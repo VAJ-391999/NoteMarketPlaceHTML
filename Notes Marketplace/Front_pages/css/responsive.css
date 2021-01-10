@@ -1,0 +1,1562 @@
+/*=======================================
+                Mobile Menu
+=======================================*/
+.navbar-header {
+    position: relative;
+}
+
+.navbar-movable #mobile-nav-open-btn {
+    visibility: visible;
+    font-size: 30px;
+    color: #6255a5;
+    cursor: pointer;
+    z-index: 2;
+    position: absolute;
+    display: none;
+
+}
+
+#home-header .navbar-movable #mobile-nav-open-btn {
+    color: #fff;
+}
+
+.navbar-movable #mobile-nav-open-btn {
+    right: 6%;
+    margin-right: 0;
+}
+
+#mobile-nav {
+    /* by defalut,  mobile nav will be hidden with height 0% */
+    width: 100%;
+    height: 0%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 3;
+    background-color: rgba(255, 255, 255, 0.9);
+    -webkit-transition: all 300ms linear;
+    transition: all 300ms linear;
+    overflow-y: hidden;
+}
+
+#mobile-nav-close-btn {
+    font-family: "Open Sans", sans-serif;
+    font-size: 50px;
+    color: #6255a5;
+    font-weight: 400;
+    cursor: pointer;
+    position: absolute;
+    top: -9px;
+    right: 13px;
+    -webkit-transition: .3s;
+    transition: .3s;
+}
+
+#mobile-nav-content {
+    text-align: center;
+    width: 100%;
+    margin-top: 10px;
+    position: relative;
+    top: 10%;
+}
+
+#mobile-nav ul.navbar-nav li {
+    margin-bottom: 20px;
+
+}
+
+#mobile-nav ul li #mybtn {
+    margin-bottom: 20px;
+    margin-left: 15px;
+    background-color: #6255a5;
+    color: #fff;
+    width: 100px;
+}
+
+#mobile-nav ul.navbar-nav li a {
+    font-family: "Open Sans", sans-serif;
+    font-size: 16px;
+    color: #212226;
+    font-weight: 400;
+    display: inline;
+    -webkit-transition: .3s;
+    transition: .3s;
+    text-align: center;
+}
+
+/* Change */
+
+#mobile-nav .navbar-brand img {
+    margin-top: 15px;
+    margin-left: 15px;
+}
+
+#mobile-nav li {
+    border-bottom: 2px solid #6255a5;
+}
+
+#mobile-nav li:first-child {
+    border-top: 2px solid #6255a5;
+    padding-top: 15px;
+}
+
+#mobile-nav li a span {
+    padding-left: 10px ! important;
+}
+
+#mobile-nav .accordion-button {
+    background-color: #fff;
+    width: 100%;
+    border: none;
+    font-size: 16px;
+    outline: none;
+    display: flex ! important;
+    justify-content: space-between ! important;
+    padding-left: 10px;
+    
+}
+
+
+#mobile-nav .accordion-button  i {
+    font-size: 30px;
+    color: #6255a5;
+}
+
+#mobile-nav .accordion-button:hover {
+    cursor: pointer;
+}
+#mobile-nav ul.mobile-submenu {
+    list-style: none;
+    list-style-position: outside;
+    padding: 0;
+}
+
+#mobile-nav .accordion-content ul.mobile-submenu li {
+    padding: 10px 0 10px 30px;
+    margin: 0;
+}
+
+#mobile-nav .accordion-content ul.mobile-submenu li a{
+    padding: 0;
+}
+
+#mobile-nav ul.mobile-submenu li:last-child,
+#mobile-nav ul.navbar-nav li:last-child,
+#mobile-nav ul.navbar-nav li:nth-child(6){
+    border-bottom: none;
+}
+
+.rotate {
+    transition: all 50ms linear;
+    -webkit-transform: rotate(-180deg);
+    transform: rotate(-180deg);
+}
+/* Change Ends */
+
+
+
+/* ==========Large Devices (Desktop & Laptops) @media (min-width: 1200px) and (max-width: 1299px)==================*/
+@media (min-width: 1200px)  {
+
+    /*NAvigation */
+    .navbar-header {
+        width: auto;
+    }
+
+    /*=========== Notes Details ============*/
+    .book-star .rate {
+        left: 55%;
+    }
+    
+    .modal-body .popup-heading img {
+        width: 70px ! important;
+        height: 70px ! important;
+    }
+    
+    
+    /*==========Dashboard =======*/
+    .dashboard .dash-right {
+        min-height: 160px ! important;
+    }
+
+    
+    
+}
+
+/*====== Medium Devices (Landscap Tablets & Medium Desktops) @media (min-width: 992px) and (max-width: 1199px) ==========*/
+
+@media (min-width: 992px) and (max-width: 1199px) {
+
+    /* Navigation */
+    .navbar-movable #mobile-nav-open-btn {
+        display: block;
+    }
+
+
+    #navbarSupportedContent .navbar-nav {
+        display: none;
+    }
+
+    .navbar-expand-md .navbar-nav {
+        flex-direction: column;
+    }
+
+    .navbar-header {
+        width: 100%;
+    }
+    
+    /*=======Login to signup=====*/
+    .form-container h2 {
+        font-size: 30px ! important;
+    }
+
+    /*===== Search Notes =======*/
+    
+    #search-filter #inputgender {
+        margin-bottom: 20px;
+    }
+
+    /*=========== Notes Details ============*/
+    #note-image img {
+        width: 100%;
+        height: 90%;
+    }
+    
+    .photo-content {
+        padding-top: 0;
+    }
+    
+    .note-title h3 {
+        font-size: 30px;
+    }
+    
+
+    .book-star .rate {
+        left: 45%;
+    }
+
+    .modal-body .popup-heading img {
+        width: 70px ! important;
+        height: 70px ! important;
+    }
+
+    /*===== Home =======*/
+    #home-heading h2 {
+        font-size: 45px;
+    }
+    
+    .image-title h6 {
+        font-size: 22px;
+    }
+    
+    .image-title p {
+        font-size: 16px;
+    }
+    
+    .author img {
+        width: 80px;
+        height: 80px;
+    }
+
+    /*==========Dashboard =======*/
+    .dashboard .dash-right,
+    .earning .col-lg-4,
+    .earning .col-lg-8{
+        min-height: 184px ! important;
+    }
+    
+    .dashboard .dashboar-heading h4,
+    .d-top .dashboar-heading h3{
+        margin-bottom: 20px;
+        font-size: 27px;
+        line-height: 30px;
+    }
+    
+    /*======= FAQ ====*/
+    
+    #faq-heading h3 {
+        font-size: 27px;
+    }
+    
+    #faq-heading p {
+        font-size: 15px;
+        line-height: 20px;
+    }
+    
+    /*======= Admin Profile ====*/
+    #admin-profile .dashboar-heading h2 {
+        font-size: 30px ! important;
+    }
+    
+}
+
+/* ===============================Medium Device ======================================================================*/
+@media (min-width: 768px) and (max-width: 991px) {
+
+    /*Navigation */
+    .navbar-movable #mobile-nav-open-btn {
+        display: block;
+    }
+
+    #navbarSupportedContent .navbar-nav {
+        display: none;
+    }
+
+    .navbar-expand-md .navbar-nav {
+        flex-direction: column;
+    }
+    
+    .profile-navigation .navbar-brand img {
+        width: 250px;
+    }
+
+    .navbar-header {
+        width: 100%;
+    }
+    
+     /*=======Login to signup=====*/
+    .form-container h2,
+    #email-verification h2{
+        font-size: 27px;
+    }
+    
+    .form-container .para1,
+    .mylabel,
+    #form-content p,
+    .forgot-link a,
+    .form-check label{
+        font-size: 15px;
+    }
+    
+    .form-container .para1 {
+        margin-bottom: 30px;
+    }
+    
+    input[type=email],
+    input[type=text],
+    input[type=date],
+    input[type=password],
+    #inputgender,
+    #inputcode,
+    #inputzipcountry {
+        height: 45px ! important;
+    }
+    
+    input[type=checkbox] {
+        width: 27px;
+        height: 27px;
+    }
+    
+    #form-ele input[type=password] {
+        margin-bottom: 20px;
+    }
+    
+    #sign-up .wrapper img {
+        left: 85%;
+    }
+    
+    /*======= Profile============*/
+
+    #basic-profile-details .wrapper img,
+    #address-details .wrapper img {
+        top: 18px;
+        left: 90%;
+    }
+   
+    /*===== Search Notes =======*/
+
+    .book-info-content .rate:not(:checked) > label {
+        font-size: 20px;
+    }
+
+    /*=========== Notes Details ============*/
+    #search-filter #inputgender {
+        margin-bottom: 20px;
+    }
+
+    #note-image img {
+        width: 100%;
+        height: 90%;
+    }
+    
+    .photo-content {
+        padding-top: 0;
+    }
+    
+    .note-title h3 {
+        font-size: 22px;
+        line-height: 25px;
+    }
+
+    .note-text p {
+        font-size: 13px;
+        font-weight: 400;
+        line-height: 18px;
+    }
+    
+    .note-title p span {
+        font-size: 16px;
+    }
+    
+    .notebook-details .book-info-content .sub-text,
+    .book-star p,
+    .book-star span{
+        font-size: 13px;
+    }
+
+    .book-star .rate {
+        left: 30%;
+        margin-right: 0;
+    }
+    
+    .download-btn {
+        font-size: 14px;
+        height: 35px;
+    }
+    
+    .author-img h6 {
+        font-size: 16px;
+    }
+    
+    .author-img p {
+        font-size: 13px;
+    }
+
+    .modal-body .popup-heading img {
+        width: 70px ! important;
+        height: 70px ! important;
+    }
+
+    .author-img .col-md-10 {
+        padding: 10px 10px;
+    }
+
+    #Iframe-Cicis-Menu-To-Go iframe {
+        width: 100%;
+        height: 390px;
+    }
+
+    /*==========Dashboard =======*/
+    .dashboard .dashboar-content .dash-right {
+        margin-top: 30px;
+    }
+    
+    .dashboard .dashboar-heading h2 {
+        font-size: 30px;
+    }
+    
+    .dashboard .dashboar-heading h4,
+    .d-top .dashboar-heading h3,
+    .dashboard .dashboar-content h4{
+        margin-bottom: 20px;
+        font-size: 25px;
+        line-height: 30px;
+    }
+    
+    .table th,
+    .table tbody td,
+    .dashboard .dashboar-content p {
+        font-size: 14px;
+    }
+
+    /*======= dash board progress ============*/
+    .search-wrapper input[type=text] {
+        width: auto;
+    }
+
+    .search-btn,
+    .add-note-btn {
+        width: auto;
+        font-size: 16px;
+    }
+    
+    .profile-btn,
+    .verify-email-btn{
+        font-size: 16px;
+    }
+    
+    .search-btn,
+    .add-note-btn,
+    #searchbar,
+    .dashboard3 #inputgender,
+    .notes-under-review #inputcode,
+    .verify-email-btn{
+        height: 45px;
+    }
+    
+    /*======Add Notes ======*/
+    input[type=radio] {
+        width: 30px;
+        height: 30px;
+    }
+    
+    .check:after {
+    top: 10px;
+    left: 9px;
+    width: 13px;
+    height: 13px;
+    }
+    
+    .save-btn,
+    .publish-btn {
+        height: 35px;
+        font-size: 14px;
+    }
+
+    /*======= Dashboard3============*/
+    
+    .dashboard3 #inputgender {
+        width: 80%;
+    }
+
+    .dashboard3 #searchbar {
+        width: 453px;
+    }
+
+    .dashboard3 .wrapper select {
+        width: 200px;
+    }
+
+    .dashboard3 .wrapper img {
+        left: 70%;
+    }
+    
+    .dashboard3 h2 {
+        font-size:  30px;
+    }
+    
+    .dashboard3 .dash-right p {
+        font-size: 13px;
+    }
+
+    /*===== Home =======*/
+    #home-heading h2 {
+        font-size: 35px;
+        line-height: 35px;
+    }
+    
+    #home-text p,
+    .image-title p,
+    #about-right p{
+        font-size: 14px;
+    }
+    
+    .left-heading h3,
+    .horizontal-heading h4{
+        font-size: 25px;
+    }
+    
+    .image-title h6 {
+        font-size: 22px;
+    }
+   
+    .author img {
+        width: 70px;
+        height: 70px;
+    }
+    
+    .author-box {
+        max-height: 430px;
+    }
+
+    .author-name-des h6 {
+        margin-bottom: 5px;
+        font-size: 18px;
+    }
+    
+    .author-name-des p span {
+        font-size: 15px;
+    }
+
+    .author-name-des {
+        padding-left: 20px;
+    }
+    
+    /*===FAQ=====*/
+    .search-title h2{
+        font-size: 30px;
+    }
+    
+    #faq-heading h3 {
+        font-size: 25px;
+        margin-bottom: 15px;
+    }
+    
+    #faq-heading p {
+        font-size: 14px;
+        line-height: 20px;
+    }
+    
+    /*===contact-us=====*/
+    #contact-us textarea[type=text] {
+        max-height: 230px;
+    }
+    
+    /*=== Admin Profile======*/
+    #admin-profile .dashboar-heading h2 {
+        font-size: 28px ! important;
+    }
+    
+    .manage-administrator table td img ,
+    .manage-category table td img,
+    .manage-country td img{
+        padding: 0 3px;
+    }
+
+    /*===== Manage country =======*/
+    .manage-country tbody > tr > :nth-child(3) {
+        padding-left: 35px;
+    }
+
+    /*===== Admin Member Details =======*/
+    .admin-members-details #member-image img {
+        width: 100px;
+        height: 100px;
+    }
+
+    .admin-members-details .member-info-content p {
+        font-size: 12px;
+    }
+
+    .admin-members-details .members-details-right span {
+        margin-left: 0;
+    }
+
+    /*===== Member notes Details =======*/
+    .admin-members-details span {
+        margin-left: 2px;
+    }
+
+    #member-all-notes tbody > tr > :nth-child(5) {
+        padding-left: 40px;
+    }
+
+    #member-all-notes tbody > tr > :nth-child(6) {
+        padding-left: 20px;
+    }
+}
+
+/* ============================Samll Device ============================================================================ */
+@media (max-width: 767px) {
+
+    
+    input[placeholder] {
+        text-overflow: ellipsis;
+    }
+
+    /* Navigation */
+    .navbar-movable #mobile-nav-open-btn {
+        display: block;
+    }
+
+    #navbarSupportedContent .navbar-nav {
+        display: none;
+    }
+
+    .navbar-expand-md .navbar-nav {
+        flex-direction: column;
+    }
+    
+    .profile-navigation .navbar-brand img {
+        width: 200px;
+    }
+
+    .navbar-header {
+        width: 100%;
+    }
+    
+     /*=======Login to signup=====*/
+    .form-container h2,
+    #email-verification h2{
+        font-size: 25px;
+    }
+    
+    .form-container .para1,
+    .mylabel,
+    #form-content p,
+    .forgot-link a,
+    #emailAddress1::placeholder,
+    #password1::placeholder,
+    #oldpassword::placeholder,
+    #newpassword::placeholder,
+    #confirmpassword::placeholder,
+    #lastname::placeholder,
+    #firstname::placeholder,
+    #birthday::placeholder,
+    #birthday::placeholder,
+    #inputgender,
+    #inputcode,
+    #inputzipcountry,
+    #admin-profile #inputcode,
+    #phoneno::placeholder,
+    #profilephoto::placeholder,
+    #addressline1::placeholder,
+    #addressline2::placeholder,
+    #inputcity::placeholder,
+    #inputstate::placeholder,
+    #inputzipcode::placeholder,
+    #university::placeholder,
+    #college::placeholder,
+    #searchbar::placeholder,
+    .verify-email-btn,
+    #form-eles p,
+    .form-check label{
+        font-size: 14px;
+    }
+    
+    input[type=email],
+    input[type=text],
+    input[type=date],
+    input[type=password],
+    #inputgender,
+    #inputcode,
+    #inputzipcountry,
+    .verify-email-btn{
+        height: 40px ! important;
+    }
+    
+    input[type=checkbox] {
+        width: 25px;
+        height: 25px;
+    }
+    
+    .email-block {
+        margin-bottom: 20px;
+    }
+    
+    .form-container .login-btn,
+    .forget-password-btn,
+    .change-password-btn,
+    .signup-btn{
+        height: 35px ! important;
+        font-size: 16px;
+    }
+    
+    #form-ele input[type=password] {
+        margin-bottom: 15px;
+    }
+    
+    .form-container .para1 {
+        margin-bottom: 30px;
+    }
+    
+    .form-container .wrapper img {
+        top: 13px;
+        width: 20px;
+    }
+    
+    /*========Profile============*/
+    #basic-profile-details .wrapper img,
+    #address-details .wrapper img {
+        top: 13px;
+    }
+    
+    /*========Email Verification============*/
+    
+    #email-verification img {
+        height: 50px;
+        width: 250px;
+    }
+    
+    #email-verification h6,
+    #email-verification p{
+        font-size: 14px;
+    }
+    
+    /*==========SEarch Notes ==========*/
+    #search-filter #inputgender {
+        margin-bottom: 20px;
+    }
+    
+    #search-filter .wrapper img {
+        top: 16px;
+        left: 80%;
+        width: 15px;
+    }
+    
+    #search-result .book-info-content .sub-text,
+    .inappropriate-mark {
+        font-size: 12px ! important;
+    }
+
+    #preview .search-heading {
+        margin-top: 20px;
+    }
+    
+    #search-result .rate:not(:checked) > label{
+        font-size: 20px;
+    }
+
+    /*==========Notes Details ==========*/
+    .book-star .rate {
+        left: 53%;
+    }
+    
+    #notebook-details .photo-content .note-title h3 {
+        font-size: 30px;
+    }
+    
+    .photo-content {
+        padding-top: 20px;
+    }
+    
+    .download-btn {
+        font-size: 14px;
+        height: 35px;
+    }
+    
+    .author-img h6 {
+        font-size: 16px;
+    }
+    
+    .author-img p {
+        font-size: 13px;
+    }
+
+    /*==========Dashboard =======*/
+    .dashboard .dashboar-content .dash-right {
+        /*margin-top: 30px;*/
+        border: none;
+        padding: 20px;
+    }
+
+    .dashboard .dashboar-content .col-sm-12 {
+        border: 1px solid #d1d1d1;
+    }
+
+    
+    .dashboard .dashboar-heading h4,
+    .d-top .dashboar-heading h3,
+    .dashboard3 .dashboar-heading h4,
+    .dashboard3 h4,
+    .dashboard .dashboar-content h4 {
+        margin-bottom: 20px;
+        font-size: 22px;
+        line-height: 30px;
+    }
+    
+    .dashboard .dashboar-heading h2 {
+        font-size: 27px;
+    }
+    
+    .dashboard .dash-left p {
+        font-size: 14px;
+    }
+    
+    .notes-under-review #inputcode {
+        height: 40px;
+    }
+    
+    /*======Add Notes ======*/
+    input[type=radio] {
+        width: 25px;
+        height: 25px;
+    }
+    
+    .check:after {
+    top: 12px;
+    left: 7px;
+    width: 12px;
+    height: 12px;
+    }
+    
+    .save-btn,
+    .publish-btn {
+        height: 35px;
+        font-size: 14px;
+    }
+
+    /*===== My Downloads ======*/
+    #searchbar {
+        width: 380px;
+        height: 40px;
+    }
+    
+    .search-btn,
+    .profile-btn,
+    .add-note-btn {
+        height: 40px;
+        font-size: 14px;
+    }
+    
+    .table th,
+    .table tbody td{
+        font-size: 13px;
+    }
+    
+    .search-wrapper img {
+        top: 10px;
+    }
+    
+    
+    /*===FAQ=====*/
+    .search-title h2{
+        font-size: 30px;
+    }
+    
+    #faq-heading h3 {
+        font-size: 25px;
+        margin-bottom: 15px;
+    }
+    
+    .accordion-item .link-wrapper a,
+    .accordion-item:target .answer p,
+    .accordion-item:target .link-wrapper a {
+        font-size: 14px;
+        line-height: 20px;
+    }
+    
+    /*======= Dashboard3============*/
+    .dashboard3 .dashboar-heading h2 {
+        font-size: 30px ! important;
+    }
+
+    .dashboard3 #inputgender {
+        width: 380px;
+        margin: 10px 0 0 0;
+    }
+
+    .dashboard3 .wrapper img {
+        top: 25px;
+        left: 90%;
+    }
+    
+    .mynote-info .dash-right p {
+        font-size: 14px; 
+    }
+    
+    .dashboard3 #inputgender {
+        height: 40px;
+    }
+
+    /*===== Home =======*/
+    #home-heading h2 {
+        font-size: 30px;
+        line-height: 35px;
+    }
+    
+    #home-text p {
+        font-size: 16px;
+    }
+    
+    .left-heading h3,
+    .horizontal-heading h4{
+        font-size: 25px;
+    }
+    
+    .left-heading {
+        margin-bottom: 20px;
+    }
+    
+    .image-title h6 {
+        font-size: 22px;
+    }
+    
+    .image-title p {
+        font-size: 14px;
+    }
+    
+    #work-left {
+        margin-bottom: 30px;
+    }
+    
+    /*=== Admin Profile======*/
+    #admin-profile .dashboar-heading h2 {
+        font-size: 25px ! important;
+    }
+    
+    #admin-profile .wrapper img {
+        top: 15px;
+    }
+    
+    .manage-administrator table td img,
+    .manage-category table td img,
+    .manage-country td img {
+        padding: 0 2px;
+    }
+    
+    /*===== Manage country =======*/
+    .manage-category #searchbar,
+    .manage-country #searchbar {
+        width: 380px;
+        margin-left: 0;
+    }
+
+    .manage-category .add-note-btn,
+    .manage-country .add-note-btn,
+    .manage-administrator .add-note-btn {
+        margin-bottom: 15px;
+    }
+
+    .manage-country tbody > tr > :nth-child(3) {
+        padding-left: 30px;
+    }
+
+    /*===== Admin Members Details =======*/
+    .admin-members-details #member-image img {
+        width: 70%;
+        height: 70%;
+        margin-bottom: 20px;
+    }
+    
+    .members-details-left {
+        border-right: none;
+    }
+
+    /*=======Admin Published notes =======*/
+    .notes-under-review .wrapper {
+        width: 100%;
+    }
+
+    .notes-under-review .content-right .form-inline {
+        padding: 10px 0 20px 0;
+    }
+
+    .notes-under-review .wrapper img {
+        left: 94%;
+    }
+
+}
+
+/* ============================Extra Small Devices (Portait Phone & Smaller Devices) =============================== */
+
+@media (max-width: 480px) {
+
+    /* Navigation */
+    .navbar-movable #mobile-nav-open-btn {
+        display: block;
+    }
+
+    #navbarSupportedContent .navbar-nav {
+        display: none;
+    }
+
+    .navbar-expand-md .navbar-nav {
+        flex-direction: column;
+    }
+
+    .navbar-header {
+        width: 100%;
+    }
+
+    /* Form Content */
+    .logo-image img{
+        width: 200px ! important;
+    }
+    
+    .form-container .para1 {
+        margin-bottom: 35px;
+    }
+
+    #form-content p {
+        font-size: 14px;
+        line-height: 18px;
+    }
+
+    /*===== Profile ========*/
+    .phone .wrapper img {
+        top: 12px;
+        left: 70%;
+    }
+    
+    #form-profile h4 {
+        font-size: 22px;
+        margin-bottom: 20px;
+    }
+
+    /* Footer */
+    .footer-text p {
+        top: 30%;
+        padding: 0;
+        font-size: 12px;
+        line-height: 15px;
+    }
+
+    .footer-tab {
+        padding: 15px 0;
+    }
+
+    footer {
+        width: 100%;
+    }
+
+    #pagination-style {
+        width: 100%;
+    }
+
+    /*======= Search Notes =======*/
+    #filter-content .wrapper img {
+        left: 90%;
+    }
+
+    #search-filter #inputgender {
+        margin-bottom: 20px;
+    }
+
+    /*==========Notes Details ====*/
+    
+    #note-image img {
+        width: 100%;
+        height: 100%;
+    }
+    
+    .photo-content {
+        padding-top: 20px;
+    }
+    
+    #notebook-details .photo-content .note-title h3 {
+        font-size: 25px;
+    }
+    
+    #notebook-details .note-text p,
+    #notebook-details .book-info-content p,
+    .book-star span{
+        font-size: 13px;
+    }
+
+    .author-img .col-md-10 {
+        text-align: center;
+    }
+
+    .modal-body .popup-heading img {
+        width: 50px ! important;
+        height: 50px ! important;
+    }
+
+    .book-star .rate {
+        left: 50%;
+    }
+
+    #customer-review .rate {
+        float: none;
+        margin-right: 170px;
+    }
+
+    /*======= Dashboard============*/
+    .dashboard #searchbar {
+        width: 320px;
+    }
+
+    .myearning {
+        text-align: center;
+    }
+    
+    .dashboard .add-note-btn {
+        width: 100%;
+        margin-top: 20px;
+    }
+    
+    .dashboard td img {
+        padding: 0 1px;
+    }
+    
+
+    /*===== My Downloads ======*/
+    #searchbar {
+        width: 320px;
+    }
+    
+    /*===FAQ=====*/
+    .search-title h2{
+        font-size: 25px;
+    }
+    
+    #faq-heading h3 {
+        font-size: 20px;
+        margin-bottom: 15px;
+    }
+    
+
+    /*======= Dashboard3============*/
+
+    .dashboard3 .wrapper img {
+        top: 18px;
+        left: 90%;
+    }
+
+    .dashboard3 #inputgender {
+        width: 320px;
+        margin: 10px 0 0 0;
+    }
+    
+    
+    /*===== Home =======*/
+    #work-left {
+        margin-bottom: 30px;
+    }
+    
+    .home-btn,
+    .work-btn {
+        font-size: 14px;
+        width: 100px;
+        height: 40px;
+    }
+
+    /*===== Manage Administrator =======*/
+    .manage-administrator .add-note-btn {
+        margin-bottom: 15px;
+        width: 100%;
+    }
+
+    /*===== Manage country =======*/
+    .manage-category #searchbar,
+    .manage-country #searchbar {
+        width: 320px;
+        margin-left: 0;
+    }
+
+    /*===== Member notes Details =======*/
+    .admin-members-details #member-image img {
+        width: 100%;
+        height: 100%;
+        margin-bottom: 20px;
+    }
+
+    .admin-members-details span {
+        margin-left: 2px;
+    }
+
+    #member-all-notes tbody > tr > :nth-child(5) {
+        padding-left: 40px;
+    }
+
+    #member-all-notes tbody > tr > :nth-child(6) {
+        padding-left: 20px;
+    }
+
+    /*=======Admin Published notes =======*/
+    .notes-under-review .wrapper {
+        width: 320px;
+    }
+
+    .notes-under-review .wrapper img {
+        left: 90%;
+    }
+
+}
+
+/* ===============================Extra Small Devices (Portait Phone & Smaller Devices)======================================= */
+
+@media (max-width: 320px) {
+
+    /* Navigation */
+    .navbar-movable #mobile-nav-open-btn {
+        display: block;
+    }
+
+    #navbarSupportedContent .navbar-nav {
+        display: none;
+    }
+
+    .navbar-expand-md .navbar-nav {
+        flex-direction: column;
+    }
+
+    .navbar-header {
+        width: 100%;
+    }
+
+    .navbar-movable #mobile-nav-open-btn {
+        right: 0;
+        padding-right: 0;
+    }
+
+    #home-header .navbar-brand img {
+        width: 200px;
+        margin-left: 10px;
+    }
+
+    /* Form Content */
+    
+    .form-container .wrapper img {
+        top: 14px;
+        left: 87%;
+    }
+
+    .form-container {
+        padding: 30px;
+    }
+
+    .form-container .para1,
+    .form-container p{
+        margin-bottom: 25px;
+        font-size: 13px ! important;
+    }
+    
+    .form-container .para1,
+    #form-content p,
+    .forgot-link a,
+    #form-eles p,
+    .form-check label{
+        font-size: 13px;
+    }
+
+    /*===== Change password =======*/
+    #form-ele .wrapper img {
+        left: 87%;
+    }
+
+    input[placeholder] {
+        text-overflow: ellipsis;
+        padding-right: 15px;
+    }
+
+    /*===== Profile =======*/
+    .profile-title h2 {
+        font-size: 30px;
+    }
+    
+    #basic-profile-details .wrapper img,
+    #address-details .wrapper img {
+        left: 90%;
+    }
+
+    .footer-tab {
+        padding-top: 25px;
+    }
+
+    .footer-text p {
+        font-size: 9px;
+        line-height: 10px;
+    }
+
+    ul.social-list {
+        padding-left: 0;
+    }
+    
+    ul.social-list li {
+        display: inline-block;
+        padding: 0 1px;
+    }
+
+    ul.social-list li a {
+
+        width: 20px;
+        height: 20px;
+        display: inline-block;
+        line-height: 25px;
+    }
+
+    ul.social-list li a i {
+        position: absolute;
+        top: 20%;
+        left: 20%;
+        font-size: 14px;
+    }
+    
+    /*========Email Verification============*/
+    #email-verification h2 {
+        font-size: 22px;
+    }
+    
+    #email-verification img {
+        height: 40px;
+        width: 200px;
+    }
+
+    /*===== Search Notes =======*/
+    .search-title h2 {
+        font-size: 25px;
+    }
+    
+    #search-filter #inputgender {
+        margin-bottom: 20px;
+    }
+
+    #search-filter .wrapper img {
+        left: 85%;
+    }
+    
+    .save-btn,
+    .publish-btn {
+        width: 130px;
+        margin-right: 5px;
+    }
+    
+    #search-result .search-heading h4,
+    #search-filter .search-heading h4{
+        font-size: 22px;
+    }
+    
+    /*===== Notes Details =======*/
+    .photo-content .note-title h3 {
+        font-size: 25px;
+    }
+
+    .photo-content .note-title p span {
+        font-size: 18px;
+    }
+
+    .book-star .rate:not(:checked) > label {
+        font-size: 20px;
+    }
+
+    .book-star .rate {
+        left: 20%;
+    }
+
+    #customer-review .rate {
+        float: none;
+        margin-right: 80px;
+    }
+
+    .modal-body .popup-heading img {
+        width: 50px ! important;
+        height: 50px ! important;
+    }
+    
+    .photo-content {
+        padding-top: 20px;
+    }
+
+    /*===== Home =======*/
+    #work-left {
+        margin-bottom: 20px;
+    }
+    
+    #home-heading h2 {
+        font-size: 20px;
+        line-height: 30px;
+    }
+    
+    #home-text p {
+        font-size: 12px;
+        line-height: 20px;
+    }
+    
+    .home-btn,
+    .work-btn {
+        font-size: 12px;
+        width: 100px;
+        height: 35px;
+    }
+    
+    .left-heading h3,
+    .horizontal-heading h4{
+        font-size: 23px;
+    }
+    
+    #about-right p{
+        font-size: 13px;
+    }
+    
+    .image-title h6 {
+        font-size: 18px;
+    }
+    
+    .author-name-des h6 {
+        margin-bottom: 5px;
+        font-size: 18px;
+    }
+    
+    .author-name-des p span {
+        font-size: 13px;
+    }
+    
+    .author p {
+        font-size: 14px;
+    }
+
+    /*===== Dashboard =======*/
+    .dashboar-heading {
+        margin-bottom: 15px;
+    }
+
+    /*======= Dashboard============*/
+
+    .myearning {
+        text-align: center;
+    }
+
+    .dashboard .add-note-btn {
+        width: 100%;
+    }
+    
+    .dashboard #searchbar {
+        width: 160px;
+    }
+    
+
+    /*======= Dashboard3============*/
+
+    .dashboard3 .wrapper img {
+        top: 18px;
+        left: 80%;
+    }
+
+    .dashboard3 #inputgender {
+        width: 160px;
+        margin: 10px 0 0 0;
+    }
+    
+    .dashboard3 .dashboar-heading h2 {
+        font-size: 28px ! important;
+    }
+
+    /*===== FAQ =======*/
+    .accordion .wrapper img {
+        left: 90%;
+        top: 20px;
+    }
+    
+    #admin-profile .wrapper img {
+        left: 70%;
+    }
+
+    /*===== Add Administrator =======*/
+    .add-administrator .col-3 {
+        margin-right: 0 ! important;
+    }
+
+    #searchbar {
+        width: 160px;
+        margin-bottom: 5px;
+    }
+
+    /*===== Manage country =======*/
+    .manage-category #searchbar,
+    .manage-country #searchbar {
+        width: 160px;
+        margin-left: 0;
+    }
+
+    .add-note-btn {
+        margin-bottom: 15px;
+        width: 100%;
+    }
+
+    /*===== Member notes Details =======*/
+    .admin-members-details #member-image img {
+        width: 100%;
+        height: 100%;
+        margin-bottom: 20px;
+    }
+
+    .admin-members-details span {
+        margin-left: 2px;
+    }
+    
+    .admin-members-details .member-info-content p {
+        font-size: 13px;
+    }
+
+    #member-all-notes tbody > tr > :nth-child(5) {
+        padding-left: 50px;
+    }
+
+    #member-all-notes tbody > tr > :nth-child(6) {
+        padding-left: 20px;
+    }
+
+    /*===== Admin published notes =======*/
+    .notes-under-review .wrapper {
+        width: 100%;
+    }
+
+    .notes-under-review .wrapper img {
+        left: 90%;
+    }
+
+
+
+}

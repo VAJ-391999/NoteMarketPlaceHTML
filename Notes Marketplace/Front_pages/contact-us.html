@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <!-- Meta Data -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Title -->
+    <title>Notes Marketplace</title>
+    
+    <!-- Fevicon -->
+    <link rel="shortcut icon" href="images/Front_images/images/favicon.ico">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="css/bootstrap/bootstrap.min.css">
+
+    <!-- Font Aweasome -->
+    <link rel="stylesheet" href="css/font-awesome/css/font-awesome.min.css">
+
+    <!-- Custome CSS -->
+    <link rel="stylesheet" href="css/style.css">
+    
+    <!-- Responsive CSS -->
+    <link rel="stylesheet" href="css/responsive.css">
+
+</head>
+
+<body data-spy="scroll" data-target=".navbar" data-offset="65">
+
+    <!-- Header -->
+    <header>
+
+        <nav class="navbar navbar-expand-md navber-fixed-top fixed-top navbar-light profile-navigation">
+            <div class="container site-nav-wrapper">
+
+                <div class="navbar-header navbar-movable">
+
+                    <!--Mobile Menu Open Button-->
+                    <span id="mobile-nav-open-btn">&#9776;</span>
+
+                    <!-- Logo -->
+                    <a class="navbar-brand" href=""><img src="images/pre-login/top-purple-logo.jpeg"></a>
+
+                </div>
+
+                <!-- Main Menu -->
+                <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
+                    <ul class="navbar-nav">
+                        <li class="nav-item">
+                            <a class="nav-link" href="#"><span>Search Notes</span></a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#"><span>Sell Your Notes</span></a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="#"><span>FAQ</span></a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="#"><span>Contact Us</span></a>
+                        </li>
+                        
+                       
+                        <li>
+                        <form>
+                            <button type="submit" class="btn my-sm-0 btn-primary btn-lg btn-block logout-btn text-center">Login</button>
+                        </form>
+                       </li>
+        
+                    </ul>
+                    
+                </div>
+                
+                   <!-- Mobile Menu -->
+            <div id="mobile-nav">
+                <!-- Mobile Menu Close Button -->
+                <span id="mobile-nav-close-btn">&times;</span>
+
+                <div id="mobile-nav-content">
+                    <ul class="navbar-nav justify-content-center text-left">
+                        <li>
+                            <a href="#"><span>Search Notes</span></a>
+                        </li>
+                        <li>
+                            <a href="#"><span>Sell Your Notes</span></a>
+                        </li>
+                       
+                        <li>
+                            <a href="#"><span>FAQ</span></a>
+                        </li>
+
+                        <li>
+                            <a href="#"><span>Contact Us</span></a>
+                        </li>
+
+                       
+                        <li>
+                           <form>
+                             <a><button type="submit" class="btn my-sm-0 btn-primary login-btn text-center" id="mybtn">Login</button></a>
+                            </form>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+                
+            </div>
+        </nav>
+    </header>
+    <!-- Header Ends -->
+    
+    <!-- Commom -->
+    <section class="common">
+    
+    <!-- Search notes image section -->
+    <section id="search-page-image">
+
+       <!-- Frequently Asked Question image -->
+            <div id="search-title-image">
+
+                <div class="search-title">
+                    <h2>Contact Us</h2> 
+               </div>
+
+            </div>
+
+    </section>
+    
+    <!-- Contact Us Content -->
+    <section id="contact-us">
+       
+       <div class="container">
+        
+            <div class="row">
+                
+                <!-- Contact us heading -->
+                <div class="col-lg-6 col-md-6 col-sm-12 col-12">
+
+                    <div id="faq-heading">
+                        <h3><b>General Question</b></h3>
+                        <p>Let us know how to back to you</p>
+                    </div>
+
+                </div>
+
+            </div>
+            
+            <form>
+                
+                <div class="row">
+                    
+                    <!-- Left -->
+                    <div class="col-lg-6 col-md-6 col-sm-12 col-12">
+                        
+                        <div class="row">
+                            
+                            <!-- First Name -->
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label class="mylabel" for="firstname">First Name *</label>
+                                    <input type="text" class="form-control" id="firstname" placeholder="Enter your first name" required>
+                                </div>
+                            </div>
+                            
+                            <!-- Email block -->
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label class="mylabel" for="emailAddress1">Email Address *</label>
+                                    <input type="email" class="form-control" id="emailAddress1" placeholder="Enter your email address" required>
+                                </div>
+                            </div>
+                            
+                            <!-- First Name -->
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label class="mylabel" for="subject">Subject *</label>
+                                    <input type="text" class="form-control" id="subject" placeholder="Enter your subject" required>
+                                </div>
+                            </div>
+                            
+                        </div>
+                        
+                    </div>
+                    
+                    <!-- Right -->
+                    <div class="col-lg-6 col-md-6 col-sm12 col-12">
+                        
+                        <div class="form-group">
+                            <label class="mylabel" for="firstname">Comments/ Questions *</label>
+                            <textarea type="text" rows="10" class="form-control" id="firstname" placeholder="Comments..." required></textarea>
+                        </div>
+                        
+                    </div>
+                    
+                </div>
+                
+                <!-- Profile Button -->
+                <button type="button" class="btn btn-primary profile-btn text-uppercase text-center"><b>submit</b></button>
+                
+            </form>
+        
+        </div>
+        
+    </section>
+    
+    </section>
+    
+    <!--Footer -->
+    <footer>
+
+        <div class="footer-tab">
+
+            <div class="container">
+
+                <div class="row">
+
+                    <!-- Copy Right -->
+                    <div class="col-md-6 col-sm-7 col-7">
+
+                        <div class="footer-text">
+
+                            <p>Copyright &copy; Tatavsoft All Rights Reserverd</p>
+
+                        </div>
+
+                    </div>
+
+                    <!-- Social Icons -->
+                    <div class="col-md-6 col-sm-5 col-5 text-right">
+                        <div class="footer-text">
+
+                            <ul class="social-list">
+                                <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+                                <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+                                <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
+                            </ul>
+
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </footer>
+
+    <!-- JQuery All Files -->
+
+    <!-- JQuery JS -->
+    <script src="js/jquery-3.5.1.min.js"></script>
+
+    <!-- Bootstrap JS -->
+    <script src="js/bootstrap/bootstrap.min.js"></script>
+
+    <!-- Custome JS -->
+    <script src="js/script.js"></script>
+
+    </body>
+</html>
