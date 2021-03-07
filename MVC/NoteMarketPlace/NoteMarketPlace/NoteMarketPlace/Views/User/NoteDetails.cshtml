@@ -1,0 +1,346 @@
+﻿@model NoteMarketPlace.Models.NoteDetailsViewModel
+@{
+    if (@Session["UserEmailId"] != null)
+    {
+        Layout = "~/Views/Shared/_Layout.cshtml";
+    }
+    else
+    {
+        Layout = "~/Views/Shared/_NonRegisteredUserLayout.cshtml";
+    }
+
+    //Layout = "~/Views/Shared/_NonRegisteredUserLayout.cshtml";
+    //Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<!-- Notes Details -->
+<section id="notebook-details">
+
+    <div class="container">
+
+        <!-- Note Book Details -->
+        <div class="row">
+
+            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+
+                <div class="search-heading">
+                    <h4><b>Notes Details</b></h4>
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- Notebook Information -->
+        <div class="notebook-details">
+            <div class="row">
+
+                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+
+                    <!-- Details Left -->
+                    <div class="details-left">
+
+                        <div id="note-image">
+
+                            <div class="row">
+
+                                <!-- Note Image -->
+                                <div class="col-lg-6 col-md-6 col-sm-12 col-12">
+                                    <img src="@Url.Content(Model.note.DisplayPicture)" alt="book-page" style="height: 100%">
+                                </div>
+
+                                <!-- Note Titel -->
+                                <div class="col-lg-6 col-md-6 col-sm-12 col-12">
+
+                                    <div class="photo-content">
+
+                                        <!-- Book title -->
+                                        <div class="note-title">
+
+                                            <h3>@Model.note.NoteTitle</h3>
+                                            <p><span>@Model.note.CourseName</span></p>
+                                        </div>
+
+
+                                        <!-- Note Text -->
+                                        <div class="note-text">
+                                            <p>@Model.note.NoteDescription</p>
+                                        </div>
+
+                                        <!-- Button
+                                        <button type="button" class="btn btn-primary btn-lg btn-block download-btn text-uppercase text-center"><b>Download/&#36;15</b></button> -->
+                                        <!-- Button trigger modal -->
+                                        <!--  <button type="button" class="btn btn-primary btn-lg btn-block download-btn text-uppercase text-center" data-toggle="modal" data-target="#exampleModalCenter">
+                                            Download/&#36;15
+                                        </button>-->
+
+                                        @using (Html.BeginForm("DownloadFlow", "User", FormMethod.Post, new { }))
+                                        {
+                                            if (@Model.note.SellFor == 5)
+                                            {
+                                                <button type="submit" class="btn btn-primary btn-lg btn-block download-btn text-uppercase text-center">
+                                                    <a href="/User/DownloadFlow?sEmail=@Model.user.EmailID&bookId=@Model.note.NoteID">Download</a>
+                                                </button>
+                                            }
+                                            else
+                                            {
+                                                <button type="submit" class="btn btn-primary btn-lg btn-block download-btn text-uppercase text-center" data-toggle="modal" data-target="#exampleModalCenter" onclick="return confirm('Are you sure you want to purchse this book?')">
+                                                    <a href="/User/DownloadFlow?sEmail=@Model.user.EmailID&bookId=@Model.note.NoteID">Download/&#36;@Model.note.SellPrice</a>
+                                                </button>
+                                            }
+                                        }
+                                        @ViewBag.Error
+
+
+                                        <!-- Modal -->
+                                        <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                            <div class="modal-dialog modal-dialog-centered" role="document">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <button type="submit" class="close" data-dismiss="modal" aria-label="Close">
+                                                            <span aria-hidden="true"><img src="~/Content/images/Notes-Details/close.png"></span>
+                                                        </button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <div class="popup-heading text-center">
+                                                            <img src="~/Content/images/Notes-Details/SUCCESS.png">
+                                                            <h4>Thank you for purchasing</h4>
+                                                        </div>
+                                                        <div class="popup-content">
+                                                            <h6>Dear @ViewBag.BuyerName,</h6>
+                                                            <p>As this is paid note, you need to pay seller Rahil Shah ofline. We will send him an email that you want to download this note. He may contact you for payment process complition.</p>
+                                                            <p>In case of urgency<br>Please contact us on +919537734595</p>
+                                                            <p>Once he recive payment knowledge us - selected notes you can see over my downloads tab for download.</p>
+                                                            <p>have a nice day.</p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+
+
+                <!-- Details Right -->
+                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+
+                    <!-- Book Information -->
+                    <div class="book-info-content">
+
+                        <p class="sub-text">Institution:<span class="pull-right"><b>@Model.note.Institute</b></span></p>
+                        <p class="sub-text">Country:<span class="pull-right"><b>@Model.country.CountryName</b></span></p>
+                        <p class="sub-text">Course Name:<span class="pull-right"><b>@Model.note.CourseName</b></span></p>
+                        <p class="sub-text">Course Code:<span class="pull-right"><b>@Model.note.CourseCode</b></span></p>
+                        <p class="sub-text">Professor:<span class="pull-right"><b>@Model.note.Professor</b></span></p>
+                        <p class="sub-text">Number Of Pages:<span class="pull-right"><b>@Model.note.Pages</b></span></p>
+                        <p class="sub-text">Approved Date:<span class="pull-right"><b>November 25 2020</b></span></p>
+
+                        <div class="book-star">
+
+                            <p class="sub-text">Rating:</p>
+                            <div class="rate">
+
+                                <span class="pull-right text-center"><b>100 views</b></span>
+                                <input type="radio" id="star5" name="rate" value="5" />
+                                <label for="star5" title="text">5 stars</label>
+                                <input type="radio" id="star4" name="rate" value="4" />
+                                <label for="star4" title="text">4 stars</label>
+                                <input type="radio" id="star3" name="rate" value="3" />
+                                <label for="star3" title="text">3 stars</label>
+                                <input type="radio" id="star2" name="rate" value="2" />
+                                <label for="star2" title="text">2 stars</label>
+                                <input type="radio" id="star1" name="rate" value="1" />
+                                <label for="star1" title="text">1 star</label>
+                            </div>
+
+                        </div>
+
+
+                        <p class="inappropriate-mark">5 Users marked this notes as inappropriate</p>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+
+</section>
+
+<!-- Preview & Review -->
+<section id="preview">
+
+    <div class="container">
+
+        <div class="row">
+
+
+            <!-- Preview Left -->
+            <div class="col-xl-5 col-lg-5 col-md-5 col-sm-12 col-12">
+
+                <div id=preview-left>
+
+                    <!-- Heading -->
+                    <div class="search-heading">
+                        <h4><b>Notes Preview</b></h4>
+                    </div>
+
+                    <!-- Preview Of Pdf http://unec.edu.az/application/uploads/2014/12/pdf-sample.pdf -->
+
+                    <div id="Iframe-Cicis-Menu-To-Go" class="set-margin-cicis-menu-to-go set-padding-cicis-menu-to-go set-border-cicis-menu-to-go set-box-shadow-cicis-menu-to-go center-block-horiz">
+                        <div class="responsive-wrapper
+     responsive-wrapper-padding-bottom-90pct" style="-webkit-overflow-scrolling: touch; overflow: auto;">
+                            <iframe src="@Url.Content(Model.note.NotePreview)">
+                                <p style="font-size: 110%;">
+                                    <em>
+                                        <strong>ERROR: </strong>
+                                        An &#105;frame should be displayed here but your browser version does not support &#105;frames.
+                                    </em> Please update your browser to its most recent version and try again, or access the file <a href="@Url.Content(Model.note.NotePreview)">with this link.</a>
+                                </p>
+                            </iframe>
+                        </div>
+                    </div>
+                    <!-- Preview Of Pdf Ends -->
+
+                </div>
+
+            </div>
+
+            <!-- Preview Right -->
+            <div class="col-xl-7 col-lg-7 col-md-7 col-sm-12 col-12">
+
+                <div id="preview-right">
+
+                    <!-- Heading -->
+                    <div class="search-heading">
+                        <h4><b>Customer Reviews</b></h4>
+                    </div>
+
+                    <!-- Review -->
+                    <div id="customer-review">
+
+                        <div class="row">
+
+                            <!-- Customer 1 -->
+                            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 author-img">
+
+                                <div class="row">
+
+                                    <!-- Customer image -->
+                                    <div class="col-xl-2 col-lg-2 col-md-2 col-sm-2 text-center">
+                                        <img src="~/Content/images/home/Homepage/client-1.jpg" class="rounded-circle" alt="client">
+                                    </div>
+
+                                    <!-- Customer Review -->
+                                    <div class="col-xl-10 col-lg-10 col-md-10 col-sm-10">
+                                        <h6>Richard Brown</h6>
+                                        <div class="rate">
+                                            <input type="radio" id="star5" name="rate" value="5" />
+                                            <label for="star5" title="text">5 stars</label>
+                                            <input type="radio" id="star4" name="rate" value="4" />
+                                            <label for="star4" title="text">4 stars</label>
+                                            <input type="radio" id="star3" name="rate" value="3" />
+                                            <label for="star3" title="text">3 stars</label>
+                                            <input type="radio" id="star2" name="rate" value="2" />
+                                            <label for="star2" title="text">2 stars</label>
+                                            <input type="radio" id="star1" name="rate" value="1" />
+                                            <label for="star1" title="text">1 star</label>
+                                        </div><br>
+                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sint nobis tempora, animi distinctio officia .</p>
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                            <!-- Customer 2 -->
+                            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 author-img">
+
+                                <div class="row">
+
+                                    <!-- Customer image -->
+                                    <div class="col-xl-2 col-lg-2 col-md-2 col-sm-2 text-center">
+                                        <img src="~/Content/images/home/Homepage/client-2.jpg" class="rounded-circle" alt="client">
+                                    </div>
+
+                                    <!-- Customer Review -->
+                                    <div class="col-xl-10 col-lg-10 col-md-10 col-sm-10">
+                                        <h6>Alice Ortiaz</h6>
+                                        <div class="rate">
+                                            <input type="radio" id="star5" name="rate" value="5" />
+                                            <label for="star5" title="text">5 stars</label>
+                                            <input type="radio" id="star4" name="rate" value="4" />
+                                            <label for="star4" title="text">4 stars</label>
+                                            <input type="radio" id="star3" name="rate" value="3" />
+                                            <label for="star3" title="text">3 stars</label>
+                                            <input type="radio" id="star2" name="rate" value="2" />
+                                            <label for="star2" title="text">2 stars</label>
+                                            <input type="radio" id="star1" name="rate" value="1" />
+                                            <label for="star1" title="text">1 star</label>
+                                        </div><br>
+                                        <p>Lorem ipsum dolor sit amet, Sint nobis tempora, animi distinctio officia exercitationem recusandae.</p>
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                            <!-- Customer 3 -->
+                            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 author-img">
+
+                                <div class="row">
+
+                                    <!-- Customer image -->
+                                    <div class="col-xl-2 col-lg-2 col-md-2 col-sm-2 text-center">
+                                        <img src="~/Content/images/home/Homepage/client-3.jpg" class="rounded-circle" alt="client">
+                                    </div>
+
+                                    <!-- Customer Review -->
+                                    <div class="col-xl-10 col-lg-10 col-md-10 col-sm-10">
+                                        <h6>Richard Brown</h6>
+                                        <div class="rate">
+                                            <input type="radio" id="star5" name="rate" value="5" />
+                                            <label for="star5" title="text">5 stars</label>
+                                            <input type="radio" id="star4" name="rate" value="4" />
+                                            <label for="star4" title="text">4 stars</label>
+                                            <input type="radio" id="star3" name="rate" value="3" />
+                                            <label for="star3" title="text">3 stars</label>
+                                            <input type="radio" id="star2" name="rate" value="2" />
+                                            <label for="star2" title="text">2 stars</label>
+                                            <input type="radio" id="star1" name="rate" value="1" />
+                                            <label for="star1" title="text">1 star</label>
+                                        </div><br>
+                                        <p>Lorem ipsum dolor sit amet, o officia exercitationem recusandae.</p>
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+

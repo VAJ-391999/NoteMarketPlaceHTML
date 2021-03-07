@@ -1,0 +1,289 @@
+﻿
+@{
+    if(@Session["UserEmailId"] != null)
+    {
+        Layout = "~/Views/Shared/_Layout.cshtml";
+    }
+    else
+    {
+        Layout = "~/Views/Shared/_NonRegisteredUserLayout.cshtml";
+    }
+
+    //Layout = "~/Views/Shared/_NonRegisteredUserLayout.cshtml";
+    //Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+    <!-- Search notes image section -->
+    <section id="search-page-image">
+
+        <!-- Frequently Asked Question image -->
+        <div id="search-title-image">
+
+            <div class="search-title">
+                <h2>Frequently Asked Question</h2>
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- Questions Section -->
+    <section id="question-section">
+
+        <div class="container">
+
+            <!-- General Questions -->
+            <div class="general-question">
+
+                <!-- Title -->
+                <div class="row">
+
+                    <!-- FAQ Title -->
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-12">
+
+                        <div id="faq-heading">
+                            <h3><b>General Question</b></h3>
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <!-- Questions List -->
+                <div class="row">
+
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-12">
+
+                        <div class="accordion">
+
+                            <!-- Q1-->
+                            <div class="accordion-item wrapper" id="question1">
+
+                                <div class="link-wrapper">
+
+                                    <a class="accordion-link" href="#question1">
+                                        <p>What is marketplace-Notes?</p>
+                                        <img src="~/Content/images/FAQ/add.png" alt="add" class="add-img">
+                                        <img src="~/Content/images/FAQ/minus.png" alt="minus" class="minus-img">
+                                    </a>
+
+                                </div>
+
+                                <div class="row">
+                                    <div class="answer col-lg-10 col-md-10 col-sm-12 col-12">
+                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Doloribus, distinctio earum amet dignissimos magni laborum mollitia non doloremque nesciunt, commodi fuga perferendis laboriosam.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Q1 Ends-->
+                            <!-- Q2 -->
+                            <div class="accordion-item wrapper" id="question2">
+
+                                <div class="link-wrapper">
+
+                                    <a class="accordion-link" href="#question2">
+                                        <p>What do the university say?</p>
+                                        <img src="~/Content/images/FAQ/add.png" alt="add" class="add-img">
+                                        <img src="~/Content/images/FAQ/minus.png" alt="minus" class="minus-img">
+                                    </a>
+
+                                </div>
+
+                                <div class="row">
+                                    <div class="answer col-lg-10 col-md-10 col-sm-12 col-12">
+                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Doloribus, distinctio earum amet dignissimos magni laborum mollitia non doloremque nesciunt, commodi fuga perferendis laboriosam.</p>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <!-- Q2 Ends-->
+                            <!-- Q3 -->
+                            <div class="accordion-item wrapper" id="question3">
+
+                                <div class="link-wrapper">
+
+                                    <a class="accordion-link" href="#question3">
+                                        <p>Is this legal?</p>
+                                        <img src="~/Content/images/FAQ/add.png" alt="add" class="add-img">
+                                        <img src="~/Content/images/FAQ/minus.png" alt="minus" class="minus-img">
+                                    </a>
+
+                                </div>
+
+                                <div class="row">
+                                    <div class="answer col-lg-10 col-md-10 col-sm-12 col-12">
+                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Doloribus, distinctio earum amet dignissimos magni laborum mollitia non doloremque nesciunt, commodi fuga perferendis laboriosam.</p>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <!-- Q3 Ends-->
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <!-- Uploader Questions -->
+            <div class="general-question">
+
+                <!-- Title -->
+                <div class="row">
+
+                    <!-- FAQ Title -->
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-12">
+
+                        <div id="faq-heading">
+                            <h3><b>Uploaders</b></h3>
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- Questions List -->
+                <div class="row">
+
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-12">
+
+                        <div class="accordion">
+
+                            <!-- Q4-->
+                            <div class="accordion-item wrapper" id="question4">
+
+                                <div class="link-wrapper">
+
+                                    <a class="accordion-link" href="#question4">
+                                        <p>What Can't I sell?</p>
+                                        <img src="~/Content/images/FAQ/add.png" alt="add" class="add-img">
+                                        <img src="~/Content/images/FAQ/minus.png" alt="minus" class="minus-img">
+                                    </a>
+
+                                </div>
+
+                                <div class="row">
+                                    <div class="answer col-lg-10 col-md-10 col-sm-12 col-12">
+                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Doloribus, distinctio earum amet dignissimos magni laborum mollitia non doloremque nesciunt, commodi fuga perferendis laboriosam.</p>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <!-- Q4 Ends -->
+                            <!-- Q5 -->
+                            <div class="accordion-item wrapper" id="question5">
+
+                                <div class="link-wrapper">
+
+                                    <a class="accordion-link" href="#question5">
+                                        <p>What notes can I sell?</p>
+                                        <img src="~/Content/images/FAQ/add.png" alt="add" class="add-img">
+                                        <img src="~/Content/images/FAQ/minus.png" alt="minus" class="minus-img">
+                                    </a>
+
+                                </div>
+
+                                <div class="row">
+                                    <div class="answer col-lg-10 col-md-10 col-sm-12 col-12">
+                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Doloribus, distinctio earum amet dignissimos magni laborum mollitia non doloremque nesciunt, commodi fuga perferendis laboriosam.</p>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <!-- Q5 Ends -->
+
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <!-- Downloaders Questions -->
+            <div class="general-question">
+
+                <!-- Title -->
+                <div class="row">
+
+                    <!-- FAQ Title -->
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-12">
+
+                        <div id="faq-heading">
+                            <h3><b>Downloaders</b></h3>
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- Questions List -->
+                <div class="row">
+
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-12">
+
+                        <div class="accordion">
+
+                            <!-- Q6-->
+                            <div class="accordion-item wrapper" id="question6">
+
+                                <div class="link-wrapper">
+
+                                    <a class="accordion-link" href="#question6">
+                                        <p>How Do I buys notes?</p>
+                                        <img src="~/Content/images/FAQ/add.png" alt="add" class="add-img">
+                                        <img src="~/Content/images/FAQ/minus.png" alt="minus" class="minus-img">
+                                    </a>
+
+                                </div>
+
+                                <div class="row">
+                                    <div class="answer col-lg-10 col-md-10 col-sm-12 col-12">
+                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Doloribus, distinctio earum amet dignissimos magni laborum mollitia non doloremque nesciunt, commodi fuga perferendis laboriosam.</p>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <!-- Q6 Ends -->
+                            <!-- Q7 -->
+                            <div class="accordion-item wrapper" id="question7">
+
+                                <div class="link-wrapper">
+
+                                    <a class="accordion-link" href="#question7">
+                                        <p>Can I edit the notes I purchased?</p>
+                                        <img src="~/Content/images/FAQ/add.png" alt="add" class="add-img">
+                                        <img src="~/Content/images/FAQ/minus.png" alt="minus" class="minus-img">
+                                    </a>
+
+                                </div>
+
+                                <div class="row">
+                                    <div class="answer col-lg-10 col-md-10 col-sm-12 col-12">
+                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Doloribus, distinctio earum amet dignissimos magni laborum mollitia non doloremque nesciunt, commodi fuga perferendis laboriosam.</p>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <!-- Q7 Ends -->
+
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+   

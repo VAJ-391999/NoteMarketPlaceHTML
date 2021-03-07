@@ -1,0 +1,649 @@
+﻿@model IEnumerable<NoteMarketPlace.Models.NoteDetailsViewModel>
+@{
+    Layout = null;
+
+}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <!-- Meta Data -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Title -->
+    <title>Notes Marketplace</title>
+
+    <!-- Fevicon -->
+    <link rel="shortcut icon" href="~/Content/images/Front_images/images/favicon.ico">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="~/Content/css/bootstrap/bootstrap.min.css">
+
+    <!-- Font Aweasome -->
+    <link rel="stylesheet" href="~/Content/css/font-awesome/css/font-awesome.min.css">
+
+    <!-- Custome CSS -->
+    <link rel="stylesheet" href="~/Content/css/style.css">
+
+    <!-- Responsive CSS -->
+    <link rel="stylesheet" href="~/Content/css/responsive.css">
+
+</head>
+
+<body data-spy="scroll" data-target=".navbar" data-offset="65">
+
+    <!-- Header -->
+    <header>
+
+        <nav class="navbar navbar-expand-md navber-fixed-top fixed-top navbar-light profile-navigation">
+            <div class="container site-nav-wrapper">
+
+                <div class="navbar-header navbar-movable">
+
+                    <!--Mobile Menu Open Button-->
+                    <span id="mobile-nav-open-btn">&#9776;</span>
+
+                    <!-- Logo -->
+                    <a class="navbar-brand" href=""><img src="~/Content/images/pre-login/top-purple-logo.jpeg"></a>
+
+                </div>
+
+                <!-- Main Menu -->
+                <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
+                    <ul class="navbar-nav">
+                        <li class="nav-item">
+                            <a class="nav-link" href="/User/SearchNotes"><span>Search Notes</span></a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/User/Dashboard"><span>Sell Your Notes</span></a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="/User/BuyersRequest"><span>Buyer Requests</span></a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/User/FAQ"><span>FAQ</span></a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="/User/ContactUs"><span>Contact Us</span></a>
+                        </li>
+
+                        <!-- Image -->
+                        <li class="user-image">
+
+                            <div class="dropdown">
+
+                                <img src="~/Content/images/home/Homepage/reviewer-1.png" class="img-fluid rounded-circle" alt="User" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+
+                                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                    <a class="dropdown-item" href="#">My Profile</a>
+                                    <a class="dropdown-item" href="#">My Downloads</a>
+                                    <a class="dropdown-item" href="#">My Sold Notes</a>
+                                    <a class="dropdown-item" href="#">My Rejected Notes</a>
+                                    <a class="dropdown-item" href="#">Change Password</a>
+                                    <a class="dropdown-item" href="#">Logout</a>
+                                </div>
+
+                            </div>
+                        </li>
+
+                        <li>
+                            <form>
+                                <button type="submit" class="btn my-sm-0 btn-primary btn-lg btn-block logout-btn text-center">Logout</button>
+                            </form>
+                        </li>
+
+                    </ul>
+
+                </div>
+
+                <!-- Mobile Menu -->
+                <div id="mobile-nav">
+                    <!-- Mobile Menu Close Button -->
+                    <span id="mobile-nav-close-btn">&times;</span>
+
+                    <div id="mobile-nav-content">
+                        <ul class="navbar-nav justify-content-center text-left">
+                            <li>
+                                <a href="/User/SearchNotes"><span>Search Notes</span></a>
+                            </li>
+                            <li>
+                                <a href="/User/Dashboard"><span>Sell Your Notes</span></a>
+                            </li>
+                            <li>
+                                <a href="/User/BuyersRequest"><span>Buyer Requests</span></a>
+                            </li>
+                            <li>
+                                <a href="/User/FAQ"><span>FAQ</span></a>
+                            </li>
+
+                            <li>
+                                <a href="/User/ContactUs"><span>Contact Us</span></a>
+                            </li>
+
+                            <!-- image -->
+                            <li class="user-image">
+
+                                <div class="accordion">
+
+                                    <div class="accordion-item">
+
+                                        <button class="accordion-button text-left" id="accordion-button-3">
+                                            <span><img src="~/Content/images/home/Homepage/reviewer-1.png" class="img-fluid rounded-circle" alt="User"></span>
+                                            <span><i class="fa fa-angle-down" aria-hidden="true" id="up3"></i></span>
+                                        </button>
+
+                                        <div class="accordion-content" id="accordion-content-3">
+
+                                            <ul class="mobile-submenu">
+
+                                                <li><a href=""><span>My Profile</span></a></li>
+                                                <li><a href=""><span>My Downloads</span></a></li>
+                                                <li><a href=""><span>My Sold Notes</span></a></li>
+                                                <li><a href=""><span>My Rejected Notes</span></a></li>
+                                                <li><a href=""><span>Change Password</span></a></li>
+                                                <li><a href=""><span>Logout</span></a></li>
+
+                                            </ul>
+
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+
+                            </li>
+
+                            <li>
+                                <form>
+                                    <button type="submit" class="btn my-sm-0 btn-primary logout-btn text-center" id="mybtn">Logout</button>
+                                </form>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+            </div>
+        </nav>
+    </header>
+    <!-- Header Ends -->
+    <!-- Common -->
+    <section class="common">
+
+        <!-- Dashboard Heading -->
+        <section id="dashboard-top">
+
+            <div class="container dashboard">
+
+                <!-- dashboard heading & add note button -->
+                <div class="row dashboard-top-title">
+
+                    <!-- Title -->
+                    <div class="col-lg-6 col-md-6 col-sm-6 col-12">
+                        <div class="dashboar-heading">
+                            <h2>Dashboard</h2>
+                        </div>
+                    </div>
+
+                    <!-- button -->
+                    <div class="col-lg-6 col-md-6 col-sm-6 col-12 text-right">
+
+                        <!-- Profile Button -->
+                        <button type="button" class="btn btn-primary add-note-btn text-uppercase text-center" onclick="location.href = '@Url.Action("AddNotes","User")'"><b>Add Notes</b></button>
+
+                    </div>
+
+                </div>
+
+                <!-- Dashboard content -->
+                <div class="dashboar-content">
+                    <div class="row">
+
+                        <!-- left -->
+                        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12">
+
+                            <div class="row earning">
+                                <!-- Earning -->
+                                <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-12">
+                                    <div class="myearning">
+                                        <img src="~/Content/images/Dashboard/my-earning.png" alt="earning">
+                                        <h5>My Earning</h5>
+                                    </div>
+                                </div>
+
+                                <!-- number of notes -->
+                                <div class="col-xl-8 col-lg-8 col-md-8 col-sm-8 col-12">
+
+                                    <div class="row">
+
+                                        <!-- Number of notes sell -->
+                                        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-6">
+                                            <div class="dash-left text-center">
+                                                <h4><b>100</b></h4>
+                                                <p>Number Of Sold Notes</p>
+                                            </div>
+                                        </div>
+
+
+                                        <!-- Money Earned  -->
+                                        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-6">
+                                            <div class="dash-left text-center">
+                                                <h4><b>&#36;10,000</b></h4>
+                                                <p>Money Earned</p>
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Right -->
+                        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12">
+                            <div class="row mynote-info">
+                                <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 col-12">
+
+                                    <!-- Number of notes sell -->
+                                    <div class="dash-right text-center">
+                                        <h4><b>38</b></h4>
+                                        <p>My Downloads</p>
+                                    </div>
+
+                                </div>
+                                <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 col-12">
+
+                                    <!-- Number of notes sell -->
+                                    <div class="dash-right text-center">
+                                        <h4><b>12</b></h4>
+                                        <p>My Rejected Notes</p>
+                                    </div>
+
+                                </div>
+                                <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 col-12">
+
+                                    <!-- Number of notes sell -->
+                                    <div class="dash-right text-center">
+                                        <h4><b>102</b></h4>
+                                        <p>Buys Request</p>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+        <!-- Dashboard progress -->
+        <section id="dashboard-middle">
+
+            <div class="container dashboard">
+
+                <!-- Heading -->
+                <div class="row">
+
+                    <!-- Title -->
+                    <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                        <div class="dashboar-heading">
+                            <h4><b>In Progress Notes</b></h4>
+                        </div>
+                    </div>
+
+                    <!-- button  <form class="form-inline ml-auto pull-right">-->
+                    <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                        @ViewBag.NotFound
+                        @using (Html.BeginForm("Dashboard", "User", FormMethod.Post, new { @class = "form-inline ml-auto pull-right" }))
+                        {
+                            <div class="md-form my-0 search-wrapper">
+                                <img src="~/Content/images/Dashboard/search.jpg" alt="search">
+                                <input class="form-control" type="text" id="searchbar" placeholder="Search..." aria-label="Search" value="@ViewData["GetSearchProgess"]" name="searchingProgress">
+                            </div>
+
+                            <!-- Profile Button -->
+                            <button href="#" type="submit" class="btn btn-primary search-btn text-uppercase text-center"><b>Search</b></button>
+
+                        }
+                    </div>
+
+                </div>
+
+                <!-- Table -->
+                <div class="row">
+
+                    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 table-responsive-xl">
+
+                        <table class="table">
+                            <thead>
+                                <tr class="text-uppercase">
+                                    <th scope="col">Added date</th>
+                                    <th scope="col">
+                                        @Html.ActionLink("Title", "Dashboard", new { SortOrder = ViewBag.SortOrder == null ? "Asc" : (ViewBag.SortOrder == "Asc" ? "Desc" : "Asc"), SortBy = "Title" })
+                                    </th>
+                                    <th scope="col">
+                                        @Html.ActionLink("Category", "Dashboard", new { SortOrder = ViewBag.SortOrder == null ? "Asc" : (ViewBag.SortOrder == "Asc" ? "Desc" : "Asc"), SortBy = "Category" })
+                                    </th>
+                                    <th scope="col">
+                                        @Html.ActionLink("Status", "Dashboard", new { SortOrder = ViewBag.SortOrder == null ? "Asc" : (ViewBag.SortOrder == "Asc" ? "Desc" : "Asc"), SortBy = "Status" })
+                                    </th>
+                                    <th scope="col">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+
+                                @foreach (NoteMarketPlace.Models.NoteDetailsViewModel item in (IEnumerable<NoteMarketPlace.Models.NoteDetailsViewModel>)Model)
+                                {
+                                    <tr>
+                                        <td>10-10-2020</td>
+                                        <td>@item.note.NoteTitle</td>
+                                        <td>@item.note.CourseName</td>
+                                        <td>@item.referenceData.Value</td>
+                                        @if (item.note.Status == 6)
+                                        {
+                                            <td><img src="~/Content/images/Dashboard/edit.png" alt="edit"><img src="~/Content/images/Front_images/images/delete.png" alt="delete"></td>
+                                        }
+                                        else
+                                        {
+                                            <td><img src="~/Content/images/Dashboard/eye.png" alt="see"></td>
+                                        }
+
+
+                                    </tr>
+
+                                }
+
+                                <!-- <tr>
+                                    <td>09-10-2020</td>
+                                    <td>Data Science</td>
+                                    <td>Science</td>
+                                    <td>Draf</td>
+                                    <td><img src="~/Content/images/Dashboard/edit.png" alt="edit"><img src="~/Content/images/Front_images/images/delete.png" alt="delete"></td>
+                                </tr>
+                                <tr>
+                                    <td>10-10-2020</td>
+                                    <td>Accounts</td>
+                                    <td>Commerce</td>
+                                    <td>In Review</td>
+                                    <td><img src="~/Content/images/Dashboard/eye.png" alt="see"></td>
+                                </tr>
+                                <tr>
+                                    <td>11-10-2020</td>
+                                    <td>Social Studies</td>
+                                    <td>Social</td>
+                                    <td>Submitted</td>
+                                    <td><img src="~/Content/images/Dashboard/eye.png" alt="see"></td>
+                                </tr>
+                                <tr>
+                                    <td>12-10-2020</td>
+                                    <td>AI</td>
+                                    <td>IT</td>
+                                    <td>Submitted</td>
+                                    <td><img src="~/Content/images/Dashboard/eye.png" alt="see"></td>
+                                </tr>
+                                <tr>
+                                    <td>13-10-2020</td>
+                                    <td>ML</td>
+                                    <td>IT</td>
+                                    <td>Draf</td>
+                                    <td><img src="~/Content/images/Dashboard/edit.png" alt="edit"><img src="~/Content/images/Front_images/images/delete.png" alt="delete"></td>
+                                </tr> -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+        </section>
+
+        <!-- Pagination -->
+        <section id="pagination-style">
+            <nav aria-label="Page navigation example">
+                <ul class="pagination justify-content-center">
+                    <li class="page-item disabled">
+                        <a class="page-link" href="#" tabindex="-1" aria-disabled="true"><i class="fa fa-angle-left" aria-hidden="true"></i></a>
+                    </li>
+                    <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                    <li class="page-item"><a class="page-link" href="#">2</a></li>
+                    <li class="page-item"><a class="page-link" href="#">3</a></li>
+                    <li class="page-item"><a class="page-link" href="#">4</a></li>
+                    <li class="page-item"><a class="page-link" href="#">5</a></li>
+                    <li class="page-item">
+                        <a class="page-link" href="#"><i class="fa fa-angle-right" aria-hidden="true"></i></a>
+                    </li>
+                </ul>
+            </nav>
+        </section>
+
+        <!-- Dashboard Publish notes -->
+        <section id="dashboard-middle">
+
+            <div class="container dashboard">
+
+                <!-- Heading -->
+                <div class="row">
+
+                    <!-- Title -->
+                    <div class="col-lg-6 col-md-6 col-sm-12 col-12">
+                        <div class="dashboar-heading">
+                            <h4><b>Published Notes</b></h4>
+                        </div>
+                    </div>
+
+                    <!-- button <form class="form-inline ml-auto pull-right">-->
+                    <div class="col-lg-6 col-md-6 col-sm-12 col-12">
+                        @ViewBag.NotFound
+                        @using (Html.BeginForm("Dashboard", "User", FormMethod.Post, new { enctype = "multipart/form-data", @class = "form-inline ml-auto pull-right" }))
+                        {
+                            <div class="md-form my-0 search-wrapper">
+                                <img src="~/Content/images/Dashboard/search.jpg" alt="search">
+                                <input class="form-control" type="text" id="searchbar" placeholder="Search..." aria-label="Search" value="@ViewData["GetSearchPublished"]" name="searchingPublished">
+                            </div>
+
+                            <!-- Profile Button -->
+                            <button href="#" type="submit" class="btn btn-primary search-btn text-uppercase text-center"><b>Search</b></button>
+
+                        }
+                    </div>
+
+                </div>
+
+                <!-- Table -->
+                <div class="row">
+
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-12 table-responsive-xl">
+                        <table class="table">
+                            <thead>
+                                <tr class="text-uppercase">
+                                    <th scope="col">Added date</th>
+                                    <th scope="col">
+                                        @Html.ActionLink("Title", "Dashboard", new { SortOrder = ViewBag.SortOrder == null ? "Asc" : (ViewBag.SortOrder == "Asc" ? "Desc" : "Asc"), SortBy = "Title" })
+                                    </th>
+                                    <th scope="col">
+                                        @Html.ActionLink("Category", "Dashboard", new { SortOrder = ViewBag.SortOrder == null ? "Asc" : (ViewBag.SortOrder == "Asc" ? "Desc" : "Asc"), SortBy = "Category" })
+                                    </th>
+                                    <th scope="col">
+                                        @Html.ActionLink("Sell For", "Dashboard", new { SortOrder = ViewBag.SortOrder == null ? "Asc" : (ViewBag.SortOrder == "Asc" ? "Desc" : "Asc"), SortBy = "Sell For" })
+                                    </th>
+                                    <th scope="col">
+                                        @Html.ActionLink("Price", "Dashboard", new { SortOrder = ViewBag.SortOrder == null ? "Asc" : (ViewBag.SortOrder == "Asc" ? "Desc" : "Asc"), SortBy = "Price" })
+
+                                    </th>
+                                    <th scope="col">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+
+                                @foreach (NoteMarketPlace.Models.NoteDetailsViewModel item in (IEnumerable<NoteMarketPlace.Models.NoteDetailsViewModel>)Model)
+                                {
+                                    <tr>
+                                        <td>11-10-2020</td>
+                                        <td>@item.note.NoteTitle</td>
+                                        <td>@item.note.CourseName</td>
+                                        @if (item.note.SellFor == 4)
+                                        {
+                                            <td>Paid</td>
+                                        }
+                                        else
+                                        {
+                                            if (item.note.SellFor == 5)
+                                            {
+                                                <td>Free</td>
+                                            }
+                                        }
+                                        <td>$@item.note.SellPrice</td>
+                                        <td><img src="~/Content/images/Dashboard/eye.png" alt="see"></td>
+                                    </tr>
+
+                                }
+
+                                <!--<tr>
+                                    <td>09-10-2020</td>
+                                    <td>Data Science</td>
+                                    <td>Science</td>
+                                    <td>Paid</td>
+                                    <td>$575</td>
+                                    <td>
+                                        <div class="test">
+                                            <img src="~/Content/images/Dashboard/edit.png" alt="edit">
+
+                                            <img src="~/Content/images/Front_images/images/delete.png" alt="delete">
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>10-10-2020</td>
+                                    <td>Accounts</td>
+                                    <td>Commerce</td>
+                                    <td>Free</td>
+                                    <td>$0</td>
+                                    <td><img src="~/Content/images/Dashboard/eye.png" alt="see"></td>
+                                </tr>
+                                <tr>
+                                    <td>11-10-2020</td>
+                                    <td>Social Studies</td>
+                                    <td>Social</td>
+                                    <td>Free</td>
+                                    <td>$0</td>
+                                    <td><img src="~/Content/images/Dashboard/eye.png" alt="see"></td>
+                                </tr>
+                                <tr>
+                                    <td>12-10-2020</td>
+                                    <td>AI</td>
+                                    <td>IT</td>
+                                    <td>Paid</td>
+                                    <td>$3542</td>
+                                    <td><img src="~/Content/images/Dashboard/eye.png" alt="see"></td>
+                                </tr>
+                                <tr>
+                                    <td>13-10-2020</td>
+                                    <td>ML</td>
+                                    <td>IT</td>
+                                    <td>Free</td>
+                                    <td>$0</td>
+                                    <td>
+                                        <div class="test">
+                                            <img src="~/Content/images/Dashboard/edit.png" alt="edit">
+                                            <img src="~/Content/images/Front_images/images/delete.png" alt="delete">
+                                        </div>
+                                    </td>
+                                </tr>-->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+        </section>
+
+        <!-- Pagination -->
+        <section id="pagination-style">
+            <nav aria-label="Page navigation example">
+                <ul class="pagination justify-content-center">
+                    <li class="page-item disabled">
+                        <a class="page-link" href="#" tabindex="-1" aria-disabled="true"><i class="fa fa-angle-left" aria-hidden="true"></i></a>
+                    </li>
+                    <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                    <li class="page-item"><a class="page-link" href="#">2</a></li>
+                    <li class="page-item"><a class="page-link" href="#">3</a></li>
+                    <li class="page-item"><a class="page-link" href="#">4</a></li>
+                    <li class="page-item"><a class="page-link" href="#">5</a></li>
+                    <li class="page-item">
+                        <a class="page-link" href="#"><i class="fa fa-angle-right" aria-hidden="true"></i></a>
+                    </li>
+                </ul>
+            </nav>
+        </section>
+
+    </section>
+
+    <!--Footer -->
+    <footer>
+
+        <div class="footer-tab">
+
+            <div class="container">
+
+                <div class="row">
+
+                    <!-- Copy Right -->
+                    <div class="col-lg-6 col-md-6 col-sm-7 col-7">
+
+                        <div class="footer-text">
+
+                            <p>Copyright &copy; Tatavsoft All Rights Reserverd</p>
+
+                        </div>
+
+                    </div>
+
+                    <!-- Social Icons -->
+                    <div class="col-lg-6 col-md-6 col-sm-5 col-5 text-right">
+                        <div class="footer-text">
+
+                            <ul class="social-list">
+                                <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+                                <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+                                <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
+                            </ul>
+
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </footer>
+
+    <!-- JQuery All Files -->
+    <!-- JQuery JS -->
+    <script src="~/Scripts/js/jquery-3.5.1.min.js"></script>
+
+    <!-- Bootstrap JS -->
+    <script src="~/Scripts/js/bootstrap/bootstrap.min.js"></script>
+
+    <!-- Custome JS -->
+    <script src="~/Scripts/js/script.js"></script>
+
+
+
+</body>
+
+</html>
+

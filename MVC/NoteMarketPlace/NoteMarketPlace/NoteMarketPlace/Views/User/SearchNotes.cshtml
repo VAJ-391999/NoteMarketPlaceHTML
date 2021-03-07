@@ -1,0 +1,792 @@
+﻿@model IEnumerable<NoteMarketPlace.Models.NoteCountryContex>
+@{
+    if (@Session["UserEmailId"] != null)
+    {
+        Layout = "~/Views/Shared/_Layout.cshtml";
+    }
+    else
+    {
+        Layout = "~/Views/Shared/_NonRegisteredUserLayout.cshtml";
+    }
+    var i = new NoteMarketPlace.Models.NoteCountryContex();
+
+    //Layout = "~/Views/Shared/_NonRegisteredUserLayout.cshtml";
+    //Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+        <!-- Search notes image section -->
+        <section id="search-page-image">
+
+            <!-- Search image -->
+            <div id="search-title-image">
+
+                <div class="search-title">
+                    <h2>Search Notes</h2>
+                </div>
+
+            </div>
+
+        </section>
+
+        <!-- Search Filter -->
+        <section id="search-filter">
+
+            <div class="container">
+
+                <!-- Heading -->
+                <div class="row">
+
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-12">
+
+                        <div class="search-heading">
+                            <h4><b>Search and Filter Notes</b></h4>
+                        </div>
+
+                    </div>
+
+                </div>
+
+                @using (Html.BeginForm("SearchNotes", "User", FormMethod.Post, new { @id = "showNote" }))
+                {
+
+                    <!--Filter Content -->
+                    <div id="filter-content">
+
+                        <!-- Search bar -->
+                        <div class="search-bar">
+
+                            <div class="row">
+
+                                <div class="col-md-12 col-sm-12 col-12 search-wrapper">
+                                    <img src="~/Content/images/Dashboard/search.jpg" alt="search">
+                                    <input type="search" class="form-control" id="searchbar" placeholder="Search notes here..." name="textbox">
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+
+
+                        <!--Filter-->
+                        <div class="row">
+
+                            <!-- Type -->
+                            <div class="col-xl-2 col-lg-4 col-md-4 col-sm-4 col-12">
+                                <div class="wrapper">
+                                    @Html.DropDownListFor(m => i.typeDetails.TypeName, ViewBag.TypeList as SelectList, "Select Type", new { @id = "inputgender", @class = "form-control typeDrop" })
+                                    <img src="~/Content/images/User-Profile/down-arrow.png" alt="dropdown">
+                                </div>
+                            </div>
+
+                            <!-- Category -->
+                            <div class="col-xl-2 col-lg-4 col-md-4 col-sm-4 col-12">
+                                <div class="wrapper">
+                                    @Html.DropDownListFor(m => i.categoryDetails.CategoryName, ViewBag.CategoryList as SelectList, "Select Category", new { @id = "inputgender", @class = "form-control categoryDrop" })
+                                    <img src="~/Content/images/User-Profile/down-arrow.png" alt="dropdown">
+                                </div>
+                            </div>
+
+                            <!-- University -->
+                            <div class="col-xl-2 col-lg-4 col-md-4 col-sm-4 col-12">
+                                <div class="wrapper">
+                                    @Html.DropDownListFor(m => i.universityDetails.Institute, ViewBag.UniversityList as SelectList, "Select university", new { @id = "inputgender", @class = "form-control universityDrop" })
+                                    <img src="~/Content/images/User-Profile/down-arrow.png" alt="dropdown">
+                                </div>
+                            </div>
+
+                            <!-- Course -->
+                            <div class="col-xl-2 col-lg-4 col-md-4 col-sm-4 col-12">
+                                <div class="wrapper">
+                                    @Html.DropDownListFor(m => i.noteDetails.CourseName, ViewBag.CourseList as SelectList, "Select Course", new { @id = "inputgender", @class = "form-control courseDrop" })
+                                    <img src="~/Content/images/User-Profile/down-arrow.png" alt="dropdown">
+                                </div>
+                            </div>
+
+                            <!-- Country -->
+                            <div class="col-xl-2 col-lg-4 col-md-4 col-sm-4 col-12">
+                                <div class="wrapper">
+                                    @Html.DropDownListFor(m => i.countryDetails.CountryName, ViewBag.CountyList as SelectList, "Select Country", new { @id = "inputgender", @class = "form-control countryDrop", @name = "countryDrop" })
+                                    <img src="~/Content/images/User-Profile/down-arrow.png" alt="dropdown">
+
+                                </div>
+                            </div>
+
+                            <!-- Rating -->
+                            <div class="col-xl-2 col-lg-4 col-md-4 col-sm-4 col-12">
+                                <div class="wrapper">
+                                    @Html.DropDownListFor(m => i.ratingsDetails.Ratings, ViewBag.RatingList as SelectList, "Select Rating", new { @id = "inputgender", @class = "form-control ratingDrop" })
+                                    <img src="~/Content/images/User-Profile/down-arrow.png" alt="dropdown">
+                                </div>
+                            </div>
+
+                            @*
+                                <!-- Select type -->
+                                <div class="col-xl-2 col-lg-4 col-md-4 col-sm-4 col-12">
+                                    <div class="wrapper">
+                                        <!-- <select id="inputgender" class="form-control">
+                                             <option selected>Select type</option>
+                                             <option>Type 1</option>
+                                             <option>Type 2</option>
+                                             <option>Type 3</option>
+                                         </select>-->
+
+                                        <img src="~/Content/images/User-Profile/down-arrow.png" alt="dropdown">
+                                    </div>
+                                </div>
+
+                                <!-- Select catagory -->
+                                <div class="col-xl-2 col-lg-4 col-md-4 col-sm-4 col-12">
+                                    <div class="wrapper">
+                                        <select id="inputgender" class="form-control">
+                                            <option selected>Select catagory</option>
+                                            <option>Type 1</option>
+                                            <option>Type 2</option>
+                                            <option>Type 3</option>
+                                        </select>
+                                        <img src="~/Content/images/User-Profile/down-arrow.png" alt="dropdown">
+                                    </div>
+                                </div>
+
+                                <!-- Select university -->
+                                <div class="col-xl-2 col-lg-4 col-md-4 col-sm-4 col-12">
+                                    <div class="wrapper">
+                                         <select id="inputgender" class="form-control">
+                                             <option selected>Select university</option>
+                                             <option>University of California</option>
+                                             <option>IIT Bombay</option>
+                                             <option>GTU</option>
+                                         </select>
+
+                                        <img src="~/Content/images/User-Profile/down-arrow.png" alt="dropdown">
+                                    </div>
+                                </div>
+
+                                <!-- Select course -->
+                                <div class="col-xl-2 col-lg-4 col-md-4 col-sm-4 col-12">
+                                    <div class="wrapper">
+                                        <select id="inputgender" class="form-control">
+                                            <option selected>Select course</option>
+                                            <option>Computer Engineering</option>
+                                            <option>Electrical Engineering</option>
+                                            <option>BCA</option>
+                                        </select>
+                                        <img src="~/Content/images/User-Profile/down-arrow.png" alt="dropdown">
+                                    </div>
+                                </div>
+
+                                <!-- Select country -->
+                                <div class="col-xl-2 col-lg-4 col-md-4 col-sm-4 col-12">
+                                    <div class="wrapper">
+                                        <select id="inputgender" class="form-control">
+                                            <option selected>Select country</option>
+                                            <option>Type 1</option>
+                                            <option>Type 2</option>
+                                            <option>Type 3</option>
+                                        </select>
+                                        <img src="~/Content/images/User-Profile/down-arrow.png" alt="dropdown">
+                                    </div>
+                                </div>
+
+                                <!-- Select rating -->
+                                <div class="col-xl-2 col-lg-4 col-md-4 col-sm-4 col-12">
+                                    <div class="wrapper">
+                                        <select id="inputgender" class="form-control">
+                                            <option selected>Select rating</option>
+                                            <option>Type 1</option>
+                                            <option>Type 2</option>
+                                            <option>Type 3</option>
+                                        </select>
+                                        <img src="~/Content/images/User-Profile/down-arrow.png" alt="dropdown">
+                                    </div>
+                                </div>
+
+                            *@
+
+                        </div>
+
+                    </div>
+                }
+
+            </div>
+
+        </section>
+
+        <!-- Search Result -->
+        <section id="search-result">
+
+            <div class="container">
+
+                <!-- Heading -->
+                <div class="row">
+
+                    <div class="col-md-12">
+
+                        <div class="search-heading">
+
+                            @{
+                                if (Model.Count() == 0)
+                                {
+                                    <h4><b>No Record Found</b></h4>
+                                }
+                                else
+                                {
+                                    <h4><b>Total @Model.Count() notes </b></h4>
+                                }
+                            }
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <!-- Books Result -->
+                <div id="book-result">
+
+                    <div class="row">
+                        @foreach (NoteMarketPlace.Models.NoteCountryContex item in (IEnumerable<NoteMarketPlace.Models.NoteCountryContex>)ViewData.Model)
+                        {
+                            <!-- Book 1 For for loop -->
+                            <div class="col-lg-4 col-md-6 col-sm-6 col-12">
+
+                                <div class="book-info">
+
+                                    <!-- Book image -->
+                                    <div class="book-info-image">
+                                        <img src="@Url.Content(item.noteDetails.DisplayPicture)" alt="Book image">
+                                    </div>
+
+                                    <div class="book-info-content">
+
+                                        <!-- Book title -->
+                                        <div class="book-title">
+
+                                            @*<h6><a href="/User/NoteDetails?id=@item.noteDetails.NoteID">@item.noteDetails.NoteTitle</a></h6>*@
+                                            <h6><a href="/User/NoteDetails?noteName=@item.noteDetails.NoteTitle">@item.noteDetails.NoteTitle</a></h6>
+                                        </div>
+
+                                        <!-- Sub Info -->
+                                        <div class="sub-info">
+
+                                            <p class="sub-text"><img src="~/Content/images/search/Search/university.png" alt="university">@item.noteDetails.Institute,@item.countryDetails.CountryName</p>
+                                            <p class="sub-text"><img src="~/Content/images/search/Search/pages.png" alt="pages">@item.noteDetails.Pages Pages</p>
+                                            <p class="sub-text"><img src="~/Content/images/search/Search/date.png" alt="date">@item.noteDetails.PublishedDate</p>
+                                            <p class="inappropriate-mark"><img src="~/Content/images/search/Search/flag.png" alt="flag">5 Users marked this note inappropriate</p>
+
+                                        </div>
+
+                                        <!-- Ratings -->
+                                        <div class="ratings">
+
+                                            <div class="rate">
+
+                                                <input type="radio" id="star5" name="rate" value="5" />
+                                                <label for="star5" title="text">5 stars</label>
+                                                <input type="radio" id="star4" name="rate" value="4" />
+                                                <label for="star4" title="text">4 stars</label>
+                                                <input type="radio" id="star3" name="rate" value="3" />
+                                                <label for="star3" title="text">3 stars</label>
+                                                <input type="radio" id="star2" name="rate" value="2" />
+                                                <label for="star2" title="text">2 stars</label>
+                                                <input type="radio" id="star1" name="rate" value="1" />
+                                                <label for="star1" title="text">1 star</label>
+                                            </div>
+
+                                            <p class="sub-text">100 reviews</p>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Book 1 Ends -->
+                        }
+
+                        @* <!-- Book 1 -->
+                            <div class="col-lg-4 col-md-6 col-sm-6 col-12">
+
+                                <div class="book-info">
+
+                                    <!-- Book image -->
+                                    <div class="book-info-image">
+                                        <img src="~/Content/images/search/Search/1.jpg">
+                                    </div>
+
+                                    <div class="book-info-content">
+
+                                        <!-- Book title -->
+                                        <div class="book-title">
+                                            <h6>Computer Operating System - Final Exam Paper With Solution</h6>
+                                        </div>
+
+                                        <!-- Sub Info -->
+                                        <div class="sub-info">
+
+                                            <p class="sub-text"><img src="~/Content/images/search/Search/university.png" alt="university">University of Californiya,</p>
+                                            <p class="sub-text"><img src="~/Content/images/search/Search/pages.png" alt="pages">204 Pages</p>
+                                            <p class="sub-text"><img src="~/Content/images/search/Search/date.png" alt="date">Thu, Nov 2020</p>
+                                            <p class="inappropriate-mark"><img src="~/Content/images/search/Search/flag.png" alt="flag">5 Users marked this note inappropriate</p>
+
+                                        </div>
+
+                                        <!-- Ratings -->
+                                        <div class="ratings">
+
+                                            <div class="rate">
+
+                                                <input type="radio" id="star5" name="rate" value="5" />
+                                                <label for="star5" title="text">5 stars</label>
+                                                <input type="radio" id="star4" name="rate" value="4" />
+                                                <label for="star4" title="text">4 stars</label>
+                                                <input type="radio" id="star3" name="rate" value="3" />
+                                                <label for="star3" title="text">3 stars</label>
+                                                <input type="radio" id="star2" name="rate" value="2" />
+                                                <label for="star2" title="text">2 stars</label>
+                                                <input type="radio" id="star1" name="rate" value="1" />
+                                                <label for="star1" title="text">1 star</label>
+                                            </div>
+
+                                            <p class="sub-text">100 reviews</p>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Book 1 Ends -->
+                            <!-- Book 2 -->
+                            <div class="col-lg-4 col-md-6 col-sm-6 col-12">
+
+                                <div class="book-info">
+
+                                    <!-- Book image -->
+                                    <div class="book-info-image">
+                                        <img src="~/Content/images/search/Search/2.jpg">
+                                    </div>
+                                    <div class="book-info-content">
+
+                                        <!-- Book title -->
+                                        <div class="book-title">
+                                            <h6>Computer Science</h6>
+                                        </div>
+
+                                        <!-- Sub Info -->
+                                        <div class="sub-info">
+
+                                            <p class="sub-text"><img src="~/Content/images/search/Search/university.png" alt="university">University of Californiya,</p>
+                                            <p class="sub-text"><img src="~/Content/images/search/Search/pages.png" alt="pages">204 Pages</p>
+                                            <p class="sub-text"><img src="~/Content/images/search/Search/date.png" alt="date">Thu, Nov 2020</p>
+                                            <p class="inappropriate-mark"><img src="~/Content/images/search/Search/flag.png" alt="flag">5 Users marked this note inappropriate</p>
+
+                                        </div>
+
+                                        <!-- Ratings -->
+                                        <div class="ratings">
+
+                                            <div class="rate">
+
+                                                <input type="radio" id="star5" name="rate" value="5" />
+                                                <label for="star5" title="text">5 stars</label>
+                                                <input type="radio" id="star4" name="rate" value="4" />
+                                                <label for="star4" title="text">4 stars</label>
+                                                <input type="radio" id="star3" name="rate" value="3" />
+                                                <label for="star3" title="text">3 stars</label>
+                                                <input type="radio" id="star2" name="rate" value="2" />
+                                                <label for="star2" title="text">2 stars</label>
+                                                <input type="radio" id="star1" name="rate" value="1" />
+                                                <label for="star1" title="text">1 star</label>
+                                            </div>
+
+                                            <p class="sub-text">100 reviews</p>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Book 2 Ends -->
+                            <!-- Book 3 -->
+                            <div class="col-lg-4 col-md-6 col-sm-6 col-12">
+
+                                <div class="book-info">
+
+                                    <!-- Book image -->
+                                    <div class="book-info-image">
+                                        <img src="~/Content/images/search/Search/3.jpg">
+                                    </div>
+
+                                    <div class="book-info-content">
+
+                                        <!-- Book title -->
+                                        <div class="book-title">
+                                            <h6>Basic Computer Engineering Tech All India Publication Series</h6>
+                                        </div>
+
+                                        <!-- Sub Info -->
+                                        <div class="sub-info">
+
+                                            <p class="sub-text"><img src="~/Content/images/search/Search/university.png" alt="university">University of Californiya,</p>
+                                            <p class="sub-text"><img src="~/Content/images/search/Search/pages.png" alt="pages">204 Pages</p>
+                                            <p class="sub-text"><img src="~/Content/images/search/Search/date.png" alt="date">Thu, Nov 2020</p>
+                                            <p class="inappropriate-mark"><img src="~/Content/images/search/Search/flag.png" alt="flag">5 Users marked this note inappropriate</p>
+
+                                        </div>
+
+                                        <!-- Ratings -->
+                                        <div class="ratings">
+
+                                            <div class="rate">
+
+                                                <input type="radio" id="star5" name="rate" value="5" />
+                                                <label for="star5" title="text">5 stars</label>
+                                                <input type="radio" id="star4" name="rate" value="4" />
+                                                <label for="star4" title="text">4 stars</label>
+                                                <input type="radio" id="star3" name="rate" value="3" />
+                                                <label for="star3" title="text">3 stars</label>
+                                                <input type="radio" id="star2" name="rate" value="2" />
+                                                <label for="star2" title="text">2 stars</label>
+                                                <input type="radio" id="star1" name="rate" value="1" />
+                                                <label for="star1" title="text">1 star</label>
+                                            </div>
+
+                                            <p class="sub-text">100 reviews</p>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Book 3 Ends -->
+                            <!-- Book 4 -->
+                            <div class="col-lg-4 col-md-6 col-sm-6 col-12">
+
+                                <div class="book-info">
+
+                                    <!-- Book image -->
+                                    <div class="book-info-image">
+                                        <img src="~/Content/images/search/Search/4.jpg">
+                                    </div>
+
+                                    <div class="book-info-content">
+
+                                        <!-- Book title -->
+                                        <div class="book-title">
+                                            <h6>Computer Science Illuminated - Seventh Edition</h6>
+                                        </div>
+
+                                        <!-- Sub Info -->
+                                        <div class="sub-info">
+
+                                            <p class="sub-text"><img src="~/Content/images/search/Search/university.png" alt="university">University of Californiya,</p>
+                                            <p class="sub-text"><img src="~/Content/images/search/Search/pages.png" alt="pages">204 Pages</p>
+                                            <p class="sub-text"><img src="~/Content/images/search/Search/date.png" alt="date">Thu, Nov 2020</p>
+                                            <p class="inappropriate-mark"><img src="~/Content/images/search/Search/flag.png" alt="flag">5 Users marked this note inappropriate</p>
+
+                                        </div>
+
+                                        <!-- Ratings -->
+                                        <div class="ratings">
+
+                                            <div class="rate">
+
+                                                <input type="radio" id="star5" name="rate" value="5" />
+                                                <label for="star5" title="text">5 stars</label>
+                                                <input type="radio" id="star4" name="rate" value="4" />
+                                                <label for="star4" title="text">4 stars</label>
+                                                <input type="radio" id="star3" name="rate" value="3" />
+                                                <label for="star3" title="text">3 stars</label>
+                                                <input type="radio" id="star2" name="rate" value="2" />
+                                                <label for="star2" title="text">2 stars</label>
+                                                <input type="radio" id="star1" name="rate" value="1" />
+                                                <label for="star1" title="text">1 star</label>
+                                            </div>
+
+                                            <p class="sub-text">100 reviews</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Book 4 Ends -->
+                            <!-- Book 5 -->
+                            <div class="col-lg-4 col-md-6 col-sm-6 col-12">
+
+                                <div class="book-info">
+
+                                    <!-- Book image -->
+                                    <div class="book-info-image">
+                                        <img src="~/Content/images/search/Search/5.jpg">
+                                    </div>
+
+                                    <div class="book-info-content">
+
+                                        <!-- Book title -->
+                                        <div class="book-title">
+                                            <h6>The Principle Of Computer Hardware - Oxford</h6>
+                                        </div>
+
+                                        <!-- Sub Info -->
+                                        <div class="sub-info">
+
+                                            <p class="sub-text"><img src="~/Content/images/search/Search/university.png" alt="university">University of Californiya,</p>
+                                            <p class="sub-text"><img src="~/Content/images/search/Search/pages.png" alt="pages">204 Pages</p>
+                                            <p class="sub-text"><img src="~/Content/images/search/Search/date.png" alt="date">Thu, Nov 2020</p>
+                                            <p class="inappropriate-mark"><img src="~/Content/images/search/Search/flag.png" alt="flag">5 Users marked this note inappropriate</p>
+
+                                        </div>
+
+                                        <!-- Ratings -->
+                                        <div class="ratings">
+
+                                            <div class="rate">
+
+                                                <input type="radio" id="star5" name="rate" value="5" />
+                                                <label for="star5" title="text">5 stars</label>
+                                                <input type="radio" id="star4" name="rate" value="4" />
+                                                <label for="star4" title="text">4 stars</label>
+                                                <input type="radio" id="star3" name="rate" value="3" />
+                                                <label for="star3" title="text">3 stars</label>
+                                                <input type="radio" id="star2" name="rate" value="2" />
+                                                <label for="star2" title="text">2 stars</label>
+                                                <input type="radio" id="star1" name="rate" value="1" />
+                                                <label for="star1" title="text">1 star</label>
+                                            </div>
+
+                                            <p class="sub-text">100 reviews</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Book 5 Ends -->
+                            <!-- Book 6 -->
+                            <div class="col-lg-4 col-md-6 col-sm-6 col-12">
+
+                                <div class="book-info">
+
+                                    <!-- Book image -->
+                                    <div class="book-info-image">
+                                        <img src="~/Content/images/search/Search/6.jpg">
+                                    </div>
+
+                                    <div class="book-info-content">
+
+                                        <!-- Book title -->
+                                        <div class="book-title">
+                                            <h6>The Computer Book</h6>
+                                        </div>
+
+                                        <!-- Sub Info -->
+                                        <div class="sub-info">
+
+                                            <p class="sub-text"><img src="~/Content/images/search/Search/university.png" alt="university">University of Californiya,</p>
+                                            <p class="sub-text"><img src="~/Content/images/search/Search/pages.png" alt="pages">204 Pages</p>
+                                            <p class="sub-text"><img src="~/Content/images/search/Search/date.png" alt="date">Thu, Nov 2020</p>
+                                            <p class="inappropriate-mark"><img src="~/Content/images/search/Search/flag.png" alt="flag">5 Users marked this note inappropriate</p>
+
+                                        </div>
+
+                                        <!-- Ratings -->
+                                        <div class="ratings">
+
+                                            <div class="rate">
+
+                                                <input type="radio" id="star5" name="rate" value="5" />
+                                                <label for="star5" title="text">5 stars</label>
+                                                <input type="radio" id="star4" name="rate" value="4" />
+                                                <label for="star4" title="text">4 stars</label>
+                                                <input type="radio" id="star3" name="rate" value="3" />
+                                                <label for="star3" title="text">3 stars</label>
+                                                <input type="radio" id="star2" name="rate" value="2" />
+                                                <label for="star2" title="text">2 stars</label>
+                                                <input type="radio" id="star1" name="rate" value="1" />
+                                                <label for="star1" title="text">1 star</label>
+                                            </div>
+
+                                            <p class="sub-text">100 reviews</p>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Book 6 Ends -->
+                            <!-- Book 7 -->
+                            <div class="col-lg-4 col-md-6 col-sm-6 col-12">
+
+                                <div class="book-info">
+
+                                    <!-- Book image -->
+                                    <div class="book-info-image">
+                                        <img src="~/Content/images/search/Search/1.jpg">
+                                    </div>
+
+                                    <div class="book-info-content">
+
+                                        <!-- Book title -->
+                                        <div class="book-title">
+                                            <h6>Computer Operating System - Final Exam Paper With Solution</h6>
+                                        </div>
+
+                                        <!-- Sub Info -->
+                                        <div class="sub-info">
+
+                                            <p class="sub-text"><img src="~/Content/images/search/Search/university.png" alt="university">University of Californiya,</p>
+                                            <p class="sub-text"><img src="~/Content/images/search/Search/pages.png" alt="pages">204 Pages</p>
+                                            <p class="sub-text"><img src="~/Content/images/search/Search/date.png" alt="date">Thu, Nov 2020</p>
+                                            <p class="inappropriate-mark"><img src="~/Content/images/search/Search/flag.png" alt="flag">5 Users marked this note inappropriate</p>
+
+                                        </div>
+
+                                        <!-- Ratings -->
+                                        <div class="ratings">
+
+                                            <div class="rate">
+
+                                                <input type="radio" id="star5" name="rate" value="5" />
+                                                <label for="star5" title="text">5 stars</label>
+                                                <input type="radio" id="star4" name="rate" value="4" />
+                                                <label for="star4" title="text">4 stars</label>
+                                                <input type="radio" id="star3" name="rate" value="3" />
+                                                <label for="star3" title="text">3 stars</label>
+                                                <input type="radio" id="star2" name="rate" value="2" />
+                                                <label for="star2" title="text">2 stars</label>
+                                                <input type="radio" id="star1" name="rate" value="1" />
+                                                <label for="star1" title="text">1 star</label>
+                                            </div>
+
+                                            <p class="sub-text">100 reviews</p>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Book 7 Ends -->
+                            <!-- Book 8 -->
+                            <div class="col-lg-4 col-md-6 col-sm-6 col-12">
+
+                                <div class="book-info">
+
+                                    <!-- Book image -->
+                                    <div class="book-info-image">
+                                        <img src="~/Content/images/search/Search/2.jpg">
+                                    </div>
+
+                                    <div class="book-info-content">
+
+                                        <!-- Book title -->
+                                        <div class="book-title">
+                                            <h6>Computer Science</h6>
+                                        </div>
+
+                                        <!-- Sub Info -->
+                                        <div class="sub-info">
+
+                                            <p class="sub-text"><img src="~/Content/images/search/Search/university.png" alt="university">University of Californiya,</p>
+                                            <p class="sub-text"><img src="~/Content/images/search/Search/pages.png" alt="pages">204 Pages</p>
+                                            <p class="sub-text"><img src="~/Content/images/search/Search/date.png" alt="date">Thu, Nov 2020</p>
+                                            <p class="inappropriate-mark"><img src="~/Content/images/search/Search/flag.png" alt="flag">5 Users marked this note inappropriate</p>
+
+                                        </div>
+
+                                        <!-- Ratings -->
+                                        <div class="ratings">
+
+                                            <div class="rate">
+
+                                                <input type="radio" id="star5" name="rate" value="5" />
+                                                <label for="star5" title="text">5 stars</label>
+                                                <input type="radio" id="star4" name="rate" value="4" />
+                                                <label for="star4" title="text">4 stars</label>
+                                                <input type="radio" id="star3" name="rate" value="3" />
+                                                <label for="star3" title="text">3 stars</label>
+                                                <input type="radio" id="star2" name="rate" value="2" />
+                                                <label for="star2" title="text">2 stars</label>
+                                                <input type="radio" id="star1" name="rate" value="1" />
+                                                <label for="star1" title="text">1 star</label>
+                                            </div>
+
+                                            <p class="sub-text">100 reviews</p>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Book 8 Ends -->
+                            <!-- Book 9 -->
+                            <div class="col-lg-4 col-md-6 col-sm-6 col-12">
+
+                                <div class="book-info">
+
+                                    <!-- Book image -->
+                                    <div class="book-info-image">
+                                        <img src="~/Content/images/search/Search/3.jpg">
+                                    </div>
+
+                                    <div class="book-info-content">
+
+                                        <!-- Book title -->
+                                        <div class="book-title">
+                                            <h6>Basic Computer Engineering Tech All India Publication Series</h6>
+                                        </div>
+
+                                        <!-- Sub Info -->
+                                        <div class="sub-info">
+
+                                            <p class="sub-text"><img src="~/Content/images/search/Search/university.png" alt="university">University of Californiya,</p>
+                                            <p class="sub-text"><img src="~/Content/images/search/Search/pages.png" alt="pages">204 Pages</p>
+                                            <p class="sub-text"><img src="~/Content/images/search/Search/date.png" alt="date">Thu, Nov 2020</p>
+                                            <p class="inappropriate-mark"><img src="~/Content/images/search/Search/flag.png" alt="flag">5 Users marked this note inappropriate</p>
+
+                                        </div>
+
+                                        <!-- Ratings -->
+                                        <div class="ratings">
+
+                                            <div class="rate">
+
+                                                <input type="radio" id="star5" name="rate" value="5" />
+                                                <label for="star5" title="text">5 stars</label>
+                                                <input type="radio" id="star4" name="rate" value="4" />
+                                                <label for="star4" title="text">4 stars</label>
+                                                <input type="radio" id="star3" name="rate" value="3" />
+                                                <label for="star3" title="text">3 stars</label>
+                                                <input type="radio" id="star2" name="rate" value="2" />
+                                                <label for="star2" title="text">2 stars</label>
+                                                <input type="radio" id="star1" name="rate" value="1" />
+                                                <label for="star1" title="text">1 star</label>
+                                            </div>
+
+                                            <p class="sub-text">100 reviews</p>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Book 9 Ends -->
+                        *@
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- Pagination -->
+        <section id="pagination-style">
+            <nav aria-label="Page navigation example">
+                <ul class="pagination justify-content-center">
+                    <li class="page-item disabled">
+                        <a class="page-link" href="#" tabindex="-1" aria-disabled="true"><i class="fa fa-angle-left" aria-hidden="true"></i></a>
+                    </li>
+                    <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                    <li class="page-item"><a class="page-link" href="#">2</a></li>
+                    <li class="page-item"><a class="page-link" href="#">3</a></li>
+                    <li class="page-item"><a class="page-link" href="#">4</a></li>
+                    <li class="page-item"><a class="page-link" href="#">5</a></li>
+                    <li class="page-item">
+                        <a class="page-link" href="#"><i class="fa fa-angle-right" aria-hidden="true"></i></a>
+                    </li>
+                </ul>
+            </nav>
+        </section>
+
+   

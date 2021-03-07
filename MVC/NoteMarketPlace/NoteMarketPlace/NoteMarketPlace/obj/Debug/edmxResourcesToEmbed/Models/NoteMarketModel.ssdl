@@ -1,0 +1,501 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="NoteMarketPlaceDatabaseModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="DownloadedNotes">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="NoteID" Type="int" Nullable="false" />
+    <Property Name="SellerID" Type="int" Nullable="false" />
+    <Property Name="BuyersID" Type="int" Nullable="false" />
+    <Property Name="IsSellerHasAllowedDownload" Type="bit" Nullable="false" />
+    <Property Name="AttachmentPath" Type="varchar(max)" />
+    <Property Name="IsAttachmentDownloaded" Type="bit" Nullable="false" />
+    <Property Name="AttachmentDownloadedDate" Type="datetime" />
+    <Property Name="IsPaid" Type="bit" Nullable="false" />
+    <Property Name="PurchasedPrice" Type="decimal" Precision="18" Scale="0" />
+    <Property Name="NoteTitle" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="NoteCategory" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="CreatedDate" Type="datetime" />
+    <Property Name="CreatedBy" Type="int" />
+    <Property Name="ModifiedDate" Type="datetime" />
+    <Property Name="ModifiedBy" Type="int" />
+  </EntityType>
+  <EntityType Name="ManageSystemConfiguration">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="SupportEmail" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="OtherEmail" Type="varchar" MaxLength="50" />
+    <Property Name="SupportPhoneNo" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="FacebookURL" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="TwitterURL" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="LinkedinURL" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="DefaultBookImage" Type="varchar(max)" Nullable="false" />
+    <Property Name="DefaultUserImage" Type="varchar(max)" Nullable="false" />
+    <Property Name="CreatedBy" Type="int" />
+    <Property Name="CreatedDate" Type="datetime" />
+    <Property Name="ModifiedBy" Type="int" />
+    <Property Name="ModifiedDate" Type="datetime" />
+    <Property Name="IsActive" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Note">
+    <Key>
+      <PropertyRef Name="NoteID" />
+    </Key>
+    <Property Name="NoteID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="SellerID" Type="int" Nullable="false" />
+    <Property Name="ActionedBy" Type="int" />
+    <Property Name="NoteTitle" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="Category" Type="int" Nullable="false" />
+    <Property Name="DisplayPicture" Type="varchar(max)" />
+    <Property Name="AdminRemarks" Type="varchar(max)" />
+    <Property Name="NoteAttachment" Type="varchar(max)" Nullable="false" />
+    <Property Name="NoteSize" Type="decimal" Precision="18" Scale="0" />
+    <Property Name="NoteType" Type="int" Nullable="false" />
+    <Property Name="Pages" Type="int" />
+    <Property Name="NoteDescription" Type="varchar(max)" Nullable="false" />
+    <Property Name="Country" Type="int" Nullable="false" />
+    <Property Name="Institute" Type="varchar" MaxLength="200" />
+    <Property Name="CourseName" Type="varchar" MaxLength="100" />
+    <Property Name="CourseCode" Type="varchar" MaxLength="100" />
+    <Property Name="Professor" Type="varchar" MaxLength="100" />
+    <Property Name="SellFor" Type="int" Nullable="false" />
+    <Property Name="NotePreview" Type="varchar(max)" />
+    <Property Name="SellPrice" Type="decimal" Precision="18" Scale="0" />
+    <Property Name="Status" Type="int" Nullable="false" />
+    <Property Name="ApprovedBy" Type="int" />
+    <Property Name="ApprovedDate" Type="datetime" />
+    <Property Name="PublishedDate" Type="datetime" Nullable="false" />
+    <Property Name="ModifiedBy" Type="int" />
+    <Property Name="ModifiedDate" Type="datetime" />
+    <Property Name="IsActive" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="NoteCategory">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="CategoryName" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="CategoryDescription" Type="varchar(max)" Nullable="false" />
+    <Property Name="CreatedDate" Type="datetime" />
+    <Property Name="CreatedBy" Type="int" />
+    <Property Name="ModifiedDate" Type="datetime" />
+    <Property Name="ModifiedBy" Type="int" />
+    <Property Name="IsActive" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="NoteCountry">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="CountryName" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="CountryCode" Type="varchar" MaxLength="10" Nullable="false" />
+    <Property Name="CreatedBy" Type="int" />
+    <Property Name="CreatedDate" Type="datetime" />
+    <Property Name="ModifiedBy" Type="int" />
+    <Property Name="ModifiedDate" Type="datetime" />
+    <Property Name="IsActive" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="NoteReview">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="NoteID" Type="int" Nullable="false" />
+    <Property Name="AgainstDownloadsID" Type="int" Nullable="false" />
+    <Property Name="Ratings" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+    <Property Name="Feedback" Type="varchar(max)" Nullable="false" />
+    <Property Name="Inappropriate" Type="bit" />
+    <Property Name="BuyersID" Type="int" Nullable="false" />
+    <Property Name="CreatedDate" Type="datetime" />
+    <Property Name="ModifiedBy" Type="int" />
+    <Property Name="ModifiedDate" Type="datetime" />
+    <Property Name="IsActive" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="NoteType">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="TypeName" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="TypeDescription" Type="varchar(max)" Nullable="false" />
+    <Property Name="CreatedBy" Type="int" />
+    <Property Name="CreatedDate" Type="datetime" />
+    <Property Name="ModifiedBy" Type="int" />
+    <Property Name="ModifiedDate" Type="datetime" />
+    <Property Name="IsActive" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Profile">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="SellerID" Type="int" />
+    <Property Name="SecondaryEmailID" Type="varchar" MaxLength="50" />
+    <Property Name="DOB" Type="date" />
+    <Property Name="Gender" Type="int" />
+    <Property Name="PhoneNo" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="CountryCode" Type="int" Nullable="false" />
+    <Property Name="ProfilePhoto" Type="varchar(max)" />
+    <Property Name="Address1" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="Address2" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="City" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="State" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="ZipCode" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Country" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="University" Type="varchar" MaxLength="100" />
+    <Property Name="College" Type="varchar" MaxLength="100" />
+    <Property Name="CreatedDate" Type="datetime" />
+    <Property Name="CreatedBy" Type="int" />
+    <Property Name="ModifiedBy" Type="int" />
+    <Property Name="ModifiedDate" Type="datetime" />
+    <Property Name="IsActive" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="ReferenceData">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" />
+    <Property Name="Value" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="DataValue" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="RefCategory" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="CreatedBy" Type="int" />
+    <Property Name="CreatedDate" Type="datetime" />
+    <Property Name="ModifiedBy" Type="int" />
+    <Property Name="ModifiedDate" Type="datetime" />
+    <Property Name="IsActive" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="RejectedNotes">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="NoteID" Type="int" Nullable="false" />
+    <Property Name="BuyersID" Type="int" Nullable="false" />
+    <Property Name="AgainstDownloadsID" Type="int" Nullable="false" />
+    <Property Name="RejectedBy" Type="int" Nullable="false" />
+    <Property Name="Remarks" Type="varchar(max)" Nullable="false" />
+    <Property Name="CreatedDate" Type="datetime" />
+    <Property Name="ModifiedBy" Type="int" />
+    <Property Name="ModifiedDate" Type="datetime" />
+    <Property Name="IsActive" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="UserRole">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Description" Type="varchar(max)" />
+    <Property Name="CreatedDate" Type="datetime" />
+    <Property Name="CreatedBy" Type="int" />
+    <Property Name="ModifiedDate" Type="datetime" />
+    <Property Name="ModifiedBy" Type="int" />
+    <Property Name="IsActive" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Users">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="RoleID" Type="int" Nullable="false" />
+    <Property Name="EmailID" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="FirstName" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="LastName" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Password" Type="varchar" MaxLength="24" Nullable="false" />
+    <Property Name="IsEmailVerified" Type="bit" Nullable="false" />
+    <Property Name="CreatedDate" Type="datetime" />
+    <Property Name="CreatedBy" Type="int" />
+    <Property Name="ModifiedDate" Type="datetime" />
+    <Property Name="ModifiedBy" Type="int" />
+    <Property Name="IsActive" Type="bit" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_DownloadedNotes_BuyserID">
+    <End Role="Users" Type="Self.Users" Multiplicity="1" />
+    <End Role="DownloadedNotes" Type="Self.DownloadedNotes" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="DownloadedNotes">
+        <PropertyRef Name="BuyersID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_DownloadedNotes_NoteID">
+    <End Role="Note" Type="Self.Note" Multiplicity="1" />
+    <End Role="DownloadedNotes" Type="Self.DownloadedNotes" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Note">
+        <PropertyRef Name="NoteID" />
+      </Principal>
+      <Dependent Role="DownloadedNotes">
+        <PropertyRef Name="NoteID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_DownloadedNotes_SellerID">
+    <End Role="Users" Type="Self.Users" Multiplicity="1" />
+    <End Role="DownloadedNotes" Type="Self.DownloadedNotes" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="DownloadedNotes">
+        <PropertyRef Name="SellerID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Note_ActionBy">
+    <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+    <End Role="Note" Type="Self.Note" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Note">
+        <PropertyRef Name="ActionedBy" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Note_Category">
+    <End Role="NoteCategory" Type="Self.NoteCategory" Multiplicity="1" />
+    <End Role="Note" Type="Self.Note" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="NoteCategory">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Note">
+        <PropertyRef Name="Category" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Note_Country">
+    <End Role="NoteCountry" Type="Self.NoteCountry" Multiplicity="1" />
+    <End Role="Note" Type="Self.Note" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="NoteCountry">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Note">
+        <PropertyRef Name="Country" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Note_NoteType">
+    <End Role="NoteType" Type="Self.NoteType" Multiplicity="1" />
+    <End Role="Note" Type="Self.Note" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="NoteType">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Note">
+        <PropertyRef Name="NoteType" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Note_SellerID">
+    <End Role="Note" Type="Self.Note" Multiplicity="1" />
+    <End Role="Note1" Type="Self.Note" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Note">
+        <PropertyRef Name="NoteID" />
+      </Principal>
+      <Dependent Role="Note1">
+        <PropertyRef Name="NoteID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Note_Status">
+    <End Role="ReferenceData" Type="Self.ReferenceData" Multiplicity="1" />
+    <End Role="Note" Type="Self.Note" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ReferenceData">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Note">
+        <PropertyRef Name="Status" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_NoteReview_AgainstDownloadsID">
+    <End Role="DownloadedNotes" Type="Self.DownloadedNotes" Multiplicity="1" />
+    <End Role="NoteReview" Type="Self.NoteReview" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DownloadedNotes">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="NoteReview">
+        <PropertyRef Name="AgainstDownloadsID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_NoteReview_BuyersID">
+    <End Role="Users" Type="Self.Users" Multiplicity="1" />
+    <End Role="NoteReview" Type="Self.NoteReview" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="NoteReview">
+        <PropertyRef Name="BuyersID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_NoteReview_NoteID">
+    <End Role="Note" Type="Self.Note" Multiplicity="1" />
+    <End Role="NoteReview" Type="Self.NoteReview" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Note">
+        <PropertyRef Name="NoteID" />
+      </Principal>
+      <Dependent Role="NoteReview">
+        <PropertyRef Name="NoteID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Profile_Gender">
+    <End Role="ReferenceData" Type="Self.ReferenceData" Multiplicity="0..1" />
+    <End Role="Profile" Type="Self.Profile" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ReferenceData">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Profile">
+        <PropertyRef Name="Gender" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Profile_SellerID">
+    <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+    <End Role="Profile" Type="Self.Profile" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Profile">
+        <PropertyRef Name="SellerID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_RejectedNotes_BuyersID">
+    <End Role="Users" Type="Self.Users" Multiplicity="1" />
+    <End Role="RejectedNotes" Type="Self.RejectedNotes" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="RejectedNotes">
+        <PropertyRef Name="BuyersID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_RejectedNotes_NoteID">
+    <End Role="Note" Type="Self.Note" Multiplicity="1" />
+    <End Role="RejectedNotes" Type="Self.RejectedNotes" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Note">
+        <PropertyRef Name="NoteID" />
+      </Principal>
+      <Dependent Role="RejectedNotes">
+        <PropertyRef Name="NoteID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Users_UserRole">
+    <End Role="UserRole" Type="Self.UserRole" Multiplicity="1" />
+    <End Role="Users" Type="Self.Users" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="UserRole">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Users">
+        <PropertyRef Name="RoleID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="NoteMarketPlaceDatabaseModelStoreContainer">
+    <EntitySet Name="DownloadedNotes" EntityType="Self.DownloadedNotes" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ManageSystemConfiguration" EntityType="Self.ManageSystemConfiguration" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Note" EntityType="Self.Note" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="NoteCategory" EntityType="Self.NoteCategory" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="NoteCountry" EntityType="Self.NoteCountry" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="NoteReview" EntityType="Self.NoteReview" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="NoteType" EntityType="Self.NoteType" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Profile" EntityType="Self.Profile" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ReferenceData" EntityType="Self.ReferenceData" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="RejectedNotes" EntityType="Self.RejectedNotes" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="UserRole" EntityType="Self.UserRole" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_DownloadedNotes_BuyserID" Association="Self.FK_DownloadedNotes_BuyserID">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="DownloadedNotes" EntitySet="DownloadedNotes" />
+    </AssociationSet>
+    <AssociationSet Name="FK_DownloadedNotes_NoteID" Association="Self.FK_DownloadedNotes_NoteID">
+      <End Role="Note" EntitySet="Note" />
+      <End Role="DownloadedNotes" EntitySet="DownloadedNotes" />
+    </AssociationSet>
+    <AssociationSet Name="FK_DownloadedNotes_SellerID" Association="Self.FK_DownloadedNotes_SellerID">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="DownloadedNotes" EntitySet="DownloadedNotes" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Note_ActionBy" Association="Self.FK_Note_ActionBy">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="Note" EntitySet="Note" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Note_Category" Association="Self.FK_Note_Category">
+      <End Role="NoteCategory" EntitySet="NoteCategory" />
+      <End Role="Note" EntitySet="Note" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Note_Country" Association="Self.FK_Note_Country">
+      <End Role="NoteCountry" EntitySet="NoteCountry" />
+      <End Role="Note" EntitySet="Note" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Note_NoteType" Association="Self.FK_Note_NoteType">
+      <End Role="NoteType" EntitySet="NoteType" />
+      <End Role="Note" EntitySet="Note" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Note_SellerID" Association="Self.FK_Note_SellerID">
+      <End Role="Note" EntitySet="Note" />
+      <End Role="Note1" EntitySet="Note" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Note_Status" Association="Self.FK_Note_Status">
+      <End Role="ReferenceData" EntitySet="ReferenceData" />
+      <End Role="Note" EntitySet="Note" />
+    </AssociationSet>
+    <AssociationSet Name="FK_NoteReview_AgainstDownloadsID" Association="Self.FK_NoteReview_AgainstDownloadsID">
+      <End Role="DownloadedNotes" EntitySet="DownloadedNotes" />
+      <End Role="NoteReview" EntitySet="NoteReview" />
+    </AssociationSet>
+    <AssociationSet Name="FK_NoteReview_BuyersID" Association="Self.FK_NoteReview_BuyersID">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="NoteReview" EntitySet="NoteReview" />
+    </AssociationSet>
+    <AssociationSet Name="FK_NoteReview_NoteID" Association="Self.FK_NoteReview_NoteID">
+      <End Role="Note" EntitySet="Note" />
+      <End Role="NoteReview" EntitySet="NoteReview" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Profile_Gender" Association="Self.FK_Profile_Gender">
+      <End Role="ReferenceData" EntitySet="ReferenceData" />
+      <End Role="Profile" EntitySet="Profile" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Profile_SellerID" Association="Self.FK_Profile_SellerID">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="Profile" EntitySet="Profile" />
+    </AssociationSet>
+    <AssociationSet Name="FK_RejectedNotes_BuyersID" Association="Self.FK_RejectedNotes_BuyersID">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="RejectedNotes" EntitySet="RejectedNotes" />
+    </AssociationSet>
+    <AssociationSet Name="FK_RejectedNotes_NoteID" Association="Self.FK_RejectedNotes_NoteID">
+      <End Role="Note" EntitySet="Note" />
+      <End Role="RejectedNotes" EntitySet="RejectedNotes" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Users_UserRole" Association="Self.FK_Users_UserRole">
+      <End Role="UserRole" EntitySet="UserRole" />
+      <End Role="Users" EntitySet="Users" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

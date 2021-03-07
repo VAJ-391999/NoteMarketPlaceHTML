@@ -1,0 +1,111 @@
+﻿
+@{
+    if (@Session["UserEmailId"] != null)
+    {
+        Layout = "~/Views/Shared/_Layout.cshtml";
+    }
+    else
+    {
+        Layout = "~/Views/Shared/_NonRegisteredUserLayout.cshtml";
+    }
+
+    //Layout = "~/Views/Shared/_NonRegisteredUserLayout.cshtml";
+    //Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+        <!-- Search notes image section -->
+        <section id="search-page-image">
+
+            <!-- Frequently Asked Question image -->
+            <div id="search-title-image">
+
+                <div class="search-title">
+                    <h2>Contact Us</h2>
+                </div>
+
+            </div>
+
+        </section>
+
+        <!-- Contact Us Content -->
+        <section id="contact-us">
+
+            <div class="container">
+
+                <div class="row">
+
+                    <!-- Contact us heading -->
+                    <div class="col-lg-6 col-md-6 col-sm-12 col-12">
+
+                        <div id="faq-heading">
+                            <h3><b>General Question</b></h3>
+                            <p>Let us know how to back to you</p>
+                            @ViewBag.emailOfSeller
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <form method="post">
+
+                    <div class="row">
+
+                        <!-- Left -->
+                        <div class="col-lg-6 col-md-6 col-sm-12 col-12">
+
+                            <div class="row">
+                                <!-- First Name -->
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label class="mylabel" for="firstname">First Name *</label>
+                                        <input type="text" class="form-control" id="firstname" placeholder="Enter your first name" name="Name">
+                                        @ViewBag.ContactUsErrror
+
+                                    </div>
+                                </div>
+
+                                <!-- Email block -->
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label class="mylabel" for="emailAddress1">Email Address *</label>
+                                        <input type="email" class="form-control" id="emailAddress1" placeholder="Enter your email address" name="EmailAddress" required>
+                                    </div>
+                                </div>
+
+                                <!-- First Name -->
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label class="mylabel" for="subject">Subject *</label>
+                                        <input type="text" class="form-control" id="subject" placeholder="Enter your subject" name="Subject" required>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                        <!-- Right -->
+                        <div class="col-lg-6 col-md-6 col-sm12 col-12">
+
+                            <div class="form-group">
+                                <label class="mylabel" for="firstname">Comments/ Questions *</label>
+                                <textarea type="text" rows="10" class="form-control" id="firstname" placeholder="Comments..." name="Comment" required></textarea>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <!-- Profile Button -->
+                    <button type="submit" class="btn btn-primary profile-btn text-uppercase text-center"><b>submit</b></button>
+
+                </form>
+
+            </div>
+
+        </section>
+
+    
