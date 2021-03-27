@@ -2061,12 +2061,12 @@ namespace NoteMarketPlace.Controllers
 
         public IEnumerable<NoteDetailsViewModel> ApplyPagination(IEnumerable<NoteDetailsViewModel> query1, int PageNumber = 1)
         {
-            ViewBag.PageTotal = Math.Ceiling(query1.Count() / 1.0);
+            ViewBag.PageTotal = Math.Ceiling(query1.Count() / 2.0);
 
             ViewBag.TotalRecord = query1.Count();
             ViewBag.PageNumber = PageNumber;
 
-            query1 = query1.Skip((PageNumber - 1) * 1).Take(1).ToList();
+            query1 = query1.Skip((PageNumber - 1) * 2).Take(2).ToList();
 
             return query1;
         }
