@@ -260,6 +260,13 @@ input[type=checkbox] {
     border: none;
 }
 
+.download-btn a{
+    color: #fff;
+}
+
+.download-btn a:hover {
+    text-decoration : none;
+}
     
 
     .forget-password-btn,
@@ -1701,14 +1708,13 @@ input[type=radio]:checked ~ .check:after {
 }
 
 .d-top #exampleModal h5 {
-    color: #6255a5;
+    color: #6255a5 !important;
 }
 
 
 .d-top #exampleModal .rate:not(:checked) > label {
     margin-bottom: 0;
     font-size: 25px;
-
 }
 
 

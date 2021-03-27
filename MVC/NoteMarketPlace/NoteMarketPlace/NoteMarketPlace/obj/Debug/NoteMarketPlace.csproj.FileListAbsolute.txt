@@ -76,8 +76,8 @@ D:\TatvSoft Traning\NoteMarketPlace\NoteMarketPlace\NoteMarketPlace\bin\System.W
 D:\TatvSoft Traning\NoteMarketPlace\NoteMarketPlace\NoteMarketPlace\bin\Newtonsoft.Json.xml
 D:\TatvSoft Traning\NoteMarketPlace\NoteMarketPlace\NoteMarketPlace\bin\Antlr3.Runtime.pdb
 D:\TatvSoft Traning\NoteMarketPlace\NoteMarketPlace\NoteMarketPlace\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
+D:\TatvSoft Traning\NoteMarketPlace\NoteMarketPlace\NoteMarketPlace\obj\Debug\NoteMarketPlace.csprojAssemblyReference.cache
 D:\TatvSoft Traning\NoteMarketPlace\NoteMarketPlace\NoteMarketPlace\obj\Debug\NoteMarketPlace.csproj.CoreCompileInputs.cache
 D:\TatvSoft Traning\NoteMarketPlace\NoteMarketPlace\NoteMarketPlace\obj\Debug\NoteMarketPlace.csproj.CopyComplete
 D:\TatvSoft Traning\NoteMarketPlace\NoteMarketPlace\NoteMarketPlace\obj\Debug\NoteMarketPlace.dll
 D:\TatvSoft Traning\NoteMarketPlace\NoteMarketPlace\NoteMarketPlace\obj\Debug\NoteMarketPlace.pdb
-D:\TatvSoft Traning\NoteMarketPlace\NoteMarketPlace\NoteMarketPlace\obj\Debug\NoteMarketPlace.csprojAssemblyReference.cache

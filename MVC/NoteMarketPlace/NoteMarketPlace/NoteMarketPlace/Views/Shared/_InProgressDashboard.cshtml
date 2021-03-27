@@ -27,7 +27,7 @@
                     <!-- Profile Button -->
                     <button href="#" type="submit" class="btn btn-primary search-btn text-uppercase text-center"><b>Search</b></button>
                 </form>
-                
+
             </div>
 
         </div>
@@ -45,10 +45,10 @@
                                 @Html.ActionLink("Title", "Dashboard", new { SortOrder1 = ViewBag.SortOrder == null ? "Asc" : (ViewBag.SortOrder == "Asc" ? "Desc" : "Asc"), SortBy1 = "Title" })
                             </th>
                             <th scope="col">
-                                @Html.ActionLink("Category", "Dashboard", new { SortOrder = ViewBag.SortOrder == null ? "Asc" : (ViewBag.SortOrder == "Asc" ? "Desc" : "Asc"), SortBy = "Category" })
+                                @Html.ActionLink("Category", "Dashboard", new { SortOrder1 = ViewBag.SortOrder == null ? "Asc" : (ViewBag.SortOrder == "Asc" ? "Desc" : "Asc"), SortBy1 = "Category" })
                             </th>
                             <th scope="col">
-                                @Html.ActionLink("Status", "Dashboard", new { SortOrder = ViewBag.SortOrder == null ? "Asc" : (ViewBag.SortOrder == "Asc" ? "Desc" : "Asc"), SortBy = "Status" })
+                                @Html.ActionLink("Status", "Dashboard", new { SortOrder1 = ViewBag.SortOrder == null ? "Asc" : (ViewBag.SortOrder == "Asc" ? "Desc" : "Asc"), SortBy1 = "Status" })
                             </th>
                             <th scope="col">Action</th>
                         </tr>
@@ -64,11 +64,11 @@
                                 <td>@item.referenceData.Value</td>
                                 @if (item.note.Status == 6)
                                 {
-                                    <td><img src="~/Content/images/Dashboard/edit.png" alt="edit"><img src="~/Content/images/Front_images/images/delete.png" alt="delete"></td>
+                                    <td><a href="/User/AddNotes?nId=@item.note.NoteID"><img src="~/Content/images/Dashboard/edit.png" alt="edit"></a><a href="/User/DeleteConform?deleteId=@item.note.NoteID"><img src="~/Content/images/Front_images/images/delete.png" alt="delete" id="deleteConform"></a></td>
                                 }
                                 else
                                 {
-                                    <td><img src="~/Content/images/Dashboard/eye.png" alt="see"></td>
+                                    <td><a href="/User/NoteDetails?noteName=@item.note.NoteTitle"><img src="~/Content/images/Dashboard/eye.png" alt="see"></a></td>
                                 }
 
 
@@ -83,6 +83,72 @@
     </div>
 
 </section>
+@*
+    <!--Pagination-->
+    <section id="pagination-style">
+        <nav aria-label="Page navigation example">
+            @{
+                Double totalPage = ViewBag.PageTotal;
+
+                <ul class="pagination justify-content-center">
+
+                    @if (ViewBag.PageNumber == 1)
+                    {
+                        <li class="page-item disabled">
+                            @Html.ActionLink("<", "Dashboard", new { SortOrder = ViewBag.SortOrder == null ? "Asc" : ViewBag.SortOrder, SortBy = ViewBag.SortBy == null ? "Note Title" : ViewBag.SortBy, PageNumber = ViewBag.PageNumber }, new { @class = "page-link" })
+                        </li>
+
+                    }
+                    else
+                    {
+                        <li class="page-item">
+                            @Html.ActionLink("<", "Dashboard", new { SortOrder = ViewBag.SortOrder == null ? "Asc" : ViewBag.SortOrder, SortBy = ViewBag.SortBy == null ? "Note Title" : ViewBag.SortBy, PageNumber = ViewBag.PageNumber - 1 }, new { @class = "page-link" })
+                        </li>
+                    }
+
+
+
+                    @for (int j = 1; j <= totalPage; j++)
+                    {
+
+                        if (j == ViewBag.PageNumber)
+                        {
+
+                            <li class="page-item active">
+                                @Html.ActionLink(j.ToString(), "Dashboard", new { SortOrder = ViewBag.SortOrder == null ? "Asc" : ViewBag.SortOrder, SortBy = ViewBag.SortBy == null ? "Note Title" : ViewBag.SortBy, PageNumber = j }, new { @class = "page-link" })
+                            </li>
+                        }
+                        else
+                        {
+                            <li class="page-item">
+                                @Html.ActionLink(j.ToString(), "Dashboard", new { SortOrder = ViewBag.SortOrder == null ? "Asc" : ViewBag.SortOrder, SortBy = ViewBag.SortBy == null ? "Note Title" : ViewBag.SortBy, PageNumber = j }, new { @class = "page-link" })
+                            </li>
+                        }
+
+                    }
+
+                    @if (ViewBag.PageNumber == totalPage)
+                    {
+                        <li class="page-item">
+                            @Html.ActionLink(">", "Dashboard", new { SortOrder = ViewBag.SortOrder == null ? "Asc" : ViewBag.SortOrder, SortBy = ViewBag.SortBy == null ? "Note Title" : ViewBag.SortBy, PageNumber = ViewBag.PageNumber }, new { @class = "page-link" })
+
+                        </li>
+                    }
+                    else
+                    {
+                        <li class="page-item">
+                            @Html.ActionLink(">", "Dashboard", new { SortOrder = ViewBag.SortOrder == null ? "Asc" : ViewBag.SortOrder, SortBy = ViewBag.SortBy == null ? "Note Title" : ViewBag.SortBy, PageNumber = ViewBag.PageNumber + 1 }, new { @class = "page-link" })
+
+                        </li>
+                    }
+
+
+                </ul>
+            }
+        </nav>
+    </section>
+*@
+
 
 <!--Pagination-->
 <section id="pagination-style">
@@ -95,14 +161,14 @@
                 @if (ViewBag.PageNumber == 1)
                 {
                     <li class="page-item disabled">
-                        @Html.ActionLink("<", "Dashboard", new { SortOrder = ViewBag.SortOrder == null ? "Asc" : ViewBag.SortOrder, SortBy = ViewBag.SortBy == null ? "Note Title" : ViewBag.SortBy, PageNumber = ViewBag.PageNumber }, new { @class = "page-link" })
+                        @Html.ActionLink("<", "Dashboard", new { SortOrder1 = ViewBag.SortOrder == null ? "Asc" : ViewBag.SortOrder, SortBy1 = ViewBag.SortBy == null ? "Note Title" : ViewBag.SortBy, PageNumber1 = ViewBag.PageNumber }, new { @class = "page-link" })
                     </li>
 
                 }
                 else
                 {
                     <li class="page-item">
-                        @Html.ActionLink("<", "Dashboard", new { SortOrder = ViewBag.SortOrder == null ? "Asc" : ViewBag.SortOrder, SortBy = ViewBag.SortBy == null ? "Note Title" : ViewBag.SortBy, PageNumber = ViewBag.PageNumber - 1 }, new { @class = "page-link" })
+                        @Html.ActionLink("<", "Dashboard", new { SortOrder1 = ViewBag.SortOrder == null ? "Asc" : ViewBag.SortOrder, SortBy1 = ViewBag.SortBy == null ? "Note Title" : ViewBag.SortBy, PageNumber1 = ViewBag.PageNumber - 1 }, new { @class = "page-link" })
                     </li>
                 }
 
@@ -115,13 +181,13 @@
                     {
 
                         <li class="page-item active">
-                            @Html.ActionLink(j.ToString(), "Dashboard", new { SortOrder = ViewBag.SortOrder == null ? "Asc" : ViewBag.SortOrder, SortBy = ViewBag.SortBy == null ? "Note Title" : ViewBag.SortBy, PageNumber = j }, new { @class = "page-link" })
+                            @Html.ActionLink(j.ToString(), "Dashboard", new { SortOrder1 = ViewBag.SortOrder == null ? "Asc" : ViewBag.SortOrder, SortBy1 = ViewBag.SortBy == null ? "Note Title" : ViewBag.SortBy, PageNumber1 = j }, new { @class = "page-link" })
                         </li>
                     }
                     else
                     {
                         <li class="page-item">
-                            @Html.ActionLink(j.ToString(), "Dashboard", new { SortOrder = ViewBag.SortOrder == null ? "Asc" : ViewBag.SortOrder, SortBy = ViewBag.SortBy == null ? "Note Title" : ViewBag.SortBy, PageNumber = j }, new { @class = "page-link" })
+                            @Html.ActionLink(j.ToString(), "Dashboard", new { SortOrder1 = ViewBag.SortOrder == null ? "Asc" : ViewBag.SortOrder, SortBy1 = ViewBag.SortBy == null ? "Note Title" : ViewBag.SortBy, PageNumber1 = j }, new { @class = "page-link" })
                         </li>
                     }
 
@@ -130,14 +196,14 @@
                 @if (ViewBag.PageNumber == totalPage)
                 {
                     <li class="page-item">
-                        @Html.ActionLink(">", "Dashboard", new { SortOrder = ViewBag.SortOrder == null ? "Asc" : ViewBag.SortOrder, SortBy = ViewBag.SortBy == null ? "Note Title" : ViewBag.SortBy, PageNumber = ViewBag.PageNumber }, new { @class = "page-link" })
+                        @Html.ActionLink(">", "Dashboard", new { SortOrder1 = ViewBag.SortOrder == null ? "Asc" : ViewBag.SortOrder, SortBy1 = ViewBag.SortBy == null ? "Note Title" : ViewBag.SortBy, PageNumber1 = ViewBag.PageNumber }, new { @class = "page-link" })
 
                     </li>
                 }
                 else
                 {
                     <li class="page-item">
-                        @Html.ActionLink(">", "Dashboard", new { SortOrder = ViewBag.SortOrder == null ? "Asc" : ViewBag.SortOrder, SortBy = ViewBag.SortBy == null ? "Note Title" : ViewBag.SortBy, PageNumber = ViewBag.PageNumber + 1 }, new { @class = "page-link" })
+                        @Html.ActionLink(">", "Dashboard", new { SortOrder1 = ViewBag.SortOrder == null ? "Asc" : ViewBag.SortOrder, SortBy1 = ViewBag.SortBy == null ? "Note Title" : ViewBag.SortBy, PageNumber1 = ViewBag.PageNumber + 1 }, new { @class = "page-link" })
 
                     </li>
                 }

@@ -1,341 +1,285 @@
 ﻿
 @{
-    Layout = null;
-    
-}
+    //Layout = null;
+    Layout = "~/Views/Shared/_Layout.cshtml";
 
-<!DOCTYPE html>
+}
+@using NoteMarketPlace.Models;
+
+<!--<!DOCTYPE html>
 <html lang="en">
 
-<head>
-
-    <!-- Meta Data -->
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-
-    <!-- Title -->
-    <title>Notes Marketplace</title>
-
-    <!-- Fevicon -->
-    <link rel="shortcut icon" href="~/Content/images/Front_images/images/favicon.ico">
-
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
-
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="~/Content/css/bootstrap/bootstrap.min.css">
-
-    <!-- Font Aweasome -->
-    <link rel="stylesheet" href="~/Content/css/font-awesome/css/font-awesome.min.css">
-
-    <!-- Custome CSS -->
-    <link rel="stylesheet" href="~/Content/css/style.css">
-
-    <!-- Responsive CSS -->
-    <link rel="stylesheet" href="~/Content/css/responsive.css">
+<head>-->
+<!-- Meta Data -->
+<!--<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">-->
+<!-- Title -->
+<!--<title>Notes Marketplace</title>-->
+<!-- Fevicon -->
+<!--<link rel="shortcut icon" href="~/Content/images/Front_images/images/favicon.ico">-->
+<!-- Google Fonts -->
+<!--<link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">-->
+<!-- Bootstrap CSS -->
+<!--<link rel="stylesheet" href="~/Content/css/bootstrap/bootstrap.min.css">-->
+<!-- Font Aweasome -->
+<!--<link rel="stylesheet" href="~/Content/css/font-awesome/css/font-awesome.min.css">-->
+<!-- Custome CSS -->
+<!--<link rel="stylesheet" href="~/Content/css/style.css">-->
+<!-- Responsive CSS -->
+<!--<link rel="stylesheet" href="~/Content/css/responsive.css">
 
 </head>
 
-<body data-spy="scroll" data-target=".navbar" data-offset="65">
+<body data-spy="scroll" data-target=".navbar" data-offset="65">-->
+<!-- Header -->
+<!--<header>
 
-    <!-- Header -->
-    <header>
+    <nav class="navbar navbar-expand-md navber-fixed-top fixed-top navbar-light profile-navigation">
+        <div class="container site-nav-wrapper">
 
-        <nav class="navbar navbar-expand-md navber-fixed-top fixed-top navbar-light profile-navigation">
-            <div class="container site-nav-wrapper">
+            <div class="navbar-header navbar-movable">-->
+<!--Mobile Menu Open Button-->
+<!--<span id="mobile-nav-open-btn">&#9776;</span>-->
+<!-- Logo -->
+<!--<a class="navbar-brand" href="/Home/Index"><img src="~/Content/images/pre-login/top-purple-logo.jpeg"></a>
 
-                <div class="navbar-header navbar-movable">
+</div>-->
+<!-- Main Menu -->
+<!--<div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
+    <ul class="navbar-nav">
+        <li class="nav-item">
+            <a class="nav-link" href="/User/SearchNotes"><span>Search Notes</span></a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="/User/Dashboard"><span>Sell Your Notes</span></a>
+        </li>
 
-                    <!--Mobile Menu Open Button-->
-                    <span id="mobile-nav-open-btn">&#9776;</span>
+        <li class="nav-item">
+            <a class="nav-link" href="/User/BuyersRequest"><span>Buyer Requests</span></a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="/User/FAQ"><span>FAQ</span></a>
+        </li>
 
-                    <!-- Logo -->
-                    <a class="navbar-brand" href="/Home/Index"><img src="~/Content/images/pre-login/top-purple-logo.jpeg"></a>
+        <li class="nav-item">
+            <a class="nav-link" href="/User/ContactUs"><span>Contact Us</span></a>
+        </li>-->
+<!-- Image -->
+<!--<li class="user-image">
 
+            <div class="dropdown">
+
+                <img src="~/Content/images/home/Homepage/reviewer-1.png" class="img-fluid rounded-circle" alt="User" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    <a class="dropdown-item" href="/User/UserProfile">My Profile</a>
+                    <a class="dropdown-item" href="/User/MyDownload">My Downloads</a>
+                    <a class="dropdown-item" href="#">My Sold Notes</a>
+                    <a class="dropdown-item" href="#">My Rejected Notes</a>
+                    <a class="dropdown-item" href="#">Change Password</a>
+                    <a class="dropdown-item" href="/User/logout">Logout</a>
                 </div>
 
-                <!-- Main Menu -->
-                <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
-                    <ul class="navbar-nav">
-                        <li class="nav-item">
-                            <a class="nav-link" href="/User/SearchNotes"><span>Search Notes</span></a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="/User/Dashboard"><span>Sell Your Notes</span></a>
-                        </li>
+            </div>
+        </li>
 
-                        <li class="nav-item">
-                            <a class="nav-link" href="/User/BuyersRequest"><span>Buyer Requests</span></a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="/User/FAQ"><span>FAQ</span></a>
-                        </li>
+        <li>
+            <form>
+                <button type="submit" class="btn my-sm-0 btn-primary btn-lg btn-block logout-btn text-center"><a href="/User/logout">Logout</a></button>
+            </form>
+        </li>
 
-                        <li class="nav-item">
-                            <a class="nav-link" href="/User/ContactUs"><span>Contact Us</span></a>
-                        </li>
+    </ul>
 
-                        <!-- Image -->
-                        <li class="user-image">
+</div>-->
+<!-- Mobile Menu -->
+<!--<div id="mobile-nav">-->
+<!-- Mobile Menu Close Button -->
+<!--<span id="mobile-nav-close-btn">&times;</span>
 
-                            <div class="dropdown">
+<div id="mobile-nav-content">
+    <ul class="navbar-nav justify-content-center text-left">
+        <li>
+            <a href="/User/SearchNotes"><span>Search Notes</span></a>
+        </li>
+        <li>
+            <a href="/User/Dashboard"><span>Sell Your Notes</span></a>
+        </li>
+        <li>
+            <a href="/User/BuyersRequest"><span>Buyer Requests</span></a>
+        </li>
+        <li>
+            <a href="/User/FAQ"><span>FAQ</span></a>
+        </li>
 
-                                <img src="~/Content/images/home/Homepage/reviewer-1.png" class="img-fluid rounded-circle" alt="User" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <li>
+            <a href="/User/ContactUs"><span>Contact Us</span></a>
+        </li>-->
+<!-- image -->
+<!--<li class="user-image">
 
-                                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                    <a class="dropdown-item" href="#">My Profile</a>
-                                    <a class="dropdown-item" href="#">My Downloads</a>
-                                    <a class="dropdown-item" href="#">My Sold Notes</a>
-                                    <a class="dropdown-item" href="#">My Rejected Notes</a>
-                                    <a class="dropdown-item" href="#">Change Password</a>
-                                    <a class="dropdown-item" href="/User/logout">Logout</a>
+                            <div class="accordion">
+
+                                <div class="accordion-item">
+
+                                    <button class="accordion-button text-left" id="accordion-button-3">
+                                        <span><img src="~/Content/images/home/Homepage/reviewer-1.png" class="img-fluid rounded-circle" alt="User"></span>
+                                        <span><i class="fa fa-angle-down" aria-hidden="true" id="up3"></i></span>
+                                    </button>
+
+                                    <div class="accordion-content" id="accordion-content-3">
+
+                                        <ul class="mobile-submenu">
+
+                                            <li><a href=""><span>My Profile</span></a></li>
+                                            <li><a href=""><span>My Downloads</span></a></li>
+                                            <li><a href=""><span>My Sold Notes</span></a></li>
+                                            <li><a href=""><span>My Rejected Notes</span></a></li>
+                                            <li><a href=""><span>Change Password</span></a></li>
+                                            <li><a href="/User/logout"><span>Logout</span></a></li>
+
+                                        </ul>
+
+                                    </div>
+
                                 </div>
 
                             </div>
+
+
                         </li>
 
                         <li>
                             <form>
-                                <button type="submit" class="btn my-sm-0 btn-primary btn-lg btn-block logout-btn text-center"><a href="/User/logout">Logout</a></button>
+                                <button type="submit" class="btn my-sm-0 btn-primary logout-btn text-center" id="mybtn"><a href="/User/logout">Logout</a></button>
                             </form>
                         </li>
-
                     </ul>
-
                 </div>
-
-                <!-- Mobile Menu -->
-                <div id="mobile-nav">
-                    <!-- Mobile Menu Close Button -->
-                    <span id="mobile-nav-close-btn">&times;</span>
-
-                    <div id="mobile-nav-content">
-                        <ul class="navbar-nav justify-content-center text-left">
-                            <li>
-                                <a href="/User/SearchNotes"><span>Search Notes</span></a>
-                            </li>
-                            <li>
-                                <a href="/User/Dashboard"><span>Sell Your Notes</span></a>
-                            </li>
-                            <li>
-                                <a href="/User/BuyersRequest"><span>Buyer Requests</span></a>
-                            </li>
-                            <li>
-                                <a href="/User/FAQ"><span>FAQ</span></a>
-                            </li>
-
-                            <li>
-                                <a href="/User/ContactUs"><span>Contact Us</span></a>
-                            </li>
-
-                            <!-- image -->
-                            <li class="user-image">
-
-                                <div class="accordion">
-
-                                    <div class="accordion-item">
-
-                                        <button class="accordion-button text-left" id="accordion-button-3">
-                                            <span><img src="~/Content/images/home/Homepage/reviewer-1.png" class="img-fluid rounded-circle" alt="User"></span>
-                                            <span><i class="fa fa-angle-down" aria-hidden="true" id="up3"></i></span>
-                                        </button>
-
-                                        <div class="accordion-content" id="accordion-content-3">
-
-                                            <ul class="mobile-submenu">
-
-                                                <li><a href=""><span>My Profile</span></a></li>
-                                                <li><a href=""><span>My Downloads</span></a></li>
-                                                <li><a href=""><span>My Sold Notes</span></a></li>
-                                                <li><a href=""><span>My Rejected Notes</span></a></li>
-                                                <li><a href=""><span>Change Password</span></a></li>
-                                                <li><a href="/User/logout"><span>Logout</span></a></li>
-
-                                            </ul>
-
-                                        </div>
-
-                                    </div>
-
-                                </div>
-
-
-                            </li>
-
-                            <li>
-                                <form>
-                                    <button type="submit" class="btn my-sm-0 btn-primary logout-btn text-center" id="mybtn"><a href="/User/logout">Logout</a></button>
-                                </form>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-
             </div>
-        </nav>
-    </header>
-    <!-- Header Ends -->
-    <!-- Common -->
-    <section class="common">
 
-        <!-- Dashboard Heading -->
-        <section id="dashboard-top">
+        </div>
+    </nav>
+</header>-->
+<!-- Header Ends -->
+<!-- Common -->
+<section class="common">
 
-            <div class="container dashboard">
+    <!-- Dashboard Heading -->
+    <section id="dashboard-top">
 
-                <!-- dashboard heading & add note button -->
-                <div class="row dashboard-top-title">
+        <div class="container dashboard">
 
-                    <!-- Title -->
-                    <div class="col-lg-6 col-md-6 col-sm-6 col-12">
-                        <div class="dashboar-heading">
-                            <h2>Dashboard</h2>
-                        </div>
+            <!-- dashboard heading & add note button -->
+            <div class="row dashboard-top-title">
+
+                <!-- Title -->
+                <div class="col-lg-6 col-md-6 col-sm-6 col-12">
+                    <div class="dashboar-heading">
+                        <h2>Dashboard</h2>
                     </div>
-
-                    <!-- button -->
-                    <div class="col-lg-6 col-md-6 col-sm-6 col-12 text-right">
-
-                        <!-- Profile Button -->
-                        <button type="button" class="btn btn-primary add-note-btn text-uppercase text-center" onclick="location.href = '@Url.Action("AddNotes","User")'"><b>Add Notes</b></button>
-
-                    </div>
-
                 </div>
 
-                <!-- Dashboard content -->
-                <div class="dashboar-content">
-                    <div class="row">
+                <!-- button -->
+                <div class="col-lg-6 col-md-6 col-sm-6 col-12 text-right">
 
-                        <!-- left -->
-                        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12">
-
-                            <div class="row earning">
-                                <!-- Earning -->
-                                <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-12">
-                                    <div class="myearning">
-                                        <img src="~/Content/images/Dashboard/my-earning.png" alt="earning">
-                                        <h5>My Earning</h5>
-                                    </div>
-                                </div>
-
-                                <!-- number of notes -->
-                                <div class="col-xl-8 col-lg-8 col-md-8 col-sm-8 col-12">
-
-                                    <div class="row">
-
-                                        <!-- Number of notes sell -->
-                                        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-6">
-                                            <div class="dash-left text-center">
-                                                <h4><b>100</b></h4>
-                                                <p>Number Of Sold Notes</p>
-                                            </div>
-                                        </div>
-
-
-                                        <!-- Money Earned  -->
-                                        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-6">
-                                            <div class="dash-left text-center">
-                                                <h4><b>&#36;10,000</b></h4>
-                                                <p>Money Earned</p>
-                                            </div>
-                                        </div>
-
-                                    </div>
-
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Right -->
-                        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12">
-                            <div class="row mynote-info">
-                                <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 col-12">
-
-                                    <!-- Number of notes sell -->
-                                    <div class="dash-right text-center">
-                                        <h4><b>38</b></h4>
-                                        <p>My Downloads</p>
-                                    </div>
-
-                                </div>
-                                <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 col-12">
-
-                                    <!-- Number of notes sell -->
-                                    <div class="dash-right text-center">
-                                        <h4><b>12</b></h4>
-                                        <p>My Rejected Notes</p>
-                                    </div>
-
-                                </div>
-                                <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 col-12">
-
-                                    <!-- Number of notes sell -->
-                                    <div class="dash-right text-center">
-                                        <h4><b>102</b></h4>
-                                        <p>Buys Request</p>
-                                    </div>
-
-                                </div>
-                            </div>
-                        </div>
-
-                    </div>
+                    <!-- Profile Button -->
+                    <button type="button" class="btn btn-primary add-note-btn text-uppercase text-center" onclick="location.href = '@Url.Action("AddNotes","User")'"><b>Add Notes</b></button>
 
                 </div>
 
             </div>
+            @{ 
+                NoteMarketPlaceDatabaseEntities db = new NoteMarketPlaceDatabaseEntities();
 
-        </section>
+                var sellerId = Convert.ToInt32(@Session["UserId"]);
 
-        @*Html.Partial("_InProgressDashboard") @Html.Partial("_InPublishedDashboard")*@
+                var myEarningCount = db.DownloadedNotes.Where(m => m.SellerID == sellerId && m.IsPaid == true).Sum(m => m.PurchasedPrice);
 
+                var mySoldNoteCount = db.DownloadedNotes.Where(m => m.SellerID == sellerId && m.IsPaid == true).Count();
 
-        @{
-            Html.RenderAction("_InProgressDashboard","User");
-        }
+                var myDownloadsCount = db.DownloadedNotes.Where(m => m.BuyersID == sellerId && m.IsAttachmentDownloaded == true).Count();
 
-        @{
-            Html.RenderAction("_InPublishedDashboard","User");
-        }
+                var myRejectedNoteCount = db.Notes.Where(m => m.SellerID == sellerId && m.Status == 10).Count();
 
+                var myBuyersRequestCount = db.DownloadedNotes.Where(m => m.SellerID == sellerId && m.IsSellerHasAllowedDownload == false).Count();
+            }
 
-
-
-
-    </section>
-
-    <!--Footer -->
-    <footer>
-
-        <div class="footer-tab">
-
-            <div class="container">
-
+            <!-- Dashboard content -->
+            <div class="dashboar-content">
                 <div class="row">
 
-                    <!-- Copy Right -->
-                    <div class="col-lg-6 col-md-6 col-sm-7 col-7">
+                    <!-- left -->
+                    <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12">
 
-                        <div class="footer-text">
+                        <div class="row earning">
+                            <!-- Earning -->
+                            <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-12">
+                                <div class="myearning">
+                                    <img src="~/Content/images/Dashboard/my-earning.png" alt="earning">
+                                    <h5>My Earning</h5>
+                                </div>
+                            </div>
 
-                            <p>Copyright &copy; Tatavsoft All Rights Reserverd</p>
+                            <!-- number of notes -->
+                            <div class="col-xl-8 col-lg-8 col-md-8 col-sm-8 col-12">
 
+                                <div class="row">
+
+                                    <!-- Number of notes sell -->
+                                    <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-6">
+                                        <div class="dash-left text-center">
+                                            <h4><b>@mySoldNoteCount</b></h4>
+                                            <p>Number Of Sold Notes</p>
+                                        </div>
+                                    </div>
+
+
+                                    <!-- Money Earned  -->
+                                    <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-6">
+                                        <div class="dash-left text-center">
+                                            <h4><b>&#36;@myEarningCount</b></h4>
+                                            <p>Money Earned</p>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                            </div>
                         </div>
-
                     </div>
 
-                    <!-- Social Icons -->
-                    <div class="col-lg-6 col-md-6 col-sm-5 col-5 text-right">
-                        <div class="footer-text">
+                    <!-- Right -->
+                    <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12">
+                        <div class="row mynote-info">
+                            <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 col-12">
 
-                            <ul class="social-list">
-                                <li><a href="#"><i class="fa fa-facebook"></i></a></li>
-                                <li><a href="#"><i class="fa fa-twitter"></i></a></li>
-                                <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
-                            </ul>
+                                <!-- Number of notes sell -->
+                                <div class="dash-right text-center">
+                                    <h4><b>@myDownloadsCount</b></h4>
+                                    <p>My Downloads</p>
+                                </div>
 
+                            </div>
+                            <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 col-12">
+
+                                <!-- Number of notes sell -->
+                                <div class="dash-right text-center">
+                                    <h4><b>@myRejectedNoteCount</b></h4>
+                                    <p>My Rejected Notes</p>
+                                </div>
+
+                            </div>
+                            <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 col-12">
+
+                                <!-- Number of notes sell -->
+                                <div class="dash-right text-center">
+                                    <h4><b>@myBuyersRequestCount</b></h4>
+                                    <p>Buys Request</p>
+                                </div>
+
+                            </div>
                         </div>
                     </div>
 
@@ -345,20 +289,73 @@
 
         </div>
 
-    </footer>
+    </section>
 
-    <!-- JQuery All Files -->
-    <!-- JQuery JS -->
-    <script src="~/Scripts/js/jquery-3.5.1.min.js"></script>
+    @*Html.Partial("_InProgressDashboard") @Html.Partial("_InPublishedDashboard")*@
 
-    <!-- Bootstrap JS -->
-    <script src="~/Scripts/js/bootstrap/bootstrap.min.js"></script>
 
-    <!-- Custome JS -->
-    <script src="~/Scripts/js/script.js"></script>
+    @{
+        Html.RenderAction("_InProgressDashboard", "User");
+    }
+
+    @{
+        Html.RenderAction("_InPublishedDashboard", "User");
+    }
+
+
+
+
+
+</section>
+
+<!--Footer -->
+<!--<footer>
+
+    <div class="footer-tab">
+
+        <div class="container">
+
+            <div class="row">-->
+<!-- Copy Right -->
+<!--<div class="col-lg-6 col-md-6 col-sm-7 col-7">
+
+    <div class="footer-text">
+
+        <p>Copyright &copy; Tatavsoft All Rights Reserverd</p>
+
+    </div>
+
+</div>-->
+<!-- Social Icons -->
+<!--<div class="col-lg-6 col-md-6 col-sm-5 col-5 text-right">
+                    <div class="footer-text">
+
+                        <ul class="social-list">
+                            <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+                            <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+                            <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
+                        </ul>
+
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</footer>-->
+<!-- JQuery All Files -->
+<!-- JQuery JS -->
+<!--<script src="~/Scripts/js/jquery-3.5.1.min.js"></script>-->
+<!-- Bootstrap JS -->
+<!--<script src="~/Scripts/js/bootstrap/bootstrap.min.js"></script>-->
+<!-- Custome JS -->
+<!--<script src="~/Scripts/js/script.js"></script>
 
 
 
 </body>
 
-</html>
+</html>-->

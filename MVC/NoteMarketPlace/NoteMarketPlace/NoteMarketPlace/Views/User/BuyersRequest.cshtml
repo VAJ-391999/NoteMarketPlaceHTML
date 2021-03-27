@@ -1,14 +1,9 @@
 ﻿@model IEnumerable<NoteMarketPlace.Models.NoteDetailsViewModel>
 @{
 
-    if(@Session["UserEmailId"] != null)
-    {
+   
         Layout = "~/Views/Shared/_Layout.cshtml";
-    }
-    else
-    {
-        Layout = null;
-    }
+    
 
     int i = 0;
 }
@@ -46,14 +41,16 @@
 
         </div>
 
-        @{ 
-            if(ViewBag.TotalRecord == 0)
+        
+
+        @{
+            if (ViewBag.TotalRecord == 0)
             {
                 <div class="NoRecordMsg">
                     <h4><b>No Record Found</b></h4>
                 </div>
             }
-           
+
         }
 
         <!-- Table -->
@@ -104,12 +101,14 @@
                                     <div class="dropdown">
                                         <a class="nav-link" href="#" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span><img src="~/Content/images/Front_images/images/dots.png" alt="dot"></span></a>
 
-                                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                            @using (Html.BeginForm("BuyersRequest", "User", FormMethod.Post, new { }))
-                                            {
-                                                <a class="dropdown-item" href="/User/BuyersRequest?bookId=@item.download.NoteID&buyerId=@item.download.BuyersID">Allow Download</a>
-                                            }
-                                        </div>
+                                        @using (Html.BeginForm("BuyersRequest", "User", FormMethod.Post, new { }))
+                                        {
+                                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+
+                                                <a class="dropdown-item" href="/User/BuyersRequest?downloadId=@item.download.ID&bookId=@item.note.NoteID">Allow Download</a>
+
+                                            </div>
+                                        }
                                     </div>
 
                                 </td>

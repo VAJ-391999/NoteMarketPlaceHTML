@@ -1,0 +1,239 @@
+﻿@model IEnumerable<NoteMarketPlace.Models.NoteDetailsViewModel>
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    int i = 0;
+}
+
+
+<!-- Dashboard progress -->
+<section id="dashboard-middle">
+
+    <div class="container d-top">
+
+        <!-- Heading -->
+        <div class="row">
+
+            <!-- Title -->
+            <div class="col-lg-6 col-md-6 col-sm-12 col-12">
+                <div class="dashboar-heading">
+                    <h3>My Downloads</h3>
+                </div>
+            </div>
+
+            <!-- button -->
+            <div class="col-lg-6 col-md-6 col-sm-12 col-12">
+                @using (Html.BeginForm("MyDownload", "User", FormMethod.Post, new { @class = "form-inline ml-auto pull-right" }))
+                {
+                    <div class="md-form my-0 search-wrapper">
+                        <img src="~/Content/images/Dashboard/search.jpg" alt="search">
+                        <input class="form-control" type="text" id="searchbar" placeholder="Search..." aria-label="Search" value="@ViewData["GetSoldNoteDetails"]" name="searching">
+                    </div>
+
+                    <!-- Profile Button -->
+                    <button href="#" type="submit" class="btn btn-primary search-btn text-uppercase text-center"><b>Search</b></button>
+
+                }
+            </div>
+
+        </div>
+
+        @{
+            if (ViewBag.TotalRecord == 0)
+            {
+                <div class="NoRecordMsg">
+                    <h4><b>No Record Found</b></h4>
+                </div>
+            }
+
+        }
+
+        <!-- Table -->
+        <div class="row">
+
+            <div class="col-lg-12 col-md-12 col-sm-12 col-12 table-responsive-xl">
+                <table class="table">
+                    <thead>
+                        <tr class="text-uppercase">
+                            <th scope="col">Sr. No</th>
+                            <th scope="col">
+                                @Html.ActionLink("Note Title", "MyDownload", new { SortOrder = ViewBag.SortOrder == null ? "Asc" : (ViewBag.SortOrder == "Asc" ? "Desc" : "Asc"), SortBy = "Note Title", PageNumber = ViewBag.PageNumber == 0 ? 1 : ViewBag.PageNumber })
+                            </th>
+                            <th scope="col">
+                                @Html.ActionLink("Category", "MyDownload", new { SortOrder = ViewBag.SortOrder == null ? "Asc" : (ViewBag.SortOrder == "Asc" ? "Desc" : "Asc"), SortBy = "Category", PageNumber = ViewBag.PageNumber == 0 ? 1 : ViewBag.PageNumber })
+                            </th>
+                            <th scope="col">
+                                @Html.ActionLink("Buyer", "MyDownload", new { SortOrder = ViewBag.SortOrder == null ? "Asc" : (ViewBag.SortOrder == "Asc" ? "Desc" : "Asc"), SortBy = "Buyer", PageNumber = ViewBag.PageNumber == 0 ? 1 : ViewBag.PageNumber })
+                            </th>
+
+                            <th scope="col">
+                                @Html.ActionLink("Sell Type", "MyDownload", new { SortOrder = ViewBag.SortOrder == null ? "Asc" : (ViewBag.SortOrder == "Asc" ? "Desc" : "Asc"), SortBy = "Sell Type", PageNumber = ViewBag.PageNumber == 0 ? 1 : ViewBag.PageNumber })
+                            </th>
+                            <th scope="col">
+                                @Html.ActionLink("Price", "MyDownload", new { SortOrder = ViewBag.SortOrder == null ? "Asc" : (ViewBag.SortOrder == "Asc" ? "Desc" : "Asc"), SortBy = "Price", PageNumber = ViewBag.PageNumber == 0 ? 1 : ViewBag.PageNumber })
+                            </th>
+                            <th scope="col">Download Date/Time</th>
+                            <th scope="col"></th>
+                            <th scope="col"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (NoteMarketPlace.Models.NoteDetailsViewModel item in (IEnumerable<NoteMarketPlace.Models.NoteDetailsViewModel>)Model)
+                        {
+                            <tr>
+                                <td class="text-center">@(i = i + 1)</td>
+                                <td><a href="/User/NoteDetails?noteName=@item.note.NoteTitle">@item.note.NoteTitle</a></td>
+                                <td>@item.noteCategory.CategoryName</td>
+                                <td>@item.user.EmailID</td>
+                                <td>@item.referenceData.Value</td>
+                                <td>$@item.download.PurchasedPrice</td>
+                                <td>27 Nov 2020, 11:24:34</td>
+                                
+                                <td><a href="/User/NoteDetails?noteName=@item.note.NoteTitle"><img src="~/Content/images/Dashboard/eye.png" alt="see"></a></td>
+                                @{
+                                    var indexOfDownlod = item.download.ID;
+                                }
+                                <td>
+                                    <div class="dropdown">
+                                        <a class="nav-link" href="#" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span><img src="~/Content/images/Front_images/images/dots.png" alt="dot"></span></a>
+
+                                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                            <a class="dropdown-item" href="/User/DownLoadNote?dID=@item.download.ID">Downloaded Notes</a>
+                                            <a class="dropdown-item" href="#" data-toggle="modal" data-target="#exampleModal" id="feedback-link" onclick="FeedbackForm('@item.download.ID')">Add Review/Feedback</a>
+                                            <a class="dropdown-item" href="/User/MarkInapropriate?dID=@item.download.ID" onclick="return confirm('Are you sure you want to mark this report as spam, you cannot update it later?')">Report as inappropriate</a>
+                                        </div>
+                                    </div>
+
+
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+
+        <script>
+            function FeedbackForm(id) {
+                document.getElementById("bookid").setAttribute("value", id);
+            }
+        </script>
+
+        <!-- Modal -->
+        <div class="modal fade feedbackDetails" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+
+                @using (Html.BeginForm("NoteReview", "User", FormMethod.Post, new { }))
+                {
+
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel"><b>Add Review</b></h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true"><img src="~/Content/images/Front_images/images/close.png" alt="close"></span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+
+
+                            <div class="rate">
+                                <input type="radio" id="star5" name="rate" value="5" />
+                                <label for="star5" title="text">5 stars</label>
+                                <input type="radio" id="star4" name="rate" value="4" />
+                                <label for="star4" title="text">4 stars</label>
+                                <input type="radio" id="star3" name="rate" value="3" />
+                                <label for="star3" title="text">3 stars</label>
+                                <input type="radio" id="star2" name="rate" value="2" />
+                                <label for="star2" title="text">2 stars</label>
+                                <input type="radio" id="star1" name="rate" value="1" />
+                                <label for="star1" title="text">1 star</label>
+                            </div><br><br>
+
+                            <input type="hidden" name="dID" id="bookid" />
+
+
+
+
+                            <div class="form-group">
+                                <label class="mylabel" for="firstname">Comments/ Questions *</label>
+                                <textarea type="text" rows="3" class="form-control" id="firstname" placeholder="Comments..." name="ratingComment" required></textarea>
+                            </div>
+
+                        </div>
+
+
+                        <button type="submit" class="btn btn-primary profile-btn text-uppercase text-center"><b>submit</b></button>
+
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+
+</section>
+
+
+<!-- Pagination -->
+<section id="pagination-style">
+    <nav aria-label="Page navigation example">
+        @{
+            Double totalPage = ViewBag.PageTotal;
+
+            <ul class="pagination justify-content-center">
+
+                @if (ViewBag.PageNumber == 1)
+                {
+                    <li class="page-item disabled">
+                        @Html.ActionLink("<", "MyDownload", new { SortOrder = ViewBag.SortOrder == null ? "Asc" : ViewBag.SortOrder, SortBy = ViewBag.SortBy == null ? "Note Title" : ViewBag.SortBy, PageNumber = ViewBag.PageNumber }, new { @class = "page-link" })
+                    </li>
+
+                }
+                else
+                {
+                    <li class="page-item">
+                        @Html.ActionLink("<", "MyDownload", new { SortOrder = ViewBag.SortOrder == null ? "Asc" : ViewBag.SortOrder, SortBy = ViewBag.SortBy == null ? "Note Title" : ViewBag.SortBy, PageNumber = ViewBag.PageNumber - 1 }, new { @class = "page-link" })
+                    </li>
+                }
+
+
+
+                @for (int j = 1; j <= totalPage; j++)
+                {
+
+                    if (j == ViewBag.PageNumber)
+                    {
+
+                        <li class="page-item active">
+                            @Html.ActionLink(j.ToString(), "MyDownload", new { SortOrder = ViewBag.SortOrder == null ? "Asc" : ViewBag.SortOrder, SortBy = ViewBag.SortBy == null ? "Note Title" : ViewBag.SortBy, PageNumber = j }, new { @class = "page-link" })
+                        </li>
+                    }
+                    else
+                    {
+                        <li class="page-item">
+                            @Html.ActionLink(j.ToString(), "MyDownload", new { SortOrder = ViewBag.SortOrder == null ? "Asc" : ViewBag.SortOrder, SortBy = ViewBag.SortBy == null ? "Note Title" : ViewBag.SortBy, PageNumber = j }, new { @class = "page-link" })
+                        </li>
+                    }
+
+                }
+
+                @if (ViewBag.PageNumber == totalPage)
+                {
+                    <li class="page-item">
+                        @Html.ActionLink(">", "MyDownload", new { SortOrder = ViewBag.SortOrder == null ? "Asc" : ViewBag.SortOrder, SortBy = ViewBag.SortBy == null ? "Note Title" : ViewBag.SortBy, PageNumber = ViewBag.PageNumber }, new { @class = "page-link" })
+
+                    </li>
+                }
+                else
+                {
+                    <li class="page-item">
+                        @Html.ActionLink(">", "MyDownload", new { SortOrder = ViewBag.SortOrder == null ? "Asc" : ViewBag.SortOrder, SortBy = ViewBag.SortBy == null ? "Note Title" : ViewBag.SortBy, PageNumber = ViewBag.PageNumber + 1 }, new { @class = "page-link" })
+
+                    </li>
+                }
+
+
+            </ul>
+        }
+    </nav>
+</section>
+

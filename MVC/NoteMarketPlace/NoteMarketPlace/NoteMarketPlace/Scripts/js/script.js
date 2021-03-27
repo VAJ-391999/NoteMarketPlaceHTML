@@ -75,6 +75,10 @@ $(function() {
    });
 });*/
 
+
+
+
+
 /* ====================================
                Navigation
 ====================================== */
@@ -192,8 +196,56 @@ $(function(){
     
 });
 
+/*=================
+ * Test
+ *=================*/
+$(function () {
+    $("#deleteConform").on('click', function () {
+        alert('Are you sure you want to delete this book?');
+    });
+});
 
 
+//$(function () {
+//    $(".universityDrop").on("click", ".universityDrop", function () {
+//        alert($('.universityDrop:selected').val());
+//    });
+//});
+
+
+//$(document).ready(function () {
+//    $(".universityDrop").change(function () {
+//        //alert("Test");
+//        alert($(".universityDrop").val());
+//        // $('filterOfNote').attr('action', '/User/SearchNotes') + $(".universityDrop").val());
+//        //this.form.submit();
+//        //$.post("/User/SearchNotes", {
+//        //    inputgender: $(".universityDrop").val()
+        
+//        //})
+
+//        var inputgenders = $(".universityDrop").val();
+//        //window.location.href = "/user/SearchNotes?inputgender=" + inputgenders;
+//        $('#filterOfNote').attr('action', $(this).attr('href')).submit();
+
+        
+//        //jQuery.ajax({
+//        //    type: "POST",
+//        //    url: "@Url.Action(" / User / SearchNotes / ")",
+//        //    dataType: "json",
+//        //    contentType: "application/json; charset=utf-8",
+//        //    data: JSON.stringify({ coordinate: values }),
+//        //    success: function (data) {
+//        //        alert(data);
+//        //    },
+//        //    failure: function (errsg) {
+//        //        alert(errsg);
+//        //    }
+//        //});
+
+
+//    });
+//});
 
 
 

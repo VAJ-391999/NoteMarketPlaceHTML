@@ -11,6 +11,9 @@ namespace NoteMarketPlace.Models
 {
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
+    using System.Web;
+    using System.Web.Mvc;
     
     public partial class Profile
     {
@@ -22,12 +25,31 @@ namespace NoteMarketPlace.Models
         public string PhoneNo { get; set; }
         public int CountryCode { get; set; }
         public string ProfilePhoto { get; set; }
+
+        //[Required(ErrorMessage ="Please Enter Address")]
         public string Address1 { get; set; }
+
+
+       // [Required(ErrorMessage ="Please Enter Adddress")]
         public string Address2 { get; set; }
+
+
+       // [Required(ErrorMessage ="Please Enter City")]
         public string City { get; set; }
+
+
+        //[Required(ErrorMessage ="Please Enter State ")]
         public string State { get; set; }
+
+
+        //[Required(ErrorMessage ="Please Enter ZipCode")]
         public string ZipCode { get; set; }
+
+
+        //[Required(ErrorMessage ="Please Enter Country")]
         public string Country { get; set; }
+
+
         public string University { get; set; }
         public string College { get; set; }
         public Nullable<System.DateTime> CreatedDate { get; set; }
@@ -38,5 +60,7 @@ namespace NoteMarketPlace.Models
     
         public virtual ReferenceData ReferenceData { get; set; }
         public virtual User User { get; set; }
+
+        public HttpPostedFileBase UserImage { get; set; }
     }
 }

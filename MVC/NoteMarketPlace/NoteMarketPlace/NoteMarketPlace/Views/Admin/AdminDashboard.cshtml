@@ -1,0 +1,367 @@
+﻿@model IEnumerable<NoteMarketPlace.Models.NoteDetailsViewModel>
+@{
+    //Layout = null;
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    int i = 0;
+}
+@using NoteMarketPlace.Models;
+
+
+<!-- Dashboard Heading -->
+<section id="dashboard-top">
+
+    @{
+        NoteMarketPlaceDatabaseEntities db = new NoteMarketPlaceDatabaseEntities();
+
+        var dateTimeCriteria = DateTime.Now.Date.AddDays(-7);
+
+        int lastWeekDownload = db.DownloadedNotes.Where(m => m.AttachmentDownloadedDate >= dateTimeCriteria).Count();
+
+        int lastWeekRegistration = db.Users.Where(m => m.CreatedDate >= dateTimeCriteria).Count();
+    }
+
+
+    <div class="container dashboard3">
+
+        <!-- dashboard heading & add note button -->
+        <div class="row dashboard-top-title">
+
+            <!-- Title -->
+            <div class="col-lg-6 col-md-6 col-sm-6 col-6">
+                <div class="dashboar-heading">
+                    <h2>Dashboard </h2>
+                </div>
+            </div>
+
+            <!-- button -->
+            <!--<div class="col-lg-6 col-md-6 col-sm-6 col-6 text-right">
+                <a href="">-->
+            <!-- Profile Button -->
+            <!--<button type="button" class="btn btn-primary add-note-btn text-uppercase text-center"><b>Add Notes</b></button>
+                </a>
+            </div>-->
+
+        </div>
+
+        <!-- Dashboard content -->
+        <section id="dashboard-content">
+
+            <div class="row mynote-info">
+                <!--1-->
+                <div class="col-lg-4 col-md-4 col-sm-12 col-12">
+
+                    <div class="dash-right text-center">
+                        <h4><b>20</b></h4>
+                        <p>Number of Notes in Review for Publish</p>
+                    </div>
+
+                </div>
+
+                <!--2-->
+                <div class="col-lg-4 col-md-4 col-sm-12 col-12">
+
+                    <div class="dash-right text-center">
+                        <h4><b>@lastWeekDownload</b></h4>
+                        <p>Numbers of Notes New Downloads<br>(Last 7 days)</p>
+                    </div>
+
+                </div>
+
+                <!--3-->
+                <div class="col-lg-4 col-md-4 col-sm-12 col-12">
+
+                    <div class="dash-right text-center">
+                        <h4><b>@lastWeekRegistration</b></h4>
+                        <p>Numbers of New Registrations<br>(Last 7 days)</p>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </div>
+
+</section>
+
+
+<!-- Dashboard progress -->
+<section id="dashboard-middle">
+
+    <div class="container dashboard3">
+
+        <!-- Heading -->
+        <div class="row">
+
+            <!-- Title -->
+            <div class="col-lg-4 col-md-12 col-sm-12 col-12">
+                <div class="dashboar-heading">
+                    <h4><b>Published Notes</b></h4>
+                </div>
+            </div>
+
+
+
+            <!-- button <form class="form-inline ml-auto pull-right"> -->
+            <div class="col-lg-8 col-md-12 col-sm-12 col-12 form-inline ">
+                <form class="form-inline ml-auto" method="post">
+                    <div class="md-form my-0 search-wrapper">
+                        <img src="~/Content/AdminCSS/images/Admin_images/images/search-icon.png" alt="search">
+                        <input class="form-control" type="text" id="searchbar" placeholder="Search..." aria-label="Search" name="searching" value="@ViewData["GetpublishedNotes"]">
+                    </div>
+
+                    <!-- Profile Button -->
+                    <button href="#" type="submit" class="btn btn-primary search-btn text-uppercase text-center"><b>Search</b></button>
+                </form>
+                <form class="pull-right" method="get">
+                    <!-- Input Month -->
+                    <div class="form-group">
+                        <div class="wrapper">
+                            @*<select id="inputgender" class="form-control">
+                                <option selected>Select Month</option>
+                                <option>Male</option>
+                                <option>Female</option>
+                                <option>Other</option>
+                            </select>*@
+                            @Html.DropDownList("selectMonth",new SelectList(ViewBag.MonthList), "Select Month", new { @id = "inputgender", @class = "form-control", @name= "monthlist" ,@value = "Request.QueryString['rateOfNote']",@onchange = "FilterOfNote()"
+                       })
+                            <img src="~/Content/AdminCSS/images/Admin_images/images/arrow-down.png" alt="dropdown">
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+        </div>
+
+        <!-- Table -->
+        <div class="row">
+
+            <div class="col-lg-12 col-md-12 col-sm-12 col-12 table-responsive-xl">
+
+                <table class="table">
+                    <thead>
+                        <tr class="text-uppercase">
+                            <th scope="col">Sr No.</th>
+                            <th scope="col">
+                                @Html.ActionLink("Note Title", "AdminDashboard", new { SortOrder = ViewBag.SortOrder == null ? "Asc" : (ViewBag.SortOrder == "Asc" ? "Desc" : "Asc"), SortBy = "Note Title", PageNumber = ViewBag.PageNumber == 0 ? 1 : ViewBag.PageNumber })
+                            </th>
+                            <th scope="col">
+                                @Html.ActionLink("Category", "AdminDashboard", new { SortOrder = ViewBag.SortOrder == null ? "Asc" : (ViewBag.SortOrder == "Asc" ? "Desc" : "Asc"), SortBy = "Category", PageNumber = ViewBag.PageNumber == 0 ? 1 : ViewBag.PageNumber })
+                            </th>
+                            <th scope="col">Attachment size</th>
+                            <th scope="col">Sell Type</th>
+                            <th scope="col">Price</th>
+                            <th scope="col">Publisher</th>
+                            <th scope="col">Published Date</th>
+                            <th scope="col">Number of Downloads</th>
+                            <th scope="col"></th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        @foreach (NoteMarketPlace.Models.NoteDetailsViewModel item in (IEnumerable<NoteMarketPlace.Models.NoteDetailsViewModel>)Model)
+                        {
+                            //DownloadedNote d = new DownloadedNote();
+
+                            var d = db.DownloadedNotes.Where(m => m.NoteID == item.note.NoteID);
+
+                            int numberOfDownloads = 0;
+                            numberOfDownloads = db.DownloadedNotes.Where(m => m.NoteID == item.note.NoteID && m.IsAttachmentDownloaded == true).Count();
+
+                            string monthno = item.note.PublishedDate.Month.ToString();
+                            
+
+                            <tr>
+                                <td class="text-center">@(i = i + 1)</td>
+                                <td><a href="/User/NoteDetails?noteName=@item.note.NoteTitle">@item.note.NoteTitle</a></td>
+                                <td>@item.noteCategory.CategoryName</td>
+                                <td>@item.note.NoteSize KB</td>
+                                <td>@item.referenceData.Value</td>
+                                <td>$@item.note.SellPrice</td>
+                                <td>@item.user.FirstName</td>
+                                <td>@item.note.PublishedDate </td>
+                                <td>@numberOfDownloads</td>
+                                <td>
+                                    <div class="dropdown">
+                                        <a class="nav-link" href="#" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span><img src="~/Content/AdminCSS/images/Admin_images/images/dots.png" alt="dot"></span></a>
+
+                                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                            <a class="dropdown-item" href="">Download Notes</a>
+                                            <a class="dropdown-item" href="/User/NoteDetails?noteName=@item.note.NoteTitle">View More Details</a>
+                                            <a class="dropdown-item" href="#">Unpublish</a>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                        }
+
+                    </tbody>
+
+                    @*<tr>
+            <td class="text-center">2</td> ?dID=@item.download.ID
+            <td><a href="">Accounts</a></td>
+            <td>Commerce</td>
+            <td>23 KB</td>
+            <td>Paid</td>
+            <td>$15</td>
+            <td>Rahil Shah</td>
+            <td>10-10-2020, 12:30</td>
+            <td>10</td>
+            <td>
+                <div class="dropdown">
+                    <a class="nav-link" href="#" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span><img src="images/Admin_images/images/dots.png" alt="dot"></span></a>
+
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                        <a class="dropdown-item" href="#">Download Notes</a>
+                        <a class="dropdown-item" href="#">View More Details</a>
+                        <a class="dropdown-item" href="#">Unpublish</a>
+                    </div>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td class="text-center">3</td>
+            <td><a href="">Social Studies</a></td>
+            <td>Social</td>
+            <td>23 KB</td>
+            <td>Paid</td>
+            <td>$15</td>
+            <td>Rahil Shah</td>
+            <td>10-10-2020, 12:30</td>
+            <td>10</td>
+            <td>
+                <div class="dropdown">
+                    <a class="nav-link" href="#" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span><img src="images/Admin_images/images/dots.png" alt="dot"></span></a>
+
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                        <a class="dropdown-item" href="#">Allow Download</a>
+                    </div>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td class="text-center">4</td>
+            <td><a href="">AI</a></td>
+            <td>IT</td>
+            <td>23 KB</td>
+            <td>Paid</td>
+            <td>$15</td>
+            <td>Rahil Shah</td>
+            <td>10-10-2020, 12:30</td>
+            <td>10</td>
+            <td>
+                <div class="dropdown">
+                    <a class="nav-link" href="#" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span><img src="images/Admin_images/images/dots.png" alt="dot"></span></a>
+
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                        <a class="dropdown-item" href="#">Download Notes</a>
+                        <a class="dropdown-item" href="#">View More Details</a>
+                        <a class="dropdown-item" href="#">Unpublish</a>
+                    </div>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td class="text-center">5</td>
+            <td><a href="">ML</a></td>
+            <td>IT</td>
+            <td>23 KB</td>
+            <td>Paid</td>
+            <td>$15</td>
+            <td>Rahil Shah</td>
+            <td>10-10-2020, 12:30</td>
+            <td>10</td>
+            <td>
+                <div class="dropdown">
+                    <a class="nav-link" href="#" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span><img src="images/Admin_images/images/dots.png" alt="dot"></span></a>
+
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                        <a class="dropdown-item" href="#">Download Notes</a>
+                        <a class="dropdown-item" href="#">View More Details</a>
+                        <a class="dropdown-item" href="#">Unpublish</a>
+                    </div>
+                </div>
+            </td>
+
+        </tr>*@
+
+                </table>
+            </div>
+        </div>
+
+    </div>
+
+</section>
+
+
+<!--Pagination-->
+<section id="pagination-style">
+    <nav aria-label="Page navigation example">
+        @{
+            Double totalPage = ViewBag.PageTotal;
+
+            <ul class="pagination justify-content-center">
+
+                @if (ViewBag.PageNumber == 1)
+                {
+                    <li class="page-item disabled">
+                        @Html.ActionLink("<", "AdminDashboard", new { SortOrder = ViewBag.SortOrder == null ? "Asc" : ViewBag.SortOrder, SortBy = ViewBag.SortBy == null ? "Note Title" : ViewBag.SortBy, PageNumber = ViewBag.PageNumber }, new { @class = "page-link" })
+                    </li>
+
+                }
+                else
+                {
+                    <li class="page-item">
+                        @Html.ActionLink("<", "AdminDashboard", new { SortOrder = ViewBag.SortOrder == null ? "Asc" : ViewBag.SortOrder, SortBy = ViewBag.SortBy == null ? "Note Title" : ViewBag.SortBy, PageNumber = ViewBag.PageNumber - 1 }, new { @class = "page-link" })
+                    </li>
+                }
+
+
+
+                @for (int j = 1; j <= totalPage; j++)
+                {
+
+                    if (j == ViewBag.PageNumber)
+                    {
+
+                        <li class="page-item active">
+                            @Html.ActionLink(j.ToString(), "AdminDashboard", new { SortOrder = ViewBag.SortOrder == null ? "Asc" : ViewBag.SortOrder, SortBy = ViewBag.SortBy == null ? "Note Title" : ViewBag.SortBy, PageNumber = j }, new { @class = "page-link" })
+                        </li>
+                    }
+                    else
+                    {
+                        <li class="page-item">
+                            @Html.ActionLink(j.ToString(), "AdminDashboard", new { SortOrder = ViewBag.SortOrder == null ? "Asc" : ViewBag.SortOrder, SortBy = ViewBag.SortBy == null ? "Note Title" : ViewBag.SortBy, PageNumber = j }, new { @class = "page-link" })
+                        </li>
+                    }
+
+                }
+
+                @if (ViewBag.PageNumber == totalPage)
+                {
+                    <li class="page-item">
+                        @Html.ActionLink(">", "AdminDashboard", new { SortOrder = ViewBag.SortOrder == null ? "Asc" : ViewBag.SortOrder, SortBy = ViewBag.SortBy == null ? "Note Title" : ViewBag.SortBy, PageNumber = ViewBag.PageNumber }, new { @class = "page-link" })
+
+                    </li>
+                }
+                else
+                {
+                    <li class="page-item">
+                        @Html.ActionLink(">", "AdminDashboard", new { SortOrder = ViewBag.SortOrder == null ? "Asc" : ViewBag.SortOrder, SortBy = ViewBag.SortBy == null ? "Note Title" : ViewBag.SortBy, PageNumber = ViewBag.PageNumber + 1 }, new { @class = "page-link" })
+
+                    </li>
+                }
+
+
+            </ul>
+        }
+    </nav>
+</section>
+
+<script>
+    function FilterOfNote() {
+        //alert($(".typeDrop").val());
+        $('form').submit();
+    }
+</script>

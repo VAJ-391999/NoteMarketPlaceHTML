@@ -21,5 +21,9 @@ namespace NoteMarketPlace.Models
 
         public NoteReview ratingsDetails { get; set; }
 
+        public Profile profile1 { get; set; }
+
+        
+
     }
 }

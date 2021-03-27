@@ -1,0 +1,327 @@
+﻿@model IEnumerable<NoteMarketPlace.Models.NoteDetailsViewModel>
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    int i = 0;
+}
+
+
+
+<!-- Dashboard progress -->
+<section id="dashboard-middle">
+
+    <div class="container d-top">
+
+        <!-- Heading -->
+        <div class="row">
+
+            <!-- Title -->
+            <div class="col-lg-6 col-md-6 col-sm-12 col-12">
+                <div class="dashboar-heading">
+                    <h3>My Rejected Notes</h3>
+                </div>
+            </div>
+
+            <!-- button -->
+            <div class="col-lg-6 col-md-6 col-sm-12 col-12">
+                @using (Html.BeginForm("MyRejectedNote", "User", FormMethod.Post, new { @class = "form-inline ml-auto pull-right" }))
+                {
+
+                    <div class="md-form my-0 search-wrapper">
+                        <img src="~/Content/images/Dashboard/search.jpg" alt="search">
+                        <input class="form-control" type="text" id="searchbar" placeholder="Search..." aria-label="Search" value="@ViewData["GetRejectedNoteDetails"]" name="searching">
+                    </div>
+
+                    <!-- Profile Button -->
+                    <button href="#" type="submit" class="btn btn-primary search-btn text-uppercase text-center"><b>Search</b></button>
+
+                }
+            </div>
+
+        </div>
+        @{
+            if (ViewBag.TotalRecord == 0)
+            {
+                <div class="NoRecordMsg">
+                    <h4><b>No Record Found</b></h4>
+                </div>
+            }
+
+        }
+
+        <!-- Table -->
+        <div class="row">
+
+            <div class="col-lg-12 col-md-12 col-sm-12 col-12 table-responsive-sm">
+                <table class="table">
+                    <thead>
+                        <tr class="text-uppercase">
+                            <th scope="col">Sr. No</th>
+                            <th scope="col">
+                                @Html.ActionLink("Note Title", "MyRejectedNote", new { SortOrder = ViewBag.SortOrder == null ? "Asc" : (ViewBag.SortOrder == "Asc" ? "Desc" : "Asc"), SortBy = "Note Title", PageNumber = ViewBag.PageNumber == 0 ? 1 : ViewBag.PageNumber })
+                            </th>
+                            <th scope="col">
+                                @Html.ActionLink("Category", "MyRejectedNote", new { SortOrder = ViewBag.SortOrder == null ? "Asc" : (ViewBag.SortOrder == "Asc" ? "Desc" : "Asc"), SortBy = "Category", PageNumber = ViewBag.PageNumber == 0 ? 1 : ViewBag.PageNumber })
+                            </th>
+                            <th scope="col">Remarks</th>
+                            <th scope="col">Clone</th>
+                            <th scope="col"></th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        @foreach (NoteMarketPlace.Models.NoteDetailsViewModel item in (IEnumerable<NoteMarketPlace.Models.NoteDetailsViewModel>)Model)
+                        {
+                            <tr>
+                                <td class="text-center">@(i = i + 1)</td>
+                                <td><a href="/User/NoteDetails?noteName=@item.note.NoteTitle">@item.note.NoteTitle</a></td>
+                                <td>@item.noteCategory.CategoryName</td>
+                                <td>Lorem ipsum is simplyDummuy text</td>
+                                <td>Colne</td>
+                                <td>
+                                    <div class="dropdown">
+                                        <a class="nav-link" href="#" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span><img src="~/Content/images/Front_images/images/dots.png" alt="dot"></span></a>
+
+                                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                            <a class="dropdown-item" href="/User/DownLoadNote?dID=@item.download.ID">Downloaded Notes</a>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+
+                    @*<tbody>
+                            <tr>
+                                <td class="text-center">1</td>
+                                <td><a href="">Data Science</a></td>
+                                <td>Science</td>
+                                <td>Lorem ipsum is simplyDummuy text</td>
+                                <td>Colne</td>
+                                <td>
+                                    <div class="dropdown">
+                                        <a class="nav-link" href="#" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span><img src="~/Content/images/Front_images/images/dots.png" alt="dot"></span></a>
+
+                                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                            <a class="dropdown-item" href="#">Downloaded Notes</a>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="text-center">2</td>
+                                <td><a href="">Account</a></td>
+                                <td>Commerce</td>
+                                <td>Lorem ipsum is simplyDummuy text</td>
+                                <td>Colne</td>
+                                <td>
+                                    <div class="dropdown">
+                                        <a class="nav-link" href="#" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span><img src="images/Front_images/images/dots.png" alt="dot"></span></a>
+
+                                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                            <a class="dropdown-item" href="#">Downloaded Notes</a>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="text-center">3</td>
+                                <td><a href="">Social Studies</a></td>
+                                <td>Social</td>
+                                <td>Lorem ipsum is simplyDummuy text</td>
+                                <td>Colne</td>
+                                <td>
+                                    <div class="dropdown">
+                                        <a class="nav-link" href="#" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span><img src="images/Front_images/images/dots.png" alt="dot"></span></a>
+
+                                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                            <a class="dropdown-item" href="#">Downloaded Notes</a>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="text-center">4</td>
+                                <td><a href="">AI</a></td>
+                                <td>IT</td>
+                                <td>Lorem ipsum is simplyDummuy text</td>
+                                <td>Colne</td>
+                                <td>
+                                    <div class="dropdown">
+                                        <a class="nav-link" href="#" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span><img src="images/Front_images/images/dots.png" alt="dot"></span></a>
+
+                                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                            <a class="dropdown-item" href="#">Downloaded Notes</a>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="text-center">5</td>
+                                <td><a href="">ML</a></td>
+                                <td>IT</td>
+                                <td>Lorem ipsum is simplyDummuy text</td>
+                                <td>Colne</td>
+                                <td>
+                                    <div class="dropdown">
+                                        <a class="nav-link" href="#" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span><img src="images/Front_images/images/dots.png" alt="dot"></span></a>
+
+                                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                            <a class="dropdown-item" href="#">Downloaded Notes</a>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="text-center">6</td>
+                                <td><a href="">Data Science</a></td>
+                                <td>Science</td>
+                                <td>Lorem ipsum is simplyDummuy text</td>
+                                <td>Colne</td>
+                                <td>
+                                    <div class="dropdown">
+                                        <a class="nav-link" href="#" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span><img src="images/Front_images/images/dots.png" alt="dot"></span></a>
+
+                                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                            <a class="dropdown-item" href="#">Downloaded Notes</a>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="text-center">7</td>
+                                <td><a href="">Account</a></td>
+                                <td>Commerce</td>
+                                <td>Lorem ipsum is simplyDummuy text</td>
+                                <td>Colne</td>
+                                <td>
+                                    <div class="dropdown">
+                                        <a class="nav-link" href="#" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span><img src="images/Front_images/images/dots.png" alt="dot"></span></a>
+
+                                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                            <a class="dropdown-item" href="#">Downloaded Notes</a>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="text-center">8</td>
+                                <td><a href="">Social Studies</a></td>
+                                <td>Social</td>
+                                <td>Lorem ipsum is simplyDummuy text</td>
+                                <td>Colne</td>
+                                <td>
+                                    <div class="dropdown">
+                                        <a class="nav-link" href="#" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span><img src="images/Front_images/images/dots.png" alt="dot"></span></a>
+
+                                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                            <a class="dropdown-item" href="#">Downloaded Notes</a>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="text-center">9</td>
+                                <td><a href="">AI</a></td>
+                                <td>IT</td>
+                                <td>Lorem ipsum is simplyDummuy text</td>
+                                <td>Colne</td>
+                                <td>
+                                    <div class="dropdown">
+                                        <a class="nav-link" href="#" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span><img src="images/Front_images/images/dots.png" alt="dot"></span></a>
+
+                                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                            <a class="dropdown-item" href="#">Downloaded Notes</a>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="text-center">10</td>
+                                <td><a href="">ML</a></td>
+                                <td>IT</td>
+                                <td>Lorem ipsum is simplyDummuy text</td>
+                                <td>Colne</td>
+                                <td>
+                                    <div class="dropdown">
+                                        <a class="nav-link" href="#" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span><img src="images/Front_images/images/dots.png" alt="dot"></span></a>
+
+                                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                            <a class="dropdown-item" href="#">Downloaded Notes</a>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+
+                        </tbody>*@
+                </table>
+            </div>
+        </div>
+    </div>
+
+</section>
+
+<!-- Pagination -->
+<section id="pagination-style">
+    <nav aria-label="Page navigation example">
+        @{
+            Double totalPage = ViewBag.PageTotal;
+
+            <ul class="pagination justify-content-center">
+
+                @if (ViewBag.PageNumber == 1)
+                {
+                    <li class="page-item disabled">
+                        @Html.ActionLink("<", "MyRejectedNote", new { SortOrder = ViewBag.SortOrder == null ? "Asc" : ViewBag.SortOrder, SortBy = ViewBag.SortBy == null ? "Note Title" : ViewBag.SortBy, PageNumber = ViewBag.PageNumber }, new { @class = "page-link" })
+                    </li>
+
+                }
+                else
+                {
+                    <li class="page-item">
+                        @Html.ActionLink("<", "MyRejectedNote", new { SortOrder = ViewBag.SortOrder == null ? "Asc" : ViewBag.SortOrder, SortBy = ViewBag.SortBy == null ? "Note Title" : ViewBag.SortBy, PageNumber = ViewBag.PageNumber - 1 }, new { @class = "page-link" })
+                    </li>
+                }
+
+
+
+                @for (int j = 1; j <= totalPage; j++)
+                {
+
+                    if (j == ViewBag.PageNumber)
+                    {
+
+                        <li class="page-item active">
+                            @Html.ActionLink(j.ToString(), "MyRejectedNote", new { SortOrder = ViewBag.SortOrder == null ? "Asc" : ViewBag.SortOrder, SortBy = ViewBag.SortBy == null ? "Note Title" : ViewBag.SortBy, PageNumber = j }, new { @class = "page-link" })
+                        </li>
+                    }
+                    else
+                    {
+                        <li class="page-item">
+                            @Html.ActionLink(j.ToString(), "MyRejectedNote", new { SortOrder = ViewBag.SortOrder == null ? "Asc" : ViewBag.SortOrder, SortBy = ViewBag.SortBy == null ? "Note Title" : ViewBag.SortBy, PageNumber = j }, new { @class = "page-link" })
+                        </li>
+                    }
+
+                }
+
+                @if (ViewBag.PageNumber == totalPage)
+                {
+                    <li class="page-item">
+                        @Html.ActionLink(">", "MyRejectedNote", new { SortOrder = ViewBag.SortOrder == null ? "Asc" : ViewBag.SortOrder, SortBy = ViewBag.SortBy == null ? "Note Title" : ViewBag.SortBy, PageNumber = ViewBag.PageNumber }, new { @class = "page-link" })
+
+                    </li>
+                }
+                else
+                {
+                    <li class="page-item">
+                        @Html.ActionLink(">", "MyRejectedNote", new { SortOrder = ViewBag.SortOrder == null ? "Asc" : ViewBag.SortOrder, SortBy = ViewBag.SortBy == null ? "Note Title" : ViewBag.SortBy, PageNumber = ViewBag.PageNumber + 1 }, new { @class = "page-link" })
+
+                    </li>
+                }
+
+
+            </ul>
+        }
+    </nav>
+</section>
+
+
