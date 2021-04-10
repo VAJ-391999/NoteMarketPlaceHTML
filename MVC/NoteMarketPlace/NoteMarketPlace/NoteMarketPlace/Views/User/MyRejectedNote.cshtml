@@ -38,15 +38,7 @@
             </div>
 
         </div>
-        @{
-            if (ViewBag.TotalRecord == 0)
-            {
-                <div class="NoRecordMsg">
-                    <h4><b>No Record Found</b></h4>
-                </div>
-            }
-
-        }
+        
 
         <!-- Table -->
         <div class="row">
@@ -75,14 +67,14 @@
                                 <td class="text-center">@(i = i + 1)</td>
                                 <td><a href="/User/NoteDetails?noteName=@item.note.NoteTitle">@item.note.NoteTitle</a></td>
                                 <td>@item.noteCategory.CategoryName</td>
-                                <td>Lorem ipsum is simplyDummuy text</td>
+                                <td>@item.note.AdminRemarks</td>
                                 <td>Colne</td>
                                 <td>
                                     <div class="dropdown">
                                         <a class="nav-link" href="#" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span><img src="~/Content/images/Front_images/images/dots.png" alt="dot"></span></a>
 
                                         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                            <a class="dropdown-item" href="/User/DownLoadNote?dID=@item.download.ID">Downloaded Notes</a>
+                                            <a class="dropdown-item" href="/User/MyRejectedNote?dID=@item.note.NoteID">Downloaded Notes</a>
                                         </div>
                                     </div>
                                 </td>
@@ -90,170 +82,16 @@
                         }
                     </tbody>
 
-                    @*<tbody>
-                            <tr>
-                                <td class="text-center">1</td>
-                                <td><a href="">Data Science</a></td>
-                                <td>Science</td>
-                                <td>Lorem ipsum is simplyDummuy text</td>
-                                <td>Colne</td>
-                                <td>
-                                    <div class="dropdown">
-                                        <a class="nav-link" href="#" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span><img src="~/Content/images/Front_images/images/dots.png" alt="dot"></span></a>
-
-                                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                            <a class="dropdown-item" href="#">Downloaded Notes</a>
-                                        </div>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="text-center">2</td>
-                                <td><a href="">Account</a></td>
-                                <td>Commerce</td>
-                                <td>Lorem ipsum is simplyDummuy text</td>
-                                <td>Colne</td>
-                                <td>
-                                    <div class="dropdown">
-                                        <a class="nav-link" href="#" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span><img src="images/Front_images/images/dots.png" alt="dot"></span></a>
-
-                                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                            <a class="dropdown-item" href="#">Downloaded Notes</a>
-                                        </div>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="text-center">3</td>
-                                <td><a href="">Social Studies</a></td>
-                                <td>Social</td>
-                                <td>Lorem ipsum is simplyDummuy text</td>
-                                <td>Colne</td>
-                                <td>
-                                    <div class="dropdown">
-                                        <a class="nav-link" href="#" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span><img src="images/Front_images/images/dots.png" alt="dot"></span></a>
-
-                                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                            <a class="dropdown-item" href="#">Downloaded Notes</a>
-                                        </div>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="text-center">4</td>
-                                <td><a href="">AI</a></td>
-                                <td>IT</td>
-                                <td>Lorem ipsum is simplyDummuy text</td>
-                                <td>Colne</td>
-                                <td>
-                                    <div class="dropdown">
-                                        <a class="nav-link" href="#" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span><img src="images/Front_images/images/dots.png" alt="dot"></span></a>
-
-                                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                            <a class="dropdown-item" href="#">Downloaded Notes</a>
-                                        </div>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="text-center">5</td>
-                                <td><a href="">ML</a></td>
-                                <td>IT</td>
-                                <td>Lorem ipsum is simplyDummuy text</td>
-                                <td>Colne</td>
-                                <td>
-                                    <div class="dropdown">
-                                        <a class="nav-link" href="#" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span><img src="images/Front_images/images/dots.png" alt="dot"></span></a>
-
-                                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                            <a class="dropdown-item" href="#">Downloaded Notes</a>
-                                        </div>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="text-center">6</td>
-                                <td><a href="">Data Science</a></td>
-                                <td>Science</td>
-                                <td>Lorem ipsum is simplyDummuy text</td>
-                                <td>Colne</td>
-                                <td>
-                                    <div class="dropdown">
-                                        <a class="nav-link" href="#" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span><img src="images/Front_images/images/dots.png" alt="dot"></span></a>
-
-                                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                            <a class="dropdown-item" href="#">Downloaded Notes</a>
-                                        </div>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="text-center">7</td>
-                                <td><a href="">Account</a></td>
-                                <td>Commerce</td>
-                                <td>Lorem ipsum is simplyDummuy text</td>
-                                <td>Colne</td>
-                                <td>
-                                    <div class="dropdown">
-                                        <a class="nav-link" href="#" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span><img src="images/Front_images/images/dots.png" alt="dot"></span></a>
-
-                                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                            <a class="dropdown-item" href="#">Downloaded Notes</a>
-                                        </div>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="text-center">8</td>
-                                <td><a href="">Social Studies</a></td>
-                                <td>Social</td>
-                                <td>Lorem ipsum is simplyDummuy text</td>
-                                <td>Colne</td>
-                                <td>
-                                    <div class="dropdown">
-                                        <a class="nav-link" href="#" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span><img src="images/Front_images/images/dots.png" alt="dot"></span></a>
-
-                                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                            <a class="dropdown-item" href="#">Downloaded Notes</a>
-                                        </div>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="text-center">9</td>
-                                <td><a href="">AI</a></td>
-                                <td>IT</td>
-                                <td>Lorem ipsum is simplyDummuy text</td>
-                                <td>Colne</td>
-                                <td>
-                                    <div class="dropdown">
-                                        <a class="nav-link" href="#" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span><img src="images/Front_images/images/dots.png" alt="dot"></span></a>
-
-                                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                            <a class="dropdown-item" href="#">Downloaded Notes</a>
-                                        </div>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="text-center">10</td>
-                                <td><a href="">ML</a></td>
-                                <td>IT</td>
-                                <td>Lorem ipsum is simplyDummuy text</td>
-                                <td>Colne</td>
-                                <td>
-                                    <div class="dropdown">
-                                        <a class="nav-link" href="#" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span><img src="images/Front_images/images/dots.png" alt="dot"></span></a>
-
-                                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                            <a class="dropdown-item" href="#">Downloaded Notes</a>
-                                        </div>
-                                    </div>
-                                </td>
-                            </tr>
-
-                        </tbody>*@
                 </table>
+                @{
+                    if (ViewBag.TotalRecord == 0)
+                    {
+                        <div class="NoRecordMsg">
+                            <h4><b>No Record Found</b></h4>
+                        </div>
+                    }
+
+                }
             </div>
         </div>
     </div>

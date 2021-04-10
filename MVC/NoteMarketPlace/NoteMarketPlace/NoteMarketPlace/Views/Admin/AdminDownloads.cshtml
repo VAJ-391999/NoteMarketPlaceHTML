@@ -1,0 +1,280 @@
+﻿@model IEnumerable<NoteMarketPlace.Models.NoteDetailsViewModel>
+@{
+    //Layout = null;
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    int i = 0;
+}
+@using NoteMarketPlace.Models;
+
+
+<!-- Dashboard progress -->
+<section id="dashboard-middle" class="notes-under-review">
+
+    <div class="container d-top admin-download-notes">
+
+        <!-- Heading -->
+        <div class="row">
+
+            <!-- Title -->
+            <div class="col-lg-6 col-md-6 col-sm-12 col-12">
+                <div class="dashboar-heading">
+                    <h3>Downloaded Notes</h3>
+                </div>
+            </div>
+
+        </div>
+        @{
+            NoteMarketPlaceDatabaseEntities db = new NoteMarketPlaceDatabaseEntities();
+
+        }
+
+        <div class="filter-section">
+
+            <!-- Buttons -->
+            <div class="row">
+
+                <!-- Filters -->
+                <div class="col-lg-6 col-md-6 col-sm-12 col-12">
+
+                    <form method="get" id="downloadFilter">
+
+                        <div class="content-left">
+
+                            <div class="row">
+
+
+                                <!-- Note -->
+                                <div class="col-lg-4 col-md-4 col-sm-12 col-12 seller">
+
+                                    <div class="form-group">
+
+                                        <label class="mylabel" for="phoneNo">Notes</label>
+                                        <div class="wrapper">
+
+                                            @Html.DropDownList("noteValue", ViewBag.NoteLTitleList as SelectList, "Notes", new { @id = "inputcode", @class = "form-control sellerv", @name = "noteValue", @value = "Request.QueryString['noteValue']", @onchange = "FilterOfNote()" })
+                                            <img src="~/Content/AdminCSS/images/Admin_images/images/arrow-down.png" alt="dropdown">
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                                <!-- Seller -->
+                                <div class="col-lg-4 col-md-4 col-sm-12 col-12 seller">
+
+                                    <div class="form-group">
+
+                                        <label class="mylabel" for="phoneNo">Seller</label>
+                                        <div class="wrapper">
+
+                                            @Html.DropDownList("sellerValue", ViewBag.SellerList as SelectList, "Seller", new { @id = "inputcode", @class = "form-control sellerv", @name = "sellerValue", @value = "Request.QueryString['sellerValue']", @onchange = "FilterOfNote()" })
+                                            <img src="~/Content/AdminCSS/images/Admin_images/images/arrow-down.png" alt="dropdown">
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                                <!-- Buys -->
+                                <div class="col-lg-4 col-md-4 col-sm-12 col-12 seller">
+
+                                    <div class="form-group">
+
+                                        <label class="mylabel" for="phoneNo">Buys</label>
+                                        <div class="wrapper">
+
+
+                                            @Html.DropDownList("buyerValue", ViewBag.BuyerSList as SelectList, "Buyer", new { @id = "inputcode", @class = "form-control sellerv", @name = "buyerValue", @value = "Request.QueryString['buyerValue']", @onchange = "FilterOfNote()" })
+                                            <img src="~/Content/AdminCSS/images/Admin_images/images/arrow-down.png" alt="dropdown">
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+                    </form>
+                </div>
+
+               
+                <!-- Search Bar -->
+                <div class="col-lg-6 col-md-6 col-sm-12 col-12">
+
+                    <div class="content-right">
+
+                        <form class="form-inline ml-auto pull-right" method="post">
+                            <div class="md-form my-0 search-wrapper">
+                                <img src="~/Content/AdminCSS/images/Admin_images/images/search-icon.png" alt="search">
+                                <input class="form-control" type="text" id="searchbar" placeholder="Search..." aria-label="Search" name="searching" value="@ViewData["GetReviewNotes"]">
+                            </div>
+
+                            <!-- Profile Button -->
+                            <button href="#" type="submit" class="btn btn-primary search-btn text-uppercase text-center"><b>Search</b></button>
+
+                        </form>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- Table -->
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-12 table-responsive-xl">
+                <table class="table">
+                    <thead>
+                        <tr class="text-uppercase">
+                            <th scope="col">Sr. No</th>
+                            <th scope="col">
+                                @Html.ActionLink("Note Title", "AdminDownloads", new { SortOrder = ViewBag.SortOrder == null ? "Asc" : (ViewBag.SortOrder == "Asc" ? "Desc" : "Asc"), SortBy = "Note Title", PageNumber = ViewBag.PageNumber == 0 ? 1 : ViewBag.PageNumber })
+                            </th>
+                            <th scope="col">
+                                @Html.ActionLink("Category", "AdminDownloads", new { SortOrder = ViewBag.SortOrder == null ? "Asc" : (ViewBag.SortOrder == "Asc" ? "Desc" : "Asc"), SortBy = "Category", PageNumber = ViewBag.PageNumber == 0 ? 1 : ViewBag.PageNumber })
+                            </th>
+                            <th scope="col">Buyers</th>
+                            <th scope="col"></th>
+                            <th scope="col">
+                                @Html.ActionLink("Seller", "AdminDownloads", new { SortOrder = ViewBag.SortOrder == null ? "Asc" : (ViewBag.SortOrder == "Asc" ? "Desc" : "Asc"), SortBy = "Seller", PageNumber = ViewBag.PageNumber == 0 ? 1 : ViewBag.PageNumber })
+                            </th>
+                            <th scope="col"></th>
+                            <th scope="col">
+                                @Html.ActionLink("Sell Type", "AdminDownloads", new { SortOrder = ViewBag.SortOrder == null ? "Asc" : (ViewBag.SortOrder == "Asc" ? "Desc" : "Asc"), SortBy = "Sell Type", PageNumber = ViewBag.PageNumber == 0 ? 1 : ViewBag.PageNumber })
+                            </th>
+
+                            <th scope="col">
+                                @Html.ActionLink("Price", "AdminDownloads", new { SortOrder = ViewBag.SortOrder == null ? "Asc" : (ViewBag.SortOrder == "Asc" ? "Desc" : "Asc"), SortBy = "Price", PageNumber = ViewBag.PageNumber == 0 ? 1 : ViewBag.PageNumber })
+                            </th>
+                            <th scope="col">
+                                @Html.ActionLink("Downloaded Date/Time", "AdminDownloads", new { SortOrder = ViewBag.SortOrder == null ? "Asc" : (ViewBag.SortOrder == "Asc" ? "Desc" : "Asc"), SortBy = "Downloaded Date/Time", PageNumber = ViewBag.PageNumber == 0 ? 1 : ViewBag.PageNumber })
+                            </th>
+                            <th scope="col"></th>
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (NoteMarketPlace.Models.NoteDetailsViewModel item in (IEnumerable<NoteMarketPlace.Models.NoteDetailsViewModel>)Model)
+                        {
+                            var d = db.DownloadedNotes.Where(m => m.NoteID == item.note.NoteID);
+
+                            int numberOfDownloads = 0;
+                            numberOfDownloads = db.DownloadedNotes.Where(m => m.NoteID == item.note.NoteID && m.IsAttachmentDownloaded == true).Count();
+                            <tr>
+                                <td class="text-center">@(i = i + 1)</td>
+                                <td><a href="/User/NoteDetails?noteName=@item.note.NoteTitle">@item.note.NoteTitle</a></td>
+                                <td>@item.noteCategory.CategoryName</td>
+                                <td>@db.Users.FirstOrDefault(m => m.ID == item.download.BuyersID).FirstName</td>
+                                <td><a href="/Admin/MemberDetails?uid=@item.user.ID"><img src="~/Content/AdminCSS/images/Admin_images/images/eye.png" alt="see"></a></td>
+                                <td>@db.Users.FirstOrDefault(m => m.ID == item.download.SellerID).FirstName</td>
+                                <td><a href="/Admin/MemberDetails?uid=@item.user.ID"><img src="~/Content/AdminCSS/images/Admin_images/images/eye.png" alt="see"></a></td>
+                                <td>@item.referenceData.Value</td>
+                                <td>$@item.note.SellPrice</td>
+                                <td>@item.download.AttachmentDownloadedDate</td>
+                                <td>
+                                    <div class="dropdown">
+                                        <a class="nav-link" href="#" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span><img src="~/Content/AdminCSS/images/Admin_images/images/dots.png" alt="dot"></span></a>
+
+                                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                            <a class="dropdown-item" href="/Admin/AdminDownloads?noteId=@item.note.NoteID">Downloaded Notes</a>
+                                            <a class="dropdown-item" href="/User/NoteDetails?noteName=@item.note.NoteTitle">View More Details</a>
+                                        </div>
+                                    </div>
+                                </td>
+
+                            </tr>
+                        }
+                    </tbody>
+
+                </table>
+                @{
+                    if (Model.Count() == 0)
+                    {
+
+                        <h4 style="color:#6255a5"><b>No Record Found</b></h4>
+                    }
+
+                }
+            </div>
+        </div>
+
+    </div>
+
+</section>
+
+<!--Pagination-->
+<section id="pagination-style">
+    <nav aria-label="Page navigation example">
+        @{
+            Double totalPage = ViewBag.PageTotal;
+
+            <ul class="pagination justify-content-center">
+
+                @if (ViewBag.PageNumber == 1)
+                {
+                    <li class="page-item disabled">
+                        @Html.ActionLink("<", "AdminDownloads", new { SortOrder = ViewBag.SortOrder == null ? "Asc" : ViewBag.SortOrder, SortBy = ViewBag.SortBy == null ? "Note Title" : ViewBag.SortBy, PageNumber = ViewBag.PageNumber }, new { @class = "page-link" })
+                    </li>
+
+                }
+                else
+                {
+                    <li class="page-item">
+                        @Html.ActionLink("<", "AdminDownloads", new { SortOrder = ViewBag.SortOrder == null ? "Asc" : ViewBag.SortOrder, SortBy = ViewBag.SortBy == null ? "Note Title" : ViewBag.SortBy, PageNumber = ViewBag.PageNumber - 1 }, new { @class = "page-link" })
+                    </li>
+                }
+
+
+
+                @for (int j = 1; j <= totalPage; j++)
+                {
+
+                    if (j == ViewBag.PageNumber)
+                    {
+
+                        <li class="page-item active">
+                            @Html.ActionLink(j.ToString(), "AdminDownloads", new { SortOrder = ViewBag.SortOrder == null ? "Asc" : ViewBag.SortOrder, SortBy = ViewBag.SortBy == null ? "Note Title" : ViewBag.SortBy, PageNumber = j }, new { @class = "page-link" })
+                        </li>
+                    }
+                    else
+                    {
+                        <li class="page-item">
+                            @Html.ActionLink(j.ToString(), "AdminDownloads", new { SortOrder = ViewBag.SortOrder == null ? "Asc" : ViewBag.SortOrder, SortBy = ViewBag.SortBy == null ? "Note Title" : ViewBag.SortBy, PageNumber = j }, new { @class = "page-link" })
+                        </li>
+                    }
+
+                }
+
+                @if (ViewBag.PageNumber == totalPage)
+                {
+                    <li class="page-item">
+                        @Html.ActionLink(">", "AdminDownloads", new { SortOrder = ViewBag.SortOrder == null ? "Asc" : ViewBag.SortOrder, SortBy = ViewBag.SortBy == null ? "Note Title" : ViewBag.SortBy, PageNumber = ViewBag.PageNumber }, new { @class = "page-link" })
+
+                    </li>
+                }
+                else
+                {
+                    <li class="page-item">
+                        @Html.ActionLink(">", "AdminDownloads", new { SortOrder = ViewBag.SortOrder == null ? "Asc" : ViewBag.SortOrder, SortBy = ViewBag.SortBy == null ? "Note Title" : ViewBag.SortBy, PageNumber = ViewBag.PageNumber + 1 }, new { @class = "page-link" })
+
+                    </li>
+                }
+
+
+            </ul>
+        }
+    </nav>
+</section>
+
+<script>
+    function FilterOfNote() {
+        //alert($(".sellerv").val());
+        $('#downloadFilter').submit();
+    }
+
+    function UnPublishForm(id) {
+        document.getElementById("bookid").setAttribute("value", id);
+    }
+
+</script>
+

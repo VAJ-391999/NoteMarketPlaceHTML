@@ -22,31 +22,33 @@ namespace NoteMarketPlace.Models
         public string SecondaryEmailID { get; set; }
         public Nullable<System.DateTime> DOB { get; set; }
         public Nullable<int> Gender { get; set; }
+
+        [Required(ErrorMessage = "Please Enter Phone No")]
         public string PhoneNo { get; set; }
         public int CountryCode { get; set; }
         public string ProfilePhoto { get; set; }
 
-        //[Required(ErrorMessage ="Please Enter Address")]
+        [Required(ErrorMessage ="Please Enter Address1")]
         public string Address1 { get; set; }
 
 
-       // [Required(ErrorMessage ="Please Enter Adddress")]
+       [Required(ErrorMessage ="Please Enter Adddress2")]
         public string Address2 { get; set; }
 
 
-       // [Required(ErrorMessage ="Please Enter City")]
+       [Required(ErrorMessage ="Please Enter City Name")]
         public string City { get; set; }
 
 
-        //[Required(ErrorMessage ="Please Enter State ")]
+        [Required(ErrorMessage ="Please Enter State ")]
         public string State { get; set; }
 
 
-        //[Required(ErrorMessage ="Please Enter ZipCode")]
+        [Required(ErrorMessage ="Please Enter ZipCode")]
         public string ZipCode { get; set; }
 
 
-        //[Required(ErrorMessage ="Please Enter Country")]
+        [Required(ErrorMessage ="Please Enter Country")]
         public string Country { get; set; }
 
 

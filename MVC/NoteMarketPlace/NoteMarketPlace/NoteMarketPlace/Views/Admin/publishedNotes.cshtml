@@ -1,0 +1,290 @@
+﻿@model IEnumerable<NoteMarketPlace.Models.NoteDetailsViewModel>
+@{
+    //Layout = null;
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    int i = 0;
+}
+@using NoteMarketPlace.Models;
+
+
+
+<!-- Dashboard progress -->
+<section id="dashboard-middle" class="notes-under-review">
+
+    <div class="container d-top admin-published-notes">
+
+        <!-- Heading -->
+        <div class="row">
+
+            <!-- Title -->
+            <div class="col-lg-6 col-md-6 col-sm-12 col-12">
+                <div class="dashboar-heading">
+                    <h3>Published Notes</h3>
+                </div>
+            </div>
+
+        </div>
+
+        @{
+            NoteMarketPlaceDatabaseEntities db = new NoteMarketPlaceDatabaseEntities();
+
+        }
+
+        <div class="filter-section">
+
+            <div class="row">
+
+                <!-- Filters -->
+                <div class="col-lg-6 col-md-6 col-sm-12 col-12">
+
+                    <div class="content-left">
+
+                        <div class="row">
+
+                            <!-- Seller -->
+                            <div class="col-lg-4 col-md-5 col-sm-12 col-12 seller">
+
+                                <div class="form-group">
+
+                                    <form method="get" class="sellnamelist">
+
+                                        <label class="mylabel" for="phoneNo">Seller</label>
+                                        <div class="wrapper">
+
+                                            @Html.DropDownList("sellerValue", ViewBag.SellerList as SelectList, "Seller", new { @id = "inputcode", @class = "form-control sellerv", @name = "sellerValue", @value = "Request.QueryString['sellerValue']", @onchange = "FilterOfNote()" })
+
+                                            <img src="~/Content/AdminCSS/images/Admin_images/images/arrow-down.png" alt="dropdown">
+                                        </div>
+                                    </form>
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <!-- Search Bar -->
+                <div class="col-lg-6 col-md-6 col-sm-12 col-12">
+
+                    <div class="content-right">
+
+                        <form class="form-inline ml-auto pull-right" method="post">
+                            <div class="md-form my-0 search-wrapper">
+                                <img src="~/Content/AdminCSS/images/Admin_images/images/search-icon.png" alt="search">
+                                <input class="form-control" type="text" id="searchbar" placeholder="Search..." aria-label="Search" name="searching" value="@ViewData["GetReviewNotes"]">
+                            </div>
+
+                            <!-- Profile Button -->
+                            <button href="#" type="submit" class="btn btn-primary search-btn text-uppercase text-center"><b>Search</b></button>
+
+                        </form>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- Table -->
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-12 table-responsive-xl">
+                <table class="table">
+                    <thead>
+                        <tr class="text-uppercase">
+                            <th scope="col">Sr. No</th>
+                            <th scope="col">
+                                @Html.ActionLink("Note Title", "publishedNotes", new { SortOrder = ViewBag.SortOrder == null ? "Asc" : (ViewBag.SortOrder == "Asc" ? "Desc" : "Asc"), SortBy = "Note Title", PageNumber = ViewBag.PageNumber == 0 ? 1 : ViewBag.PageNumber })
+                            </th>
+                            <th scope="col">
+                                @Html.ActionLink("Category", "publishedNotes", new { SortOrder = ViewBag.SortOrder == null ? "Asc" : (ViewBag.SortOrder == "Asc" ? "Desc" : "Asc"), SortBy = "Category", PageNumber = ViewBag.PageNumber == 0 ? 1 : ViewBag.PageNumber })
+                            </th>
+                            <th scope="col">
+                                @Html.ActionLink("Sell Type", "publishedNotes", new { SortOrder = ViewBag.SortOrder == null ? "Asc" : (ViewBag.SortOrder == "Asc" ? "Desc" : "Asc"), SortBy = "Sell Type", PageNumber = ViewBag.PageNumber == 0 ? 1 : ViewBag.PageNumber })
+                            </th>
+                            <th scope="col">
+                                @Html.ActionLink("Price", "publishedNotes", new { SortOrder = ViewBag.SortOrder == null ? "Asc" : (ViewBag.SortOrder == "Asc" ? "Desc" : "Asc"), SortBy = "Price", PageNumber = ViewBag.PageNumber == 0 ? 1 : ViewBag.PageNumber })
+                            </th>
+                            <th scope="col">
+                                @Html.ActionLink("Seller", "publishedNotes", new { SortOrder = ViewBag.SortOrder == null ? "Asc" : (ViewBag.SortOrder == "Asc" ? "Desc" : "Asc"), SortBy = "Seller", PageNumber = ViewBag.PageNumber == 0 ? 1 : ViewBag.PageNumber })
+                            </th>
+                            <th scope="col"></th>
+                            <th scope="col">
+                                @Html.ActionLink("Published Date", "publishedNotes", new { SortOrder = ViewBag.SortOrder == null ? "Asc" : (ViewBag.SortOrder == "Asc" ? "Desc" : "Asc"), SortBy = "Published Date", PageNumber = ViewBag.PageNumber == 0 ? 1 : ViewBag.PageNumber })
+                            </th>
+                            <th scope="col">Approved By</th>
+                            <th scope="col">Numbers of download</th>
+                            <th scope="col"></th>
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (NoteMarketPlace.Models.NoteDetailsViewModel item in (IEnumerable<NoteMarketPlace.Models.NoteDetailsViewModel>)Model)
+                        {
+                            var d = db.DownloadedNotes.Where(m => m.NoteID == item.note.NoteID);
+
+                            int numberOfDownloads = 0;
+                            numberOfDownloads = db.DownloadedNotes.Where(m => m.NoteID == item.note.NoteID && m.IsAttachmentDownloaded == true).Count();
+                            <tr>
+                                <td class="text-center">@(i = i + 1)</td>
+                                <td><a href="/User/NoteDetails?noteName=@item.note.NoteTitle">@item.note.NoteTitle</a></td>
+                                <td>@item.noteCategory.CategoryName</td>
+                                <td>@item.referenceData.Value</td>
+                                <td>$@item.note.SellPrice</td>
+                                <td>@item.user.FirstName @item.user.LastName</td>
+                                <td><a href="/Admin/MemberDetails?uid=@item.user.ID"><img src="~/Content/AdminCSS/images/Admin_images/images/eye.png" alt="see"></a></td>
+                                <td>@item.note.PublishedDate.ToString("dd-MM-yyyy hh':'mm")</td>
+                                <td>@db.Users.FirstOrDefault(m => m.ID == item.note.SellerID).FirstName</td>
+                                <td>@numberOfDownloads</td>
+                                <td>
+                                    <div class="dropdown">
+                                        <a class="nav-link" href="#" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span><img src="~/Content/AdminCSS/images/Admin_images/images/dots.png" alt="dot"></span></a>
+
+                                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                            <a class="dropdown-item" href="/Admin/publishedNotes?noteId=@item.note.NoteID">Downloaded Notes</a>
+                                            <a class="dropdown-item" href="/User/NoteDetails?noteName=@item.note.NoteTitle">View More Details</a>
+                                            <a class="dropdown-item" href="#" data-toggle="modal" data-target="#exampleModal" id="feedback-link" onclick="UnPublishNoteForm('@item.note.NoteID', '@item.note.NoteTitle', '@item.noteCategory.CategoryName')">Unpublish</a>
+                                        </div>
+                                    </div>
+                                </td>
+
+                            </tr>
+                        }
+                    </tbody>
+
+                </table>
+                @{
+                    if (Model.Count() == 0)
+                    {
+
+                        <h4 style="color:#6255a5"><b>No Record Found</b></h4>
+                    }
+
+                }
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade feedbackDetails " id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+
+            @using (Html.BeginForm("publishedNotes", "Admin", FormMethod.Post, new { }))
+            {
+                <input type="hidden" name="unpublishNote" id="bookid" />
+
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel"><b></b></h5>
+                        <h3 id="noteinfo"></h3>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true"><img src="~/Content/images/Front_images/images/close.png" alt="close"></span>
+                        </button>
+                    </div>
+                    <div class="unpulish-form">
+                        <div class="form-group">
+                            <label class="mylabel" for="firstname">Remarks *</label>
+                            <textarea type="text" rows="5" class="form-control" id="firstname" placeholder="Write Remarks" name="removedRemarks" required></textarea>
+                        </div>
+
+                    </div>
+
+                    @*<button type="submit" class="btn btn-primary profile-btn text-center" name="btnValue2" value="Rejected" onclick="confirm('Are You Sure you want to unpublish this note?')">Unpublish</button>
+                    <button type="button" data-dismiss="modal" aria-label="Close" class="btn btn-primary  text-center" name="btnValue2" value="Rejected">Cancel</button>*@
+
+                    <div class="form-inline button-part ml-auto pull-right unpulish-form">
+                        <button type="submit" class="btn btn-primary profile-btn justify-content-center" name="btnValue2" value="Rejected" onclick="confirm('Are You Sure you want to unpublish this note?')">Unpublish</button><button type="submit" class="btn btn-primary review-inreview-btn justify-content-center" data-dismiss="modal" aria-label="Close" name="cancelbtn" value="cancel">Cancel</button>
+                    </div>
+
+                    
+                </div>
+
+
+            }
+        </div>
+    </div>
+
+</section>
+
+<!--Pagination-->
+<section id="pagination-style">
+    <nav aria-label="Page navigation example">
+        @{
+            Double totalPage = ViewBag.PageTotal;
+
+            <ul class="pagination justify-content-center">
+
+                @if (ViewBag.PageNumber == 1)
+                {
+                    <li class="page-item disabled">
+                        @Html.ActionLink("<", "publishedNotes", new { SortOrder = ViewBag.SortOrder == null ? "Asc" : ViewBag.SortOrder, SortBy = ViewBag.SortBy == null ? "Note Title" : ViewBag.SortBy, PageNumber = ViewBag.PageNumber }, new { @class = "page-link" })
+                    </li>
+
+                }
+                else
+                {
+                    <li class="page-item">
+                        @Html.ActionLink("<", "publishedNotes", new { SortOrder = ViewBag.SortOrder == null ? "Asc" : ViewBag.SortOrder, SortBy = ViewBag.SortBy == null ? "Note Title" : ViewBag.SortBy, PageNumber = ViewBag.PageNumber - 1 }, new { @class = "page-link" })
+                    </li>
+                }
+
+
+
+                @for (int j = 1; j <= totalPage; j++)
+                {
+
+                    if (j == ViewBag.PageNumber)
+                    {
+
+                        <li class="page-item active">
+                            @Html.ActionLink(j.ToString(), "publishedNotes", new { SortOrder = ViewBag.SortOrder == null ? "Asc" : ViewBag.SortOrder, SortBy = ViewBag.SortBy == null ? "Note Title" : ViewBag.SortBy, PageNumber = j }, new { @class = "page-link" })
+                        </li>
+                    }
+                    else
+                    {
+                        <li class="page-item">
+                            @Html.ActionLink(j.ToString(), "publishedNotes", new { SortOrder = ViewBag.SortOrder == null ? "Asc" : ViewBag.SortOrder, SortBy = ViewBag.SortBy == null ? "Note Title" : ViewBag.SortBy, PageNumber = j }, new { @class = "page-link" })
+                        </li>
+                    }
+
+                }
+
+                @if (ViewBag.PageNumber == totalPage)
+                {
+                    <li class="page-item">
+                        @Html.ActionLink(">", "publishedNotes", new { SortOrder = ViewBag.SortOrder == null ? "Asc" : ViewBag.SortOrder, SortBy = ViewBag.SortBy == null ? "Note Title" : ViewBag.SortBy, PageNumber = ViewBag.PageNumber }, new { @class = "page-link" })
+
+                    </li>
+                }
+                else
+                {
+                    <li class="page-item">
+                        @Html.ActionLink(">", "publishedNotes", new { SortOrder = ViewBag.SortOrder == null ? "Asc" : ViewBag.SortOrder, SortBy = ViewBag.SortBy == null ? "Note Title" : ViewBag.SortBy, PageNumber = ViewBag.PageNumber + 1 }, new { @class = "page-link" })
+
+                    </li>
+                }
+
+
+            </ul>
+        }
+    </nav>
+</section>
+
+<script>
+    function FilterOfNote() {
+        //alert($(".sellerv").val());
+        $('.sellnamelist').submit();
+    }
+
+    function UnPublishNoteForm(id, namenote, categorynote) {
+        document.getElementById("bookid").setAttribute("value", id);
+        document.getElementById("noteinfo").innerHTML = namenote + "-" + categorynote;
+    }
+
+</script>
+

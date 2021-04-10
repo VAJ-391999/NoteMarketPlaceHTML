@@ -40,7 +40,7 @@ namespace NoteMarketPlace.Controllers
         [HttpPost]
         public ActionResult Index(User u2,bool RememberMe)
         {
-                var userDetails = db.Users.Where(m => m.EmailID.Equals(u2.EmailID) && m.Password.Equals(u2.Password)).FirstOrDefault();
+                var userDetails = db.Users.Where(m => m.EmailID.Equals(u2.EmailID) && m.Password.Equals(u2.Password) && m.IsActive == true).FirstOrDefault();
                if (userDetails == null)
                {
                     u2.LoginErrorMessage = "The password that you have entered is incorrect.";
@@ -233,8 +233,31 @@ namespace NoteMarketPlace.Controllers
         [HttpPost]
         public ActionResult ContactUs(string Name, string EmailAddress, string Subject, string Comment)
         {
-            //Error message Display
-            
+            if(String.IsNullOrEmpty(Name))
+            {
+                ViewBag.nameerr = "Please Enter Name";
+                return View();
+            }
+            else if (String.IsNullOrEmpty(EmailAddress))
+            {
+                ViewBag.emailerr = "Please Enter Email Address";
+                return View();
+            }
+            else if (String.IsNullOrEmpty(Subject))
+            {
+                ViewBag.suberr = "Please Enter Subject";
+                return View();
+            }
+            else if (String.IsNullOrEmpty(Comment))
+            {
+                ViewBag.commenterr = "Please Enter Comments";
+                return View();
+            }
+            else
+            {
+
+                //Error message Display
+
                 var fromEmail = new MailAddress("3999vachauhan@gmail.com", "V@chauhan3999");
                 var toEmail = new MailAddress("pateldhara1019@gmail.com", "Dhara1112");
                 var fromEmailPassword = "nnumqfegkqbdecgs";
@@ -260,7 +283,10 @@ namespace NoteMarketPlace.Controllers
                     IsBodyHtml = true
                 })
                     smtp.Send(message);
-                 return RedirectToAction("Index","User");
+                return RedirectToAction("SearchNotes", "User");
+            }
+
+            return View();
             
         }
 
@@ -292,22 +318,6 @@ namespace NoteMarketPlace.Controllers
                 
                 if(v != null)
                 {
-                    //if(v.IsAttachmentDownloaded == false)
-                    //{
-                    //    v.IsSellerHasAllowedDownload = true;
-                    //    db.Entry(v).State = System.Data.Entity.EntityState.Modified;
-
-                    //    v.AttachmentPath = q3.NoteAttachment;
-                    //    db.Entry(v).State = System.Data.Entity.EntityState.Modified;
-
-                    //    db.SaveChanges();
-
-                    //}
-                    //else
-                    //{
-                    //    ViewBag.e = "No";
-                    //}
-
                     v.IsSellerHasAllowedDownload = true;
                     db.Entry(v).State = System.Data.Entity.EntityState.Modified;
 
@@ -319,7 +329,33 @@ namespace NoteMarketPlace.Controllers
 
                     db.SaveChanges();
 
-                    //ViewBag.ei = "yes";
+                    string bemailid = db.Users.FirstOrDefault(m => m.ID == v.BuyersID).EmailID;
+
+                    var fromEmail = new MailAddress("3999vachauhan@gmail.com", "V@chauhan3999");
+                    var toEmail = new MailAddress(bemailid);
+                    var fromEmailPassword = "nnumqfegkqbdecgs";
+
+                    string subject = db.Users.FirstOrDefault(m => m.ID == v.SellerID).FirstName + " Allow to download a note";
+
+                    string body = "Hello " + db.Users.FirstOrDefault(m => m.ID == v.BuyersID).FirstName + ", <br/><br/> We would like to inform you that, " + db.Users.FirstOrDefault(m => m.ID == v.SellerID).FirstName + " Allow you to download a note. Please login and see My Download tabs to downparticular note. <br/><br/> Regards,<br/> Notes Marketlace";
+                    var smtp = new SmtpClient
+                    {
+                        Host = "smtp.gmail.com",
+                        Port = 587,
+                        EnableSsl = true,
+                        DeliveryMethod = SmtpDeliveryMethod.Network,
+                        UseDefaultCredentials = false,
+                        Credentials = new NetworkCredential(fromEmail.Address, fromEmailPassword)
+                    };
+
+                    using (var message = new MailMessage(fromEmail, toEmail)
+                    {
+                        Subject = subject,
+                        Body = body,
+                        IsBodyHtml = true
+                    })
+                        smtp.Send(message);
+
 
                 }
 
@@ -335,6 +371,7 @@ namespace NoteMarketPlace.Controllers
                 List<DownloadedNote> downloadValues = db.DownloadedNotes.ToList();
                 List<ReferenceData> referenceDataValues = db.ReferenceDatas.ToList();
                 List<NoteCategory> categoryValues = db.NoteCategories.ToList();
+                List<Profile> profileValues = db.Profiles.ToList();
 
                 var sID = Convert.ToInt32(Session["UserId"]);
 
@@ -343,15 +380,16 @@ namespace NoteMarketPlace.Controllers
                              join n in noteValues on d.NoteID equals n.NoteID
                              join nc in categoryValues on n.Category equals nc.ID
                              join rd in referenceDataValues on n.SellFor equals rd.ID
+                             join p in profileValues on u.ID equals p.SellerID
                              where n.SellerID == sID && d.IsSellerHasAllowedDownload == false
-                             select new NoteDetailsViewModel { note = n, user = u, download = d, noteCategory = nc, referenceData = rd };
+                             select new NoteDetailsViewModel { note = n, user = u, download = d, noteCategory = nc, referenceData = rd, profileUser = p };
  
 
                 ViewBag.SortOrder = SortOrder;
                 ViewBag.SortBy = SortBy;
 
                 query1 = ApplySorting(SortOrder, SortBy, query1);
-                query1 = ApplyPagination(query1, PageNumber);
+                query1 = ApplyPagination10(query1, PageNumber);
 
                 return View(query1);
 
@@ -371,6 +409,7 @@ namespace NoteMarketPlace.Controllers
             List<DownloadedNote> downloadValues = db.DownloadedNotes.ToList();
             List<ReferenceData> referenceDataValues = db.ReferenceDatas.ToList();
             List<NoteCategory> categoryValues = db.NoteCategories.ToList();
+            List<Profile> profileValues = db.Profiles.ToList();
 
             var sID = Convert.ToInt32(Session["UserId"]);
 
@@ -379,8 +418,9 @@ namespace NoteMarketPlace.Controllers
                          join n in noteValues on d.NoteID equals n.NoteID
                          join nc in categoryValues on n.Category equals nc.ID
                          join rd in referenceDataValues on n.SellFor equals rd.ID
-                         where n.SellerID == sID
-                         select new NoteDetailsViewModel { note = n, user = u, download = d, noteCategory = nc, referenceData = rd };
+                         join p in profileValues on u.ID equals p.SellerID
+                         where n.SellerID == sID && d.IsSellerHasAllowedDownload == false
+                         select new NoteDetailsViewModel { note = n, user = u, download = d, noteCategory = nc, referenceData = rd, profileUser = p };
            
 
             if (!string.IsNullOrEmpty(searching))
@@ -388,7 +428,7 @@ namespace NoteMarketPlace.Controllers
                 query1 = query1.Where(NoteDetailsViewModel => NoteDetailsViewModel.note.NoteTitle.Contains(searching) 
                 || NoteDetailsViewModel.note.CourseName.Contains(searching));
                 query1 = ApplySorting(SortOrder, SortBy, query1);
-                query1 = ApplyPagination(query1, PageNumber);
+                query1 = ApplyPagination10(query1, PageNumber);
             }
 
             return View("BuyersRequest", query1);
@@ -398,18 +438,11 @@ namespace NoteMarketPlace.Controllers
         // GET: User Search note Page
         public ActionResult SearchNotes(string textbox,int? typeOfNote,int? categoryOfNote,string instituteOfNote, string courseOfNote,int? countryNote, string rateOfNote, int PageNumber = 1)
         {
-            /*if (Session["UserEmailId"] == null)
-            {
-
-                return RedirectToAction("Index", "User");
-            }*/
-
-            //else
-            //{
-            //string univer[] =  ;
+            
             if(typeOfNote == null)
             {
-                ViewBag.search = "no";
+                int i1 = 2;
+                ViewBag.search = Convert.ToDouble(i1);
             }
             else
             {
@@ -447,61 +480,67 @@ namespace NoteMarketPlace.Controllers
             //ViewBag.RatingList = new SelectList(ratingList, "Ratings", "Ratings");
             ViewBag.RatingList = db.NoteReviews.Where(m => m.Ratings != 0).Select(m => m.Ratings).Distinct();
 
-                List<Note> noteValues = db.Notes.ToList();
+                List<Note> noteValues = db.Notes.Where(m => m.Status == 9).ToList();
                 List<NoteCountry> countryValues = db.NoteCountries.ToList();
                 List<NoteCategory> categoryValuse = db.NoteCategories.ToList();
                 List<NoteType> typeValues = db.NoteTypes.ToList();
                 List<NoteReview> reviewValues = db.NoteReviews.ToList();
+            List<User> userValues = db.Users.Where(m => m.IsActive == true).ToList();
 
                 
                  var NotejoinCountry = from n in noteValues
                                         join cv in countryValues on n.Country equals cv.ID
                                         join nc in categoryValuse on n.Category equals nc.ID
                                         join nt in typeValues on n.NoteType equals nt.ID
+                                        join u in userValues on n.SellerID equals u.ID
                                         //join nr in reviewValues on n.NoteID equals nr.NoteID
                                         //where n.NoteTitle == "cp"
-                                        select new NoteDetailsViewModel { countryDetails = cv, noteDetails = n, categoryDetails = nc, typeDetails = nt/*, noteReview = nr*/ };
+                                        select new NoteDetailsViewModel { countryDetails = cv, noteDetails = n, categoryDetails = nc, typeDetails = nt, user = u};
 
             if (!string.IsNullOrEmpty(textbox))
             {
+                ViewBag.textboxSearch = textbox;
                 
                 NotejoinCountry = NotejoinCountry.Where(NoteDetailsViewModel => NoteDetailsViewModel.noteDetails.NoteTitle.ToLower().StartsWith(textbox.ToLower())
                                   || NoteDetailsViewModel.categoryDetails.CategoryName.ToLower().StartsWith(textbox.ToLower())
-                                  //|| NoteDetailsViewModel.typeDetails.ID.Equals(typeOfNote)
-                                  //|| NoteDetailsViewModel.categoryDetails.ID.Equals(categoryOfNote)
-                                  //|| NoteDetailsViewModel.noteDetails.Institute.ToLower().StartsWith(instituteOfNote.ToLower())
-                                  //|| NoteDetailsViewModel.noteDetails.CourseName.ToLower().StartsWith(courseOfNote.ToLower())
-                                  );
+                                 );
+
+
             }
 
             if(typeOfNote != null)
             {
+                ViewBag.typesearch = typeOfNote;
                 NotejoinCountry = NotejoinCountry.Where(NoteDetailsViewModel => NoteDetailsViewModel.typeDetails.ID.Equals(typeOfNote));
             }
 
             if (categoryOfNote != null)
             {
+                ViewBag.categorySearch = categoryOfNote;
                 NotejoinCountry = NotejoinCountry.Where(NoteDetailsViewModel => NoteDetailsViewModel.categoryDetails.ID.Equals(categoryOfNote));
             }
 
             if (!string.IsNullOrEmpty(instituteOfNote))
             {
+                ViewBag.instituteSearch = instituteOfNote;
                 NotejoinCountry = NotejoinCountry.Where(NoteDetailsViewModel => NoteDetailsViewModel.noteDetails.Institute.ToLower().StartsWith(instituteOfNote.ToLower()));
             }
 
             if (!string.IsNullOrEmpty(courseOfNote))
             {
+                ViewBag.courseSearch = courseOfNote;
                 NotejoinCountry = NotejoinCountry.Where(NoteDetailsViewModel => NoteDetailsViewModel.noteDetails.CourseName.ToLower().StartsWith(courseOfNote.ToLower()));
             }
 
             if (countryNote != null)
             {
+                ViewBag.countrySearch = countryNote;
                 NotejoinCountry = NotejoinCountry.Where(NoteDetailsViewModel => NoteDetailsViewModel.countryDetails.ID.Equals(countryNote));
             }
 
             if (!string.IsNullOrEmpty(rateOfNote))
             {
-               // NotejoinCountry = NotejoinCountry.Where(NoteDetailsViewModel => NoteDetailsViewModel.noteReview.Ratings.Equals(rateOfNote));
+                ViewBag.rateSearch = rateOfNote;
                 NotejoinCountry = from n in noteValues
                                   join cv in countryValues on n.Country equals cv.ID
                                   join nc in categoryValuse on n.Category equals nc.ID
@@ -511,17 +550,11 @@ namespace NoteMarketPlace.Controllers
                                   select new NoteDetailsViewModel { countryDetails = cv, noteDetails = n, categoryDetails = nc, typeDetails = nt, noteReview = nr };
             }
 
-            //ViewBag.SortOrder = SortOrder countryNote rateOfNote;
-            //ViewBag.SortBy = SortBy;
-            //NotejoinCountry = ApplySorting(SortOrder, SortBy, NotejoinCountry);
-            NotejoinCountry = ApplyPagination(NotejoinCountry, PageNumber);
+            NotejoinCountry = ApplyPaginationsearch(NotejoinCountry, PageNumber);
 
 
             return View(NotejoinCountry);
-                //return View();
-            //}
-
-            //return View(from Note in db.Notes select Note);
+               
         }
 
         
@@ -570,7 +603,7 @@ namespace NoteMarketPlace.Controllers
                                   select new NoteDetailsViewModel { countryDetails = cv, noteDetails = n, categoryDetails = nc, typeDetails = nt };
 
             //NotejoinCountry = ApplySorting(SortOrder, SortBy, NotejoinCountry);
-            NotejoinCountry = ApplyPagination(NotejoinCountry, PageNumber);
+            NotejoinCountry = ApplyPaginationsearch(NotejoinCountry, PageNumber);
 
             return View(NotejoinCountry);
         }
@@ -585,18 +618,13 @@ namespace NoteMarketPlace.Controllers
                 return RedirectToAction("Index", "User");
             }
 
-            var categoryList = db.NoteCategories.ToList();
+            var categoryList = db.NoteCategories.Where(m => m.IsActive == true).ToList();
             ViewBag.CategoryList = new SelectList(categoryList,"ID","CategoryName");
-            //ViewBag.CategoryList = categoryList;
-            //Note n2 = new Note();
-
-            //n2.CategoryList = new SelectList(categoryList, "ID", "CategoryName");
-
-
-            var countryList = db.NoteCountries.ToList();
+            
+            var countryList = db.NoteCountries.Where(m => m.IsActive == true).ToList();
             ViewBag.CountyList = new SelectList(countryList, "ID", "CountryName");
 
-            var typeList = db.NoteTypes.ToList();
+            var typeList = db.NoteTypes.Where(m => m.IsActive == true).ToList();
             ViewBag.TypeList = new SelectList(typeList, "ID", "TypeName");
 
             if(nId == null)
@@ -617,15 +645,24 @@ namespace NoteMarketPlace.Controllers
         [HttpPost]
         public ActionResult AddNotes(int? nId, Note n1, string save, string published)
         {
+            var categoryList = db.NoteCategories.Where(m => m.IsActive == true).ToList();
+            ViewBag.CategoryList = new SelectList(categoryList, "ID", "CategoryName");
 
-            
+            var countryList = db.NoteCountries.Where(m => m.IsActive == true).ToList();
+            ViewBag.CountyList = new SelectList(countryList, "ID", "CountryName");
+
+            var typeList = db.NoteTypes.Where(m => m.IsActive == true).ToList();
+            ViewBag.TypeList = new SelectList(typeList, "ID", "TypeName");
+
+            int sellerid = Convert.ToInt32(Session["UserId"]);
+
             if (nId == null)
                 {
 
                 n1.SellerID = Convert.ToInt32(Session["UserId"]);
                 n1.NoteSize = 15;
 
-                if (n1.DisplayPicture == null)
+                if (n1.BookImage == null)
                 {
                     n1.DisplayPicture = "~/Image/search1215941230.png";
                 }
@@ -644,31 +681,46 @@ namespace NoteMarketPlace.Controllers
                     n1.BookImage.SaveAs(filename);
                 }
 
+                if(n1.NotePdf == null)
+                {
+                    ViewBag.pdferr = "Please Enter your Note";
+                    return View();
+                }
+                else
+                {
+                    //Pdf of note upload path in databse
+                    string noteName = Path.GetFileNameWithoutExtension(n1.NotePdf.FileName);
+                    string noteExtension = Path.GetExtension(n1.NotePdf.FileName);
 
-                //Pdf of note upload path in databse
-                string noteName = Path.GetFileNameWithoutExtension(n1.NotePdf.FileName);
-                string noteExtension = Path.GetExtension(n1.NotePdf.FileName);
+                    noteName = noteName + DateTime.Now.ToString("yymmssfff") + noteExtension;
 
-                noteName = noteName + DateTime.Now.ToString("yymmssfff") + noteExtension;
+                    n1.NoteAttachment = "~/PdfNotes/" + noteName;
 
-                n1.NoteAttachment = "~/PdfNotes/" + noteName;
+                    noteName = Path.Combine(Server.MapPath("~/PdfNotes/"), noteName);
 
-                noteName = Path.Combine(Server.MapPath("~/PdfNotes/"), noteName);
+                    n1.NotePdf.SaveAs(noteName);
+                }
 
-                n1.NotePdf.SaveAs(noteName);
+                if(n1.PreviewOfNote == null)
+                {
+                    ViewBag.previewerr = "Please Enter Preview of note";
+                    return View();
+                }
+                else
+                {
+                    //Note Preview upload preview path in database
+                    string notePreviewName = Path.GetFileNameWithoutExtension(n1.PreviewOfNote.FileName);
+                    string notePreviewExtension = Path.GetExtension(n1.PreviewOfNote.FileName);
 
-                //Note Preview upload preview path in database
-                string notePreviewName = Path.GetFileNameWithoutExtension(n1.PreviewOfNote.FileName);
-                string notePreviewExtension = Path.GetExtension(n1.PreviewOfNote.FileName);
+                    notePreviewName = notePreviewName + DateTime.Now.ToString("yymmssfff") + notePreviewExtension;
 
-                notePreviewName = notePreviewName + DateTime.Now.ToString("yymmssfff") + notePreviewExtension;
+                    n1.NotePreview = "~/PreviewOfNotes/" + notePreviewName;
 
-                n1.NotePreview = "~/PreviewOfNotes/" + notePreviewName;
+                    notePreviewName = Path.Combine(Server.MapPath("~/PreviewOfNotes/"), notePreviewName);
 
-                notePreviewName = Path.Combine(Server.MapPath("~/PreviewOfNotes/"), notePreviewName);
-
-                n1.NotePdf.SaveAs(notePreviewName);
-
+                    n1.NotePdf.SaveAs(notePreviewName);
+                }
+                
                 //Status of note
                 if (save != null)
                 {
@@ -677,7 +729,9 @@ namespace NoteMarketPlace.Controllers
 
                 if (!string.IsNullOrEmpty(published))
                 {
-                    n1.Status = 9;
+                    n1.Status = 7;
+                    SellerPublishNote(n1.NoteTitle, sellerid);
+
                 }
 
                 //Database Save
@@ -704,7 +758,7 @@ namespace NoteMarketPlace.Controllers
                         temp.SellerID = Convert.ToInt32(Session["UserId"]);
                         temp.NoteSize = 15;
 
-                        if (n1.DisplayPicture == null)
+                        if (n1.BookImage == null)
                         {
                             temp.DisplayPicture = "~/Image/search1215941230.png";
                         }
@@ -720,34 +774,48 @@ namespace NoteMarketPlace.Controllers
 
                             filename = Path.Combine(Server.MapPath("~/Image/"), filename);
 
-                            temp.BookImage.SaveAs(filename);
+                            n1.BookImage.SaveAs(filename);
                         }
 
+                        if (n1.NotePdf == null)
+                        {
+                            ViewBag.pdferr = "Please Enter your Note";
+                            return View();
+                        }
+                        else
+                        {
+                            //Pdf of note upload path in databse
+                            string noteName = Path.GetFileNameWithoutExtension(n1.NotePdf.FileName);
+                            string noteExtension = Path.GetExtension(n1.NotePdf.FileName);
 
-                        //Pdf of note upload path in databse
-                        string noteName = Path.GetFileNameWithoutExtension(n1.NotePdf.FileName);
-                        string noteExtension = Path.GetExtension(n1.NotePdf.FileName);
+                            noteName = noteName + DateTime.Now.ToString("yymmssfff") + noteExtension;
 
-                        noteName = noteName + DateTime.Now.ToString("yymmssfff") + noteExtension;
+                            temp.NoteAttachment = "~/PdfNotes/" + noteName;
 
-                        temp.NoteAttachment = "~/PdfNotes/" + noteName;
+                            noteName = Path.Combine(Server.MapPath("~/PdfNotes/"), noteName);
 
-                        noteName = Path.Combine(Server.MapPath("~/PdfNotes/"), noteName);
+                            n1.NotePdf.SaveAs(noteName);
 
-                        n1.NotePdf.SaveAs(noteName);
+                        }
+                        if (n1.PreviewOfNote == null)
+                        {
+                            ViewBag.previewerr = "Please Enter Preview of note";
+                            return View();
+                        }
+                        else
+                        {
+                            //Note Preview upload preview path in database
+                            string notePreviewName = Path.GetFileNameWithoutExtension(n1.PreviewOfNote.FileName);
+                            string notePreviewExtension = Path.GetExtension(n1.PreviewOfNote.FileName);
 
-                        //Note Preview upload preview path in database
-                        string notePreviewName = Path.GetFileNameWithoutExtension(n1.PreviewOfNote.FileName);
-                        string notePreviewExtension = Path.GetExtension(n1.PreviewOfNote.FileName);
+                            notePreviewName = notePreviewName + DateTime.Now.ToString("yymmssfff") + notePreviewExtension;
 
-                        notePreviewName = notePreviewName + DateTime.Now.ToString("yymmssfff") + notePreviewExtension;
+                            temp.NotePreview = "~/PreviewOfNotes/" + notePreviewName;
 
-                        temp.NotePreview = "~/PreviewOfNotes/" + notePreviewName;
+                            notePreviewName = Path.Combine(Server.MapPath("~/PreviewOfNotes/"), notePreviewName);
 
-                        notePreviewName = Path.Combine(Server.MapPath("~/PreviewOfNotes/"), notePreviewName);
-
-                        n1.NotePdf.SaveAs(notePreviewName);
-
+                            n1.NotePdf.SaveAs(notePreviewName);
+                        }
                         //Status of note
                         if (save != null)
                         {
@@ -756,7 +824,8 @@ namespace NoteMarketPlace.Controllers
 
                         if (!string.IsNullOrEmpty(published))
                         {
-                            temp.Status = 9;
+                            temp.Status = 7;
+                            SellerPublishNote(n1.NoteTitle, sellerid);
                         }
 
                         //Database Save
@@ -785,6 +854,8 @@ namespace NoteMarketPlace.Controllers
 
                         db.Entry(temp).State = System.Data.Entity.EntityState.Modified;
                         db.SaveChanges();
+
+                        
                         //db.Notes.Add(temp);
 
                         //db.Entry(n1).State = System.Data.Entity.EntityState.Modified;
@@ -968,7 +1039,7 @@ namespace NoteMarketPlace.Controllers
         public ActionResult _InProgressDashboard(string searchingProgress, string SortOrder1, string SortBy1, int PageNumber1 = 1)
         {
 
-            List<Note> noteValues = db.Notes.ToList();
+            List<Note> noteValues = db.Notes.Where(m => m.Status == 6 || m.Status == 7 || m.Status == 8).ToList();
             List<NoteCategory> noteCategoryValues = db.NoteCategories.ToList();
             List<ReferenceData> referencesValues = db.ReferenceDatas.ToList();
 
@@ -994,7 +1065,7 @@ namespace NoteMarketPlace.Controllers
                 ViewBag.SortOrder = SortOrder1;
                 ViewBag.SortBy = SortBy1;
                 query1 = ApplySorting(SortOrder1, SortBy1, query1);
-                query1 = ApplyPagination(query1, PageNumber1);
+                query1 = ApplyPaginationDadhboard(query1, PageNumber1);
 
                 return PartialView(query1);
             
@@ -1010,7 +1081,7 @@ namespace NoteMarketPlace.Controllers
             
                 ViewData["GetSearchPublished"] = searchingPublished;
 
-                List<Note> noteValues = db.Notes.ToList();
+                List<Note> noteValues = db.Notes.Where(m => m.Status == 9).ToList();
                 List<NoteCategory> noteCategoryValues = db.NoteCategories.ToList();
                 List<ReferenceData> referencesValues = db.ReferenceDatas.ToList();
 
@@ -1032,7 +1103,7 @@ namespace NoteMarketPlace.Controllers
             ViewBag.SortOrder = SortOrder;
             ViewBag.SortBy = SortBy;
             query2 = ApplySorting(SortOrder, SortBy, query2);
-            query2 = ApplyPagination(query2, PageNumber);
+            query2 = ApplyPaginationDadhboard(query2, PageNumber);
 
             return PartialView( query2);
             
@@ -1107,12 +1178,14 @@ namespace NoteMarketPlace.Controllers
                     downlodNote.NoteID = model.note.NoteID;
                     downlodNote.SellerID = model.note.SellerID;
                     downlodNote.BuyersID = db.Users.FirstOrDefault(m => m.EmailID == buyerEmail).ID;
+                    
                     if (model.note.SellFor == 5)
                     {
                         downlodNote.IsSellerHasAllowedDownload = true;
                         downlodNote.AttachmentPath = model.note.NoteAttachment;
                         downlodNote.IsAttachmentDownloaded = true;
                         downlodNote.IsPaid = true;
+                        downlodNote.AttachmentDownloadedDate = DateTime.Now;
                     }
                     else
                     {
@@ -1128,6 +1201,8 @@ namespace NoteMarketPlace.Controllers
                     downlodNote.PurchasedPrice = model.note.SellPrice;
                     downlodNote.NoteTitle = model.note.NoteTitle;
                     downlodNote.NoteCategory = model.noteCategory.CategoryName;
+                    downlodNote.CreatedDate = DateTime.Now;
+                    downlodNote.CreatedBy = db.Users.FirstOrDefault(m => m.EmailID == buyerEmail).ID;
 
                     db.DownloadedNotes.Add(downlodNote);
                     db.SaveChanges();
@@ -1148,20 +1223,7 @@ namespace NoteMarketPlace.Controllers
                         if (q1.SellFor == 4)
                         {
                             ViewBag.Error = "Seller did not not allow you to download this note";
-                            /*var d1 = db.DownloadedNotes.FirstOrDefault(m => m.NoteID == bookId);
-                            if (d1 != null)
-                            {
-                                if (d1.IsSellerHasAllowedDownload == true)
-                                {
-                                    string downloadFile = d1.AttachmentPath;
-
-                                    return File(downloadFile, "application/pdf", downloadFile);
-                                }
-                                else
-                                {
-                                    ViewBag.Error = "Seller did not not allow you to download this note";
-                                }
-                            }*/
+                            
                         }
                     }
                 }
@@ -1187,10 +1249,48 @@ namespace NoteMarketPlace.Controllers
             {
                 return RedirectToAction("Index", "User");
             }
+            else
+            {
+                var sid = Convert.ToInt32(Session["UserId"]);
 
-            ViewBag.userEmail = Session["UserEmailId"].ToString();
-            ViewData["userEmail"] = Session["UserEmailId"];
+                ViewBag.userEmail = Session["UserEmailId"].ToString();
+                ViewData["userEmail"] = Session["UserEmailId"];
 
+                var genderList = db.ReferenceDatas.Where(m => m.RefCategory == "Gender").ToList();
+                ViewBag.GenderList = new SelectList(genderList, "ID", "Value");
+
+                var countryCodeList = new List<string>() { "+91", "+1", "+44" };
+                ViewBag.CountryCodeList = countryCodeList;
+
+                var countryProfileList = new List<string>() { "India", "USA", "UK" };
+                ViewBag.CountyProfileList = countryProfileList;
+
+                var profileUpdate = db.Profiles.FirstOrDefault(m => m.SellerID == sid);
+                if(profileUpdate == null)
+                {
+                    return View();
+                }
+                else
+                {
+                    NoteDetailsViewModel n1 = new NoteDetailsViewModel();
+
+                    var temp = db.Users.FirstOrDefault(m => m.ID == sid);
+                    var temp1 = db.Profiles.FirstOrDefault(m => m.SellerID == sid);
+                    n1.user = temp;
+                    n1.profileUser = temp1;
+
+                    return View("UserProfile", n1);
+
+                }
+
+            }
+
+            
+        }
+
+        [HttpPost]
+        public ActionResult UserProfile(NoteDetailsViewModel n1)
+        {
             var genderList = db.ReferenceDatas.Where(m => m.RefCategory == "Gender").ToList();
             ViewBag.GenderList = new SelectList(genderList, "ID", "Value");
 
@@ -1200,12 +1300,6 @@ namespace NoteMarketPlace.Controllers
             var countryProfileList = new List<string>() { "India", "USA", "UK" };
             ViewBag.CountyProfileList = countryProfileList;
 
-            return View();
-        }
-
-        [HttpPost]
-        public ActionResult UserProfile(NoteDetailsViewModel n1)
-        {
             int userID = Convert.ToInt32(Session["UserId"]);
 
             var p = db.Profiles.FirstOrDefault(m => m.SellerID == userID);
@@ -1222,6 +1316,8 @@ namespace NoteMarketPlace.Controllers
                 if (v != null)
                 {
                     v.FirstName = n1.user.FirstName;
+                    v.ModifiedDate = n1.user.ModifiedDate = DateTime.Now;
+                    v.ModifiedBy = userID;
                     db.Entry(v).State = System.Data.Entity.EntityState.Modified;
 
                     v.LastName = n1.user.LastName;
@@ -1241,18 +1337,24 @@ namespace NoteMarketPlace.Controllers
                 p1.CountryCode = n1.profileUser.CountryCode;
                 // p1.ProfilePhoto = filename;
 
-                string filename = Path.GetFileNameWithoutExtension(n1.UserImage.FileName);
-                //string filename = Path.GetFileNameWithoutExtension(n1.UserImage.FileName);
-                string extension = Path.GetExtension(n1.UserImage.FileName);
+                if(n1.UserImage == null)
+                {
+                    var m1 = db.ManageSystemConfigurations.FirstOrDefault(m => m.ID == 2);
+                    p1.ProfilePhoto = m1.DefaultUserImage; 
+                }
+                else
+                {
+                    string filename = Path.GetFileNameWithoutExtension(n1.UserImage.FileName);
+                    string extension = Path.GetExtension(n1.UserImage.FileName);
 
-                filename = filename + DateTime.Now.ToString("yymmssfff") + extension;
+                    filename = filename + DateTime.Now.ToString("yymmssfff") + extension;
 
-                p1.ProfilePhoto = "~/UserPhoto/" + filename;
+                    p1.ProfilePhoto = "~/UserPhoto/" + filename;
 
-                filename = Path.Combine(Server.MapPath("~/UserPhoto/"), filename);
+                    filename = Path.Combine(Server.MapPath("~/UserPhoto/"), filename);
 
-                n1.UserImage.SaveAs(filename);
-
+                    n1.UserImage.SaveAs(filename);
+                }
                 p1.Address1 = n1.profileUser.Address1;
                 p1.Address2 = n1.profileUser.Address2;
                 p1.City = n1.profileUser.City;
@@ -1261,6 +1363,8 @@ namespace NoteMarketPlace.Controllers
                 p1.Country = n1.profileUser.Country;
                 p1.University = n1.profileUser.University;
                 p1.College = n1.profileUser.College;
+                p1.CreatedDate = DateTime.Now;
+                p1.CreatedBy = userID;
                 p1.IsActive = true;
 
                 db.Profiles.Add(p1);
@@ -1295,17 +1399,26 @@ namespace NoteMarketPlace.Controllers
                 p.CountryCode = n1.profileUser.CountryCode;
                 // p1.ProfilePhoto = filename;
 
-                string filename = Path.GetFileNameWithoutExtension(n1.UserImage.FileName);
-                //string filename = Path.GetFileNameWithoutExtension(n1.UserImage.FileName);
-                string extension = Path.GetExtension(n1.UserImage.FileName);
+                if (n1.UserImage == null)
+                {
+                    var m1 = db.ManageSystemConfigurations.FirstOrDefault(m => m.ID == 2);
+                    p.ProfilePhoto = m1.DefaultUserImage;
+                }
+                else
+                {
 
-                filename = filename + DateTime.Now.ToString("yymmssfff") + extension;
+                    string filename = Path.GetFileNameWithoutExtension(n1.UserImage.FileName);
+                    //string filename = Path.GetFileNameWithoutExtension(n1.UserImage.FileName);
+                    string extension = Path.GetExtension(n1.UserImage.FileName);
 
-                p.ProfilePhoto = "~/UserPhoto/" + filename;
+                    filename = filename + DateTime.Now.ToString("yymmssfff") + extension;
 
-                filename = Path.Combine(Server.MapPath("~/UserPhoto/"), filename);
+                    p.ProfilePhoto = "~/UserPhoto/" + filename;
 
-                n1.UserImage.SaveAs(filename);
+                    filename = Path.Combine(Server.MapPath("~/UserPhoto/"), filename);
+
+                    n1.UserImage.SaveAs(filename);
+                }
 
                 p.Address1 = n1.profileUser.Address1;
                 p.Address2 = n1.profileUser.Address2;
@@ -1315,33 +1428,16 @@ namespace NoteMarketPlace.Controllers
                 p.Country = n1.profileUser.Country;
                 p.University = n1.profileUser.University;
                 p.College = n1.profileUser.College;
+                p.ModifiedDate = DateTime.Now;
+                p.ModifiedBy = userID;
                 p.IsActive = true;
 
                 //db.Profiles.Add(p1);
                 db.SaveChanges();
             }
-
             
-           
-
-            var genderList = db.ReferenceDatas.Where(m => m.RefCategory == "Gender").ToList();
-            ViewBag.GenderList = new SelectList(genderList, "ID", "Value");
-
-            var countryCodeList = new List<string>() { "+91", "+1", "+44" };
-            ViewBag.CountryCodeList = countryCodeList;
-
-            var countryProfileList = new List<string>() { "India", "USA", "UK" };
-            ViewBag.CountyProfileList = countryProfileList;
-
-           
-
-           
-
-           
-
-
-
-            return RedirectToAction("ContactUs");
+            
+            return RedirectToAction("SearchNotes", "User");
 
         }
 
@@ -1376,7 +1472,7 @@ namespace NoteMarketPlace.Controllers
                 ViewBag.SortOrder = SortOrder;
                 ViewBag.SortBy = SortBy;
                 query1 = ApplySorting(SortOrder, SortBy, query1);
-                query1 = ApplyPagination(query1, PageNumber);
+                query1 = ApplyPagination10(query1, PageNumber);
 
 
                 return View(query1);
@@ -1437,7 +1533,7 @@ namespace NoteMarketPlace.Controllers
                 query1 = query1.Where(NoteDetailsViewModel => NoteDetailsViewModel.note.NoteTitle.Contains(searching)
                 || NoteDetailsViewModel.note.CourseName.Contains(searching));
                 query1 = ApplySorting(SortOrder, SortBy, query1);
-                query1 = ApplyPagination(query1, PageNumber);
+                query1 = ApplyPagination10(query1, PageNumber);
             }
 
             return View("MyDownload", query1);
@@ -1512,17 +1608,13 @@ namespace NoteMarketPlace.Controllers
 
         }
 
-        public ActionResult MarkInapropriate(int? dID, string SortOrder, string SortBy, int PageNumber = 1)
+        public ActionResult MarkInapropriate(int dID, string remark,string SortOrder, string SortBy, int PageNumber = 1)
         {
-
+            db.Configuration.ValidateOnSaveEnabled = false;
 
             var v = db.NoteReviews.FirstOrDefault(m => m.AgainstDownloadsID == dID);
-            if (v != null)
-            {
-                v.Inappropriate = true;
-                v.ModifiedDate = DateTime.Now;
-                db.SaveChanges();
-            }
+            var reject = db.RejectedNotes.FirstOrDefault(m => m.AgainstDownloadsID == dID);
+
 
             List<Note> noteValues = db.Notes.ToList();
             //List<NoteCountry> countryValues = db.NoteCountries.ToList();
@@ -1545,6 +1637,45 @@ namespace NoteMarketPlace.Controllers
             ViewBag.SortBy = SortBy;
             query1 = ApplySorting(SortOrder, SortBy, query1);
             query1 = ApplyPagination(query1, PageNumber);
+
+            if (v != null)
+            {
+                v.Inappropriate = true;
+                v.ModifiedBy = Convert.ToInt32(Session["UserId"]);
+                v.ModifiedDate = DateTime.Now;
+
+                if (reject != null)
+                {
+                    reject.AgainstDownloadsID = dID;
+                    reject.RejectedBy = Convert.ToInt32(Session["UserId"]);
+                    reject.Remarks = remark;
+                    reject.ModifiedBy = Convert.ToInt32(Session["UserId"]);
+                    reject.ModifiedDate = DateTime.Now;
+                    db.SaveChanges();
+                }
+                else
+                {
+                    RejectedNote rn = new RejectedNote();
+
+                    rn.NoteID = v.NoteID;
+                    rn.BuyersID = v.BuyersID;
+                    rn.AgainstDownloadsID = dID;
+                    rn.RejectedBy = Convert.ToInt32(Session["UserId"]);
+                    rn.Remarks = remark;
+                    rn.CreatedDate = DateTime.Now;
+
+                    db.RejectedNotes.Add(rn);
+                    db.SaveChanges();
+                }
+
+                db.Entry(v).State = System.Data.Entity.EntityState.Modified;
+                db.SaveChanges();
+            }
+            else
+            {
+                ViewBag.review = "First give review then you can make book inappropriate";
+                return View("MyDownload", query1);
+            }
 
             var uid = Convert.ToInt32(Session["UserId"]);
 
@@ -1609,7 +1740,7 @@ namespace NoteMarketPlace.Controllers
                 ViewBag.SortOrder = SortOrder;
                 ViewBag.SortBy = SortBy;
                 query1 = ApplySorting(SortOrder, SortBy, query1);
-                query1 = ApplyPagination(query1, PageNumber);
+                query1 = ApplyPagination10(query1, PageNumber);
 
 
                 return View(query1);
@@ -1646,7 +1777,7 @@ namespace NoteMarketPlace.Controllers
                 query1 = query1.Where(NoteDetailsViewModel => NoteDetailsViewModel.note.NoteTitle.Contains(searching)
                 || NoteDetailsViewModel.note.CourseName.Contains(searching));
                 query1 = ApplySorting(SortOrder, SortBy, query1);
-                query1 = ApplyPagination(query1, PageNumber);
+                query1 = ApplyPagination10(query1, PageNumber);
             }
 
             return View("MySoldNote", query1);
@@ -1704,7 +1835,7 @@ namespace NoteMarketPlace.Controllers
         }
 
         
-        public ActionResult MyRejectedNote(string SortOrder, string SortBy, int PageNumber = 1)
+        public ActionResult MyRejectedNote(int? dID, string SortOrder, string SortBy, int PageNumber = 1)
         {
             if (Session["UserEmailId"] == null)
             {
@@ -1721,18 +1852,27 @@ namespace NoteMarketPlace.Controllers
 
                 var sID = Convert.ToInt32(Session["UserId"]);
 
-                var query1 = from u in userValues
-                             join d in downloadValues on u.ID equals d.BuyersID
-                             join n in noteValues on d.NoteID equals n.NoteID
+                
+                var query1 = from n in noteValues
                              join nc in categoryValues on n.Category equals nc.ID
-                             join rd in referenceDataValues on n.SellFor equals rd.ID
                              where n.SellerID == sID
-                             select new NoteDetailsViewModel { note = n, user = u, download = d, noteCategory = nc, referenceData = rd };
+                            select new NoteDetailsViewModel { note = n, noteCategory = nc };
+
+                if (dID != null)
+                {
+                    var dnote = db.Notes.FirstOrDefault(m => m.NoteID == dID);
+                    if (dnote != null)
+                    {
+                        string downloadFile = dnote.NoteAttachment;
+
+                        return File(downloadFile, "application/pdf", downloadFile);
+                    }
+                }
 
                 ViewBag.SortOrder = SortOrder;
                 ViewBag.SortBy = SortBy;
                 query1 = ApplySorting(SortOrder, SortBy, query1);
-                query1 = ApplyPagination(query1, PageNumber);
+                query1 = ApplyPagination10(query1, PageNumber);
 
 
                 return View(query1);
@@ -1755,21 +1895,18 @@ namespace NoteMarketPlace.Controllers
 
             var sID = Convert.ToInt32(Session["UserId"]);
 
-            var query1 = from u in userValues
-                         join d in downloadValues on u.ID equals d.BuyersID
-                         join n in noteValues on d.NoteID equals n.NoteID
+            
+            var query1 = from n in noteValues
                          join nc in categoryValues on n.Category equals nc.ID
-                         join rd in referenceDataValues on n.SellFor equals rd.ID
                          where n.SellerID == sID
-                         select new NoteDetailsViewModel { note = n, user = u, download = d, noteCategory = nc, referenceData = rd };
-
+                         select new NoteDetailsViewModel { note = n, noteCategory = nc };
 
             if (!string.IsNullOrEmpty(searching))
             {
                 query1 = query1.Where(NoteDetailsViewModel => NoteDetailsViewModel.note.NoteTitle.Contains(searching)
                 || NoteDetailsViewModel.note.CourseName.Contains(searching));
                 query1 = ApplySorting(SortOrder, SortBy, query1);
-                query1 = ApplyPagination(query1, PageNumber);
+                query1 = ApplyPagination10(query1, PageNumber);
             }
 
             return View("MySoldNote", query1);
@@ -1890,6 +2027,37 @@ namespace NoteMarketPlace.Controllers
             })
                 smtp.Send(message);
 
+        }
+
+        [NonAction]
+        public void SellerPublishNote(string titleofnote, int sellerid)
+        {
+            
+
+            var fromEmail = new MailAddress("3999vachauhan@gmail.com", "V@chauhan3999");
+            var toEmail = new MailAddress("3999vachauhan@gmail.com");
+            var fromEmailPassword = "nnumqfegkqbdecgs";
+
+            string subject = db.Users.FirstOrDefault(m => m.ID == sellerid).FirstName + " sent his note for review";
+
+            string body = "Hello Admin, <br/><br/> We want to inform you that, " + db.Users.FirstOrDefault(m => m.ID == sellerid).FirstName + " sent his note <br/> " + titleofnote + " for review. Please look at the notes and take required actions.<br/> <br/> Regards,<br/> Notes Marketlace";
+            var smtp = new SmtpClient
+            {
+                Host = "smtp.gmail.com",
+                Port = 587,
+                EnableSsl = true,
+                DeliveryMethod = SmtpDeliveryMethod.Network,
+                UseDefaultCredentials = false,
+                Credentials = new NetworkCredential(fromEmail.Address, fromEmailPassword)
+            };
+
+            using (var message = new MailMessage(fromEmail, toEmail)
+            {
+                Subject = subject,
+                Body = body,
+                IsBodyHtml = true
+            })
+                smtp.Send(message);
         }
 
         public IEnumerable<NoteDetailsViewModel> ApplySorting(string SortOrder,string  SortBy, IEnumerable<NoteDetailsViewModel> query1)
@@ -2067,6 +2235,42 @@ namespace NoteMarketPlace.Controllers
             ViewBag.PageNumber = PageNumber;
 
             query1 = query1.Skip((PageNumber - 1) * 2).Take(2).ToList();
+
+            return query1;
+        }
+
+        public IEnumerable<NoteDetailsViewModel> ApplyPagination10(IEnumerable<NoteDetailsViewModel> query1, int PageNumber = 1)
+        {
+            ViewBag.PageTotal = Math.Ceiling(query1.Count() / 10.0);
+
+            ViewBag.TotalRecord = query1.Count();
+            ViewBag.PageNumber = PageNumber;
+
+            query1 = query1.Skip((PageNumber - 1) * 10).Take(10).ToList();
+
+            return query1;
+        }
+
+        public IEnumerable<NoteDetailsViewModel> ApplyPaginationDadhboard(IEnumerable<NoteDetailsViewModel> query1, int PageNumber = 1)
+        {
+            ViewBag.PageTotal = Math.Ceiling(query1.Count() / 5.0);
+
+            ViewBag.TotalRecord = query1.Count();
+            ViewBag.PageNumber = PageNumber;
+
+            query1 = query1.Skip((PageNumber - 1) * 5).Take(5).ToList();
+
+            return query1;
+        }
+
+        public IEnumerable<NoteDetailsViewModel> ApplyPaginationsearch(IEnumerable<NoteDetailsViewModel> query1, int PageNumber = 1)
+        {
+            ViewBag.PageTotal = Math.Ceiling(query1.Count() / 9.0);
+
+            ViewBag.TotalRecord = query1.Count();
+            ViewBag.PageNumber = PageNumber;
+
+            query1 = query1.Skip((PageNumber - 1) * 9).Take(9).ToList();
 
             return query1;
         }

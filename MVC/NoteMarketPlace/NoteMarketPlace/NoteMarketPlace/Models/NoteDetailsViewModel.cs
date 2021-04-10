@@ -40,9 +40,16 @@ namespace NoteMarketPlace.Models
 
         public NoteReview ratingsDetails { get; set; }
 
+        public RejectedNote rejectedNote { get; set; }
+
         //to CountryContex
 
+        public ManageSystemConfiguration manageSystemConfiguration { get; set; }
+
+        
         public HttpPostedFileBase UserImage { get; set; }
+
+        public HttpPostedFileBase BookImage { get; set; }
 
 
     }

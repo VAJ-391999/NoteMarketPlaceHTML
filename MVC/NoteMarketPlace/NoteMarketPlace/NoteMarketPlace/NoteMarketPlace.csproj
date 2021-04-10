@@ -489,6 +489,24 @@
     <Content Include="Views\Admin\AdminDashboard.cshtml" />
     <Content Include="Views\Shared\_AdminLayout.cshtml" />
     <Content Include="Views\Admin\NotesUnderReview.cshtml" />
+    <Content Include="Views\Admin\publishedNotes.cshtml" />
+    <Content Include="Views\Admin\AdminDownloads.cshtml" />
+    <Content Include="Views\Admin\AdminRejectedNote.cshtml" />
+    <Content Include="Views\Admin\AllMembersList.cshtml" />
+    <Content Include="Views\Admin\MemberDetails.cshtml" />
+    <Content Include="Views\Shared\_MembersInformation.cshtml" />
+    <Content Include="Views\Shared\_MembersNoteInformation.cshtml" />
+    <Content Include="Views\Admin\ManageSystemConfigurations.cshtml" />
+    <Content Include="Views\Admin\AddAdministrator.cshtml" />
+    <Content Include="Views\Admin\ManageAdministrator.cshtml" />
+    <Content Include="Views\Admin\ManageCategory.cshtml" />
+    <Content Include="Views\Admin\AddCategory.cshtml" />
+    <Content Include="Views\Admin\ManageType.cshtml" />
+    <Content Include="Views\Admin\AddType.cshtml" />
+    <Content Include="Views\Admin\ManageCountry.cshtml" />
+    <Content Include="Views\Admin\AddCountry.cshtml" />
+    <Content Include="Views\Admin\AdminSpamReport.cshtml" />
+    <Content Include="Views\Admin\AdminProfileUpdate.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

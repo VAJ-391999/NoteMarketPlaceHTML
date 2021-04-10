@@ -129,7 +129,7 @@
                         <p class="sub-text">Course Code:<span class="pull-right"><b>@Model.note.CourseCode</b></span></p>
                         <p class="sub-text">Professor:<span class="pull-right"><b>@Model.note.Professor</b></span></p>
                         <p class="sub-text">Number Of Pages:<span class="pull-right"><b>@Model.note.Pages</b></span></p>
-                        <p class="sub-text">Approved Date:<span class="pull-right"><b>November 25 2020</b></span></p>
+                        <p class="sub-text">Approved Date:<span class="pull-right"><b>@Model.note.ApprovedDate.ToString()</b></span></p>
 
                         @{
                             NoteMarketPlaceDatabaseEntities db = new NoteMarketPlaceDatabaseEntities();

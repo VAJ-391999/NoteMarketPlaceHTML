@@ -1,0 +1,184 @@
+﻿@model NoteMarketPlace.Models.NoteDetailsViewModel
+@using NoteMarketPlace.Models;
+
+<!-- Admin Members Details -->
+<section id="notebook-details">
+
+    <div class="container admin-members-details">
+
+        <!-- Member Details heading -->
+        <div class="row">
+
+            <div class="col-lg-12 col-md-12 col-sm-12 col-12">
+
+                <div class="search-heading">
+                    <h4><b>Members Details</b></h4>
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- Notebook Information -->
+        <div class="notebook-details">
+
+            <div class="row">
+
+                <!-- Image -->
+                <div id="member-image">
+                    <div class="col-lg-3 col-md-2 col-sm-12 col-12">
+                        <img src="@Url.Content(Model.profileUser.ProfilePhoto)" alt="member" >
+                    </div>
+                </div>
+
+                <!-- Information -->
+                <div class="col-lg-4 col-md-5 col-sm-12 col-12">
+
+                    <!-- Member Information -->
+                    <div class="member-info-content members-details-left">
+
+                        <!-- Line 1 -->
+                        <div class="row">
+                            <div class="col-lg-4 col-md-4 col-sm-4 col-4">
+                                <p class="sub-text">First Name:</p>
+                            </div>
+                            <div class="col-lg-8 col-md-8 col-sm-8 col-8">
+                                <p><span>@Model.user.FirstName</span></p>
+                            </div>
+                        </div>
+                        <!-- Line 1 ends -->
+                        <!-- Line 2 -->
+                        <div class="row">
+                            <div class="col-lg-4 col-md-4 col-sm-4 col-4">
+                                <p class="sub-text">Last Name:</p>
+                            </div>
+                            <div class="col-lg-8 col-md-8 col-sm-8 col-8">
+                                <p><span>@Model.user.LastName</span></p>
+                            </div>
+                        </div>
+                        <!-- Line 2 ends -->
+                        <!-- Line 3 -->
+                        <div class="row">
+                            <div class="col-lg-4 col-md-4 col-sm-4 col-4">
+                                <p class="sub-text">Email:</p>
+                            </div>
+                            <div class="col-lg-8 col-md-8 col-sm-8 col-8">
+                                <p><span>@Model.user.EmailID</span></p>
+                            </div>
+                        </div>
+                        <!-- Line 3 ends -->
+                        <!-- Line 4 -->
+                        <div class="row">
+                            <div class="col-lg-4 col-md-4 col-sm-4 col-4">
+                                <p class="sub-text">DOB:</p>
+                            </div>
+                            <div class="col-lg-8 col-md-8 col-sm-8 col-8">
+                                <p><span>@Model.profileUser.DOB</span></p>
+                            </div>
+                        </div>
+                        <!-- Line 4 ends -->
+                        <!-- Line 5 -->
+                        <div class="row">
+                            <div class="col-lg-4 col-md-4 col-sm-4 col-4">
+                                <p class="sub-text">Phone No:</p>
+                            </div>
+                            <div class="col-lg-8 col-md-8 col-sm-8 col-8">
+                                <p><span>@Model.profileUser.PhoneNo</span></p>
+                            </div>
+                        </div>
+                        <!-- Line 5 ends -->
+                        <!-- Line 6 -->
+                        <div class="row">
+                            <div class="col-lg-4 col-md-4 col-sm-4 col-4">
+                                <p class="sub-text">College/University:</p>
+                            </div>
+                            <div class="col-lg-8 col-md-8 col-sm-8 col-8">
+                                <p><span>@Model.profileUser.University</span></p>
+                            </div>
+                        </div>
+                        <!-- Line 6 ends -->
+
+                    </div>
+                </div>
+
+
+                <!-- Information -->
+                <div class="col-lg-4 col-md-4 col-sm-12 col-12">
+
+                    <!-- Member Information -->
+                    <div class="member-info-content members-details-right">
+
+                        <!-- Line 1 -->
+                        <div class="row">
+                            <div class="col-lg-4 col-md-5 col-sm-4 col-4">
+                                <p class="sub-text">Address 1:</p>
+                            </div>
+                            <div class="col-lg-8 col-md-7 col-sm-8 col-8">
+                                <p><span>@Model.profileUser.Address1</span></p>
+                            </div>
+                        </div>
+                        <!-- Line 1 ends -->
+                        <!-- Line 2 -->
+                        <div class="row">
+                            <div class="col-lg-4 col-md-5 col-sm-4 col-4">
+                                <p class="sub-text">Address 2:</p>
+                            </div>
+                            <div class="col-lg-8 col-md-7 col-sm-8 col-8">
+                                <p><span>@Model.profileUser.Address2</span></p>
+                            </div>
+                        </div>
+                        <!-- Line 2 ends -->
+                        <!-- Line 3 -->
+                        <div class="row">
+                            <div class="col-lg-4 col-md-5 col-sm-4 col-4">
+                                <p class="sub-text">City:</p>
+                            </div>
+                            <div class="col-lg-8 col-md-7 col-sm-8 col-8">
+                                <p><span>@Model.profileUser.City</span></p>
+                            </div>
+                        </div>
+                        <!-- Line 3 ends -->
+                        <!-- Line 4 -->
+                        <div class="row">
+                            <div class="col-lg-4 col-md-5 col-sm-4 col-4">
+                                <p class="sub-text">State:</p>
+                            </div>
+                            <div class="col-lg-8 col-md-7 col-sm-8 col-8">
+                                <p><span>@Model.profileUser.State</span></p>
+                            </div>
+                        </div>
+                        <!-- Line 4 ends -->
+                        <!-- Line 5 -->
+                        <div class="row">
+                            <div class="col-lg-4 col-md-5 col-sm-4 col-4">
+                                <p class="sub-text">Country:</p>
+                            </div>
+                            <div class="col-lg-8 col-md-7 col-sm-8 col-8">
+                                <p><span>@Model.profileUser.Country</span></p>
+                            </div>
+                        </div>
+                        <!-- Line 5 ends -->
+                        <!-- Line 6 -->
+                        <div class="row">
+                            <div class="col-lg-4 col-md-5 col-sm-4 col-4">
+                                <p class="sub-text">Zip Code:</p>
+                            </div>
+                            <div class="col-lg-8 col-md-7 col-sm-8 col-8">
+                                <p><span>@Model.profileUser.ZipCode</span></p>
+                            </div>
+                        </div>
+                        <!-- Line 6 ends -->
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+
+    </div>
+
+</section>

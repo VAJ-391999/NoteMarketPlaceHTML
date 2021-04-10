@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿@using NoteMarketPlace.Models;
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -51,12 +52,12 @@
 
                 <!-- Main Menu -->
                 <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
-                    <ul class="navbar-nav">
+                    <ul class="navbar-nav active-test">
 
                         <!-- Dashboard -->
-                        <li class="nav-item">
+                        <li class="nav-item active">
 
-                            <a class="nav-link" href="#"><span>Dashboard</span></a>
+                            <a class="nav-link" href="/Admin/AdminDashboard"><span>Dashboard</span></a>
 
                         </li>
 
@@ -69,9 +70,9 @@
 
                                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                     <a class="dropdown-item" href="/Admin/NotesUnderReview">Notes Under Review</a>
-                                    <a class="dropdown-item" href="#">Published Notes</a>
-                                    <a class="dropdown-item" href="#">Downloaed Notes</a>
-                                    <a class="dropdown-item" href="#">Rejected Notes</a>
+                                    <a class="dropdown-item" href="/Admin/publishedNotes">Published Notes</a>
+                                    <a class="dropdown-item" href="/Admin/AdminDownloads">Downloaed Notes</a>
+                                    <a class="dropdown-item" href="/Admin/AdminRejectedNote">Rejected Notes</a>
                                 </div>
 
                             </div>
@@ -79,7 +80,7 @@
 
                         <!-- Memebers -->
                         <li class="nav-item">
-                            <a class="nav-link" href="#"><span>Members</span></a>
+                            <a class="nav-link" href="/Admin/AllMembersList"><span>Members</span></a>
                         </li>
 
                         <!--Reports -->
@@ -90,7 +91,7 @@
                                 <a class="nav-link" href="#" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span>Reports</span></a>
 
                                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                    <a class="dropdown-item" href="#">Spam Reports</a>
+                                    <a class="dropdown-item" href="/Admin/AdminSpamReport">Spam Reports</a>
                                 </div>
 
                             </div>
@@ -99,7 +100,23 @@
 
                         <!-- Setting -->
                         <li class="nav-item">
-                            <a class="nav-link" href="#"><span>Setting</span></a>
+
+                            <div class="dropdown">
+
+                                <a class="nav-link" href="#" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span>Setting</span></a>
+
+                                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                    <a class="dropdown-item" href="/Admin/ManageSystemConfigurations">Manage System Configuration</a>
+                                    <a class="dropdown-item" href="/Admin/ManageAdministrator">Manage Administrator</a>
+                                    <a class="dropdown-item" href="/Admin/ManageCategory">Manage Category</a>
+                                    <a class="dropdown-item" href="/Admin/ManageType">Manage Type</a>
+                                    <a class="dropdown-item" href="/Admin/ManageCountry">Manage Countries</a>
+
+                                </div>
+
+                            </div>
+
+
                         </li>
 
                         <!-- Image -->
@@ -107,10 +124,26 @@
 
                             <div class="dropdown">
 
-                                <img src="~/Content/AdminCSS/images/Admin_images/images/reviewer-1.png" class="img-fluid rounded-circle" alt="User" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                @*<img src="~/Content/AdminCSS/images/Admin_images/images/reviewer-1.png" class="img-fluid rounded-circle" alt="User" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">*@
+                                @{
+                                    int id = Convert.ToInt32(Session["UserId"]);
 
+                                    NoteMarketPlaceDatabaseEntities db = new NoteMarketPlaceDatabaseEntities();
+
+                                    var item = db.Profiles.FirstOrDefault(m => m.SellerID == id);
+                                    var item1 = db.ManageSystemConfigurations.FirstOrDefault(m => m.ID == 2);
+                                    if (item != null)
+                                    {
+                                        <img src="@Url.Content(item.ProfilePhoto)" class="img-fluid rounded-circle" alt="User" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    }
+                                    else
+                                    {
+                                        <img src="@Url.Content(item1.DefaultUserImage)" class="img-fluid rounded-circle" alt="User" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    }
+
+                                }
                                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                    <a class="dropdown-item" href="#">Update Profile</a>
+                                    <a class="dropdown-item" href="/Admin/AdminProfileUpdate">Update Profile</a>
                                     <a class="dropdown-item" href="/User/ChangePassword">Change Password</a>
                                     <a class="dropdown-item" href="/User/logout">Logout</a>
                                 </div>
@@ -121,7 +154,7 @@
                         <!-- Logout Button -->
                         <li>
                             <form>
-                                <button type="submit" class="btn my-sm-0 btn-primary btn-lg btn-block logout-btn text-center">Logout</button>
+                                <button type="submit" class="btn my-sm-0 btn-primary btn-lg btn-block logout-btn text-center"><a href="/User/logout">Logout</a></button>
                             </form>
                         </li>
 
@@ -137,7 +170,7 @@
                     <div id="mobile-nav-content">
                         <ul class="navbar-nav justify-content-center text-left">
                             <li>
-                                <a href="#"><span>Dashboard</span></a>
+                                <a href="/Admin/AdminDashboard"><span>Dashboard</span></a>
                             </li>
                             <!-- Notes -->
                             <li>
@@ -156,9 +189,9 @@
                                             <ul class="mobile-submenu">
 
                                                 <li><a href="/Admin/NotesUnderReview"><span>Notes Under Review</span></a></li>
-                                                <li><a href=""><span>Published Notes</span></a></li>
-                                                <li><a href=""><span>Downloaed Notes</span></a></li>
-                                                <li><a href=""><span>Rejected Notes</span></a></li>
+                                                <li><a href="/Admin/publishedNotes"><span>Published Notes</span></a></li>
+                                                <li><a href="/Admin/AdminDownloads"><span>Downloaed Notes</span></a></li>
+                                                <li><a href="/Admin/AdminRejectedNote"><span>Rejected Notes</span></a></li>
 
                                             </ul>
 
@@ -170,7 +203,7 @@
 
                             </li>
                             <li>
-                                <a href="#"><span>Members</span></a>
+                                <a href="/Admin/AllMembersList"><span>Members</span></a>
                             </li>
                             <!-- Report -->
                             <li>
@@ -188,7 +221,7 @@
 
                                             <ul class="mobile-submenu">
 
-                                                <li><a href=""><span>Spam Report</span></a></li>
+                                                <li><a href="/Admin/AdminSpamReport"><span>Spam Report</span></a></li>
 
                                             </ul>
 
@@ -200,8 +233,36 @@
 
                             </li>
 
+                            <!--Setting-->
                             <li>
-                                <a href="#"><span>Setting</span></a>
+
+                                <div class="accordion">
+
+                                    <div class="accordion-item">
+
+                                        <button class="accordion-button text-left" id="accordion-button-3">
+                                            <span>Setting</span>
+                                            <span><i class="fa fa-angle-down" aria-hidden="true" id="up3"></i></span>
+                                        </button>
+
+                                        <div class="accordion-content" id="accordion-content-3">
+
+                                            <ul class="mobile-submenu">
+
+                                                <li><a href="/Admin/ManageSystemConfigurations"><span>Manage System Configuration</span></a></li>
+                                                <li><a href="/Admin/ManageAdministrator"><span>Manage Administrator</span></a></li>
+                                                <li><a href="/Admin/ManageCategory"><span>Manage Category</span></a></li>
+                                                <li><a href="/Admin/ManageType"><span>Manage Type</span></a></li>
+                                                <li><a href="/Admin/ManageCountry"><span>Manage Countries</span></a></li>
+
+                                            </ul>
+
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
                             </li>
 
                             <!-- image -->
@@ -211,16 +272,34 @@
 
                                     <div class="accordion-item">
 
-                                        <button class="accordion-button text-left" id="accordion-button-3">
-                                            <span><img src="~/Content/AdminCSS/images/Admin_images/images/reviewer-1.png" class="img-fluid rounded-circle" alt="User"></span>
-                                            <span><i class="fa fa-angle-down" aria-hidden="true" id="up3"></i></span>
+                                        <button class="accordion-button text-left" id="accordion-button-4">
+                                            <span>
+                                                @{
+                                                    int id1 = Convert.ToInt32(Session["UserId"]);
+
+                                                    
+
+                                                    var i1 = db.Profiles.FirstOrDefault(m => m.SellerID == id1);
+                                                    var i2 = db.ManageSystemConfigurations.FirstOrDefault(m => m.ID == 2);
+                                                    if (item != null)
+                                                    {
+                                                        <img src="@Url.Content(i1.ProfilePhoto)" class="img-fluid rounded-circle" alt="User" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                    }
+                                                    else
+                                                    {
+                                                        <img src="@Url.Content(i2.DefaultUserImage)" class="img-fluid rounded-circle" alt="User" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                    }
+
+                                                }
+                                            </span>
+                                            <span><i class="fa fa-angle-down" aria-hidden="true" id="up4"></i></span>
                                         </button>
 
-                                        <div class="accordion-content" id="accordion-content-3">
+                                        <div class="accordion-content" id="accordion-content-4">
 
                                             <ul class="mobile-submenu">
 
-                                                <li><a href=""><span>Update Password</span></a></li>
+                                                <li><a href="/Admin/AdminProfileUpdate"><span>Update Profile</span></a></li>
                                                 <li><a href="/User/ChangePassword"><span>Change Password</span></a></li>
                                                 <li><a href="/User/logout"><span>Logout</span></a></li>
 
@@ -236,7 +315,7 @@
                             </li>
                             <li>
                                 <form>
-                                    <a><button type="submit" class="btn my-sm-0 btn-primary btn-lg btn-block login-btn text-center" id="mybtn">Logout</button></a>
+                                    <a href="/User/logout"><button type="submit" class="btn my-sm-0 btn-primary btn-lg btn-block login-btn text-center" id="mybtn">Logout</button></a>
                                 </form>
                             </li>
                         </ul>
@@ -250,7 +329,7 @@
     <!-- Common Section -->
     <section class="common">
 
-       @RenderBody()
+        @RenderBody()
 
     </section>
 

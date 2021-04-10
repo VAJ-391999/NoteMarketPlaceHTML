@@ -86,8 +86,8 @@
                                 <td>@item.user.EmailID</td>
                                 <td>@item.referenceData.Value</td>
                                 <td>$@item.download.PurchasedPrice</td>
-                                <td>27 Nov 2020, 11:24:34</td>
-                                
+                                <td>@item.download.AttachmentDownloadedDate.ToString()</td>
+
                                 <td><a href="/User/NoteDetails?noteName=@item.note.NoteTitle"><img src="~/Content/images/Dashboard/eye.png" alt="see"></a></td>
                                 @{
                                     var indexOfDownlod = item.download.ID;
@@ -99,7 +99,7 @@
                                         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                             <a class="dropdown-item" href="/User/DownLoadNote?dID=@item.download.ID">Downloaded Notes</a>
                                             <a class="dropdown-item" href="#" data-toggle="modal" data-target="#exampleModal" id="feedback-link" onclick="FeedbackForm('@item.download.ID')">Add Review/Feedback</a>
-                                            <a class="dropdown-item" href="/User/MarkInapropriate?dID=@item.download.ID" onclick="return confirm('Are you sure you want to mark this report as spam, you cannot update it later?')">Report as inappropriate</a>
+                                            <a class="dropdown-item" href="#" data-toggle="modal" data-target="#exampleModal1" id="feedback-link" onclick="RejectForm('@item.download.ID', '@item.note.NoteTitle', '@item.noteCategory.CategoryName')">Report as inappropriate</a>
                                         </div>
                                     </div>
 
@@ -109,6 +109,7 @@
                         }
                     </tbody>
                 </table>
+                <p>@ViewBag.review</p>
             </div>
         </div>
 
@@ -116,6 +117,11 @@
         <script>
             function FeedbackForm(id) {
                 document.getElementById("bookid").setAttribute("value", id);
+            }
+
+            function RejectForm(id, namenote, categorynote) {
+                document.getElementById("bookid1").setAttribute("value", id);
+                document.getElementById("noteinfo").innerHTML =  namenote + "-" + categorynote;
             }
         </script>
 
@@ -165,6 +171,42 @@
                         <button type="submit" class="btn btn-primary profile-btn text-uppercase text-center"><b>submit</b></button>
 
                     </div>
+                }
+            </div>
+        </div>
+
+
+        <!-- Modal -->
+        <div class="modal fade feedbackDetails" id="exampleModal1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+
+                @using (Html.BeginForm("MarkInapropriate", "User", FormMethod.Post, new { }))
+                {
+                    <input type="hidden" name="dID" id="bookid1" />
+
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel"><b></b></h5>
+                            <h3 id="noteinfo"></h3>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true"><img src="~/Content/images/Front_images/images/close.png" alt="close"></span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+
+                            <div class="form-group">
+                                <label class="mylabel" for="firstname">Remarks *</label>
+                                <textarea type="text" rows="5" class="form-control" id="firstname" placeholder="Write Remarks" name="remark" required></textarea>
+                            </div>
+
+                        </div>
+
+                        <div class="form-inline button-part ml-auto pull-right">
+                            <button type="submit" class="btn btn-primary review-rejected-btn justify-content-center " name="btnValue2" value="Rejected">Inappropriate</button><button type="submit" class="btn btn-primary review-inreview-btn justify-content-center" data-dismiss="modal" aria-label="Close" name="cancelbtn" value="cancel">Cancel</button>
+                        </div>
+                    </div>
+
+
                 }
             </div>
         </div>

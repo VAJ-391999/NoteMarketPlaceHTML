@@ -1,0 +1,110 @@
+﻿@model NoteMarketPlace.Models.NoteDetailsViewModel
+@{
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+@using NoteMarketPlace.Models;
+
+
+
+<!-- Admin profile -->
+<section id="admin-profile">
+
+    <div class="container add-administrator">
+        
+        @using (Html.BeginForm())
+        {
+
+
+            <!-- Heading -->
+            <div class="row">
+
+                <div class="col-lg-12 col-md-12 col-sm-12 col-12">
+
+                    <div class="dashboar-heading">
+                        <h2>Add Administrator</h2>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <!-- First Name -->
+            <div class="row">
+
+                <div class="col-lg-7 col-md-12 col-sm-12 col-12">
+                    <div class="form-group">
+                        <label class="mylabel" for="firstname">First Name *</label>
+                        @*<input type="text" class="form-control" id="firstname" placeholder="Enter your first name" required>*@
+                        @Html.TextBoxFor(m => m.user.FirstName, new { @class = "form-control", @id = "firstname", @placeholder = "Enter your first name" })
+                        @Html.ValidationMessageFor(m => m.user.FirstName)
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Last Name -->
+            <div class="row">
+
+                <div class="col-lg-7 col-md-12 col-sm-12 col-12">
+                    <div class="form-group">
+                        <label class="mylabel" for="lastname">Last Name *</label>
+                        @*<input type="text" class="form-control" id="lastname" placeholder="Enter your last name" required>*@
+                        @Html.TextBoxFor(m => m.user.LastName, new { @class = "form-control", @id = "lastname", @placeholder = "Enter your last name" })
+                        @Html.ValidationMessageFor(m => m.user.LastName)
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Email -->
+            <div class="row">
+
+                <div class="col-lg-7 col-md-12 col-sm-12 col-12">
+                    <div class="form-group">
+                        <label class="mylabel" for="emailAddress1">Email *</label>
+                        @*<input type="email" class="form-control" id="emailAddress1" placeholder="Enter your email address" required>*@
+                        @Html.TextBoxFor(m => m.user.EmailID, new { @type = "email", @class = "form-control", @id = "emailAddress1", @placeholder = "Enter your email address" })
+                        <p class="field-validation-error">@ViewBag.NotFound</p>    
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Phone no -->
+            <div class="row">
+
+                <div class="col-lg-7 col-md-12 col-sm-12 col-12">
+                    <div class="form-group">
+                        <label class="mylabel" for="phoneNo">Phone Number</label>
+                        <div class="row">
+                            <div class="col-md-3 col-sm-3 col-4">
+                                <div class="wrapper">
+
+                                    @Html.DropDownListFor(m => m.profileUser.CountryCode, new SelectList(ViewBag.CountryCodeList), "Select Your Country", new { @id = "inputcode", @class = "form-control" })
+
+                                    <img src="~/Content/AdminCSS/images/Admin_images/images/arrow-down.png" alt="dropdown">
+                                </div>
+                            </div>
+                            <div class="col-md-9 col-sm-9 col-8">
+                                @*<input type="text" class="form-control" id="phoneno" placeholder="Enter Your Phone Number">*@
+                                @Html.TextBoxFor(m => m.profileUser.PhoneNo, new { @class = "form-control", @id = "phoneno", @placeholder = "Enter Your Phone Number" })
+                            </div>
+                        </div>
+                        @Html.ValidationMessageFor(m => m.profileUser.PhoneNo)
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Profile Button -->
+            <button type="submit" class="btn btn-primary profile-btn text-uppercase text-center"><b>submit</b></button>
+
+        }
+
+    </div>
+
+
+</section>
+
+<script src="~/bundles/jqueryval"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>

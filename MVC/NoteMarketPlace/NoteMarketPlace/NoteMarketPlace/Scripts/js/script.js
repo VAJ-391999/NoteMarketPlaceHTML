@@ -199,11 +199,22 @@ $(function(){
 /*=================
  * Test
  *=================*/
+//$(function () {
+//    $("#deleteConform").on('click', function () {
+//        alert('Are you sure you want to delete this book?');
+//    });
+//});
+
+/*=======================================
+ * Active class in navigation bar
+ * ======================================*/
 $(function () {
-    $("#deleteConform").on('click', function () {
-        alert('Are you sure you want to delete this book?');
+    $(".active-test").on('click', 'li', function () {
+        $(".active-test li.active").removeClass('active');
+        $(this).addClass('active');
     });
 });
+
 
 
 //$(function () {

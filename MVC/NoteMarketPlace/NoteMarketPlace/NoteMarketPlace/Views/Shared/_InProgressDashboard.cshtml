@@ -64,7 +64,7 @@
                                 <td>@item.referenceData.Value</td>
                                 @if (item.note.Status == 6)
                                 {
-                                    <td><a href="/User/AddNotes?nId=@item.note.NoteID"><img src="~/Content/images/Dashboard/edit.png" alt="edit"></a><a href="/User/DeleteConform?deleteId=@item.note.NoteID"><img src="~/Content/images/Front_images/images/delete.png" alt="delete" id="deleteConform"></a></td>
+                                    <td><a href="/User/AddNotes?nId=@item.note.NoteID"><img src="~/Content/images/Dashboard/edit.png" alt="edit"></a><a href="/User/DeleteConform?deleteId=@item.note.NoteID" onclick="confirm('Are you sure you want to delete this note?')"><img src="~/Content/images/Front_images/images/delete.png" alt="delete" id="deleteConform"></a></td>
                                 }
                                 else
                                 {

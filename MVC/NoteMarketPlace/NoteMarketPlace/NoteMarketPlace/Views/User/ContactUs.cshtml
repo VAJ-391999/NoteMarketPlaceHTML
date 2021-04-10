@@ -62,7 +62,7 @@
                                     <div class="form-group">
                                         <label class="mylabel" for="firstname">First Name *</label>
                                         <input type="text" class="form-control" id="firstname" placeholder="Enter your first name" name="Name">
-                                        @ViewBag.ContactUsErrror
+                                        <p class="field-validation-error">@ViewBag.nameerr</p>
 
                                     </div>
                                 </div>
@@ -71,7 +71,8 @@
                                 <div class="col-md-12">
                                     <div class="form-group">
                                         <label class="mylabel" for="emailAddress1">Email Address *</label>
-                                        <input type="email" class="form-control" id="emailAddress1" placeholder="Enter your email address" name="EmailAddress" required>
+                                        <input type="email" class="form-control" id="emailAddress1" placeholder="Enter your email address" name="EmailAddress" >
+                                        <p class="field-validation-error">@ViewBag.emailerr</p>
                                     </div>
                                 </div>
 
@@ -79,7 +80,8 @@
                                 <div class="col-md-12">
                                     <div class="form-group">
                                         <label class="mylabel" for="subject">Subject *</label>
-                                        <input type="text" class="form-control" id="subject" placeholder="Enter your subject" name="Subject" required>
+                                        <input type="text" class="form-control" id="subject" placeholder="Enter your subject" name="Subject" >
+                                        <p class="field-validation-error">@ViewBag.suberr</p>
                                     </div>
                                 </div>
 
@@ -92,7 +94,8 @@
 
                             <div class="form-group">
                                 <label class="mylabel" for="firstname">Comments/ Questions *</label>
-                                <textarea type="text" rows="10" class="form-control" id="firstname" placeholder="Comments..." name="Comment" required></textarea>
+                                <textarea type="text" rows="10" class="form-control" id="firstname" placeholder="Comments..." name="Comment" ></textarea>
+                                <p class="field-validation-error">@ViewBag.commenterr</p>
                             </div>
 
                         </div>

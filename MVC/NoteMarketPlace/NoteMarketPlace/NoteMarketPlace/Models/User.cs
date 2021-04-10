@@ -42,7 +42,7 @@ namespace NoteMarketPlace.Models
         public string LastName { get; set; }
 
         [Required(ErrorMessage ="Plase Enter Password")]
-       /* [RegularExpression(@"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,24}", ErrorMessage =  "Password must be between 6 and 24 characters long."+
+       /*[RegularExpression(@"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,24}", ErrorMessage =  "Password must be between 6 and 24 characters long."+
            "It must have at least 1 lowercase character."+
             "It must have at least 1 special character."+
             "It must have at least 1 digit character."+

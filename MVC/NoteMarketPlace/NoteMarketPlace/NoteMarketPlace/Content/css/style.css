@@ -260,13 +260,16 @@ input[type=checkbox] {
     border: none;
 }
 
-.download-btn a{
+.download-btn a,
+.add-note-btn a,
+.login-btn a{
     color: #fff;
 }
 
-.download-btn a:hover {
-    text-decoration : none;
-}
+    .download-btn a:hover,
+    .add-note-btn a:hover{
+        text-decoration: none;
+    }
     
 
     .forget-password-btn,
@@ -1152,6 +1155,7 @@ ul.social-list li a i {
 
 .book-info .book-info-image img {
     width: 100%;
+    max-height: 196px;
 }
 
 .book-info-content {
@@ -1444,23 +1448,29 @@ ul.social-list li a i {
     padding: 30px;
 }
 
-.earning h4,
-.mynote-info h4 {
+.earning h4 a,
+.mynote-info h4 a{
     font-family: "Open Sans", sans-serif;
     font-size: 30px;
     font-weight: 700;
     line-height: 34px;
-    color: #6255a5;
+    color: #6255a5 !important;
 }
 
-.earning h5 {
-    font-family: "Open Sans", sans-serif;
-    font-size: 20px;
-    font-weight: 700;
-    line-height: 25px;
-    color: #6255a5;
-    margin-top: 10px;
-}
+    .earning h4 a:hover,
+    .mynote-info h4 a:hover {
+        text-decoration: none;
+        color: #6255a5;
+    }
+
+    .earning h5 {
+        font-family: "Open Sans", sans-serif;
+        font-size: 20px;
+        font-weight: 700;
+        line-height: 25px;
+        color: #6255a5;
+        margin-top: 10px;
+    }
 
 .earning p,
 .mynote-info p {
@@ -1872,6 +1882,14 @@ select {
     margin-top: 30px;
 }
 
+.dashboard3 .dash-right h4 a{
+    color: #6255a5;
+}
+
+.dashboard3 .dash-right h4 a:hover {
+    text-decoration: none;
+}
+
 .dashboard3 .wrapper select {
     width: 150px;
     height: 50px;
@@ -1987,13 +2005,13 @@ select {
 }
 
 /*==========================================================
-manage administrator , category , country , memeber footer
+manage administrator , category , country , memeber footer .notes-under-review
 ============================================================*/
 
 .manage-category,
 .manage-country,
-.manage-member,
-.notes-under-review {
+.manage-member
+ {
     overflow: hidden;
     
 }
@@ -2055,7 +2073,7 @@ manage administrator , category , country , memeber footer
 
 #member-all-notes .table th,
 .manage-member .table th {
-    font-size: 13px;
+    font-size: 14px;
 }
 
 #member-all-notes .table tbody tr,
@@ -2122,7 +2140,7 @@ manage administrator , category , country , memeber footer
 }
 
 .notes-under-review .table th {
-    font-size: 13px;
+    font-size: 14px;
 }
 
 .notes-under-review td div {
@@ -2134,25 +2152,38 @@ manage administrator , category , country , memeber footer
 .review-inreview-btn {
     border: none;
     display: flex;
+    
 }
 
-.review-rejected-btn,
-.review-rejected-btn:hover,
-.review-rejected-btn:focus {
-    background-color: red;
-}
+    .review-rejected-btn a span,
+    .review-approve-btn a span,
+    .review-inreview-btn a span {
+        color: #fff !important;
+    }
 
-.review-approve-btn,
-.review-approve-btn:hover,
-.review-approve-btn:focus {
-    background-color: green;
-}
 
-.review-inreview-btn,
-.review-inreview-btn:hover,
-.review-inreview-btn:focus {
-    background-color: #d1d1d1;
-}
+
+
+    .review-rejected-btn,
+    .review-rejected-btn:hover,
+    .review-rejected-btn:focus {
+        background-color: red;
+        text-decoration: none;
+    }
+
+    .review-approve-btn,
+    .review-approve-btn:hover,
+    .review-approve-btn:focus {
+        background-color: green;
+        text-decoration: none;
+    }
+
+    .review-inreview-btn,
+    .review-inreview-btn:hover,
+    .review-inreview-btn:focus {
+        background-color: #d1d1d1;
+        text-decoration: none;
+    }
 
 /*================================================
                 Admin Published Notes
@@ -2162,10 +2193,12 @@ manage administrator , category , country , memeber footer
     text-align: center;
 }
 
+.unpulish-form {
+    padding: 20px;
+}
 /*================================================
                 Admin Downoaded Notes
 ================================================*/
-
 .admin-download-notes .table tbody tr td {
     padding: 0 12px;
 }
@@ -2181,3 +2214,51 @@ manage administrator , category , country , memeber footer
 .NoRecordMsg h4 {
     color : #6255a5;
 }
+
+#exampleModal #noteinfo,
+#exampleModal1 #noteinfo {
+    color: #6255a5;
+    padding: 0px;
+}
+
+#exampleModal .review-rejected-btn,
+#exampleModal .review-inreview-btn,
+#exampleModal1 .review-rejected-btn,
+#exampleModal1 .review-inreview-btn,
+#exampleModal .profile-btn {
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    margin: 5px 5px 20px 5px;
+    color: #fff;
+    height: 40px;
+    border-radius: 3px;
+    font-family: "Open Sans", sans-serif;
+    font-size: 18px;
+    line-height: 22px;
+    border: none;
+    padding: 0 15px;
+    width: 130px;
+}
+
+ul.active-test li.active a span {
+    color: #6255a5;
+    font-weight: 600;
+    text-decoration: underline;
+}
+
+
+ul.active-test-line li.active a span {
+    color: #6255a5;
+    font-weight: 600;
+    text-decoration: underline;
+}
+
+
+
+
+
+
+
+
+

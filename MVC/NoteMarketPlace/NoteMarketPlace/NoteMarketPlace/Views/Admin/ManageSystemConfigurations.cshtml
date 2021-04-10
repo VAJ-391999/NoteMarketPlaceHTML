@@ -1,0 +1,158 @@
+﻿@model NoteMarketPlace.Models.NoteDetailsViewModel
+@{
+    //Layout = null;
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    int i = 0;
+}
+@using NoteMarketPlace.Models;
+
+
+
+<!-- Manage Configuration -->
+<section id="admin-profile">
+
+    <div class="container">
+
+        @using (Html.BeginForm("ManageSystemConfigurations", "Admin", FormMethod.Post, new { enctype = "multipart/form-data" }))
+        {
+
+            <!-- Heading -->
+            <div class="row">
+
+                <div class="col-lg-12 col-md-12 col-sm-12 col-12">
+
+                    <div class="dashboar-heading">
+                        <h2>Manage System Configuration</h2>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <!-- Support Email Address -->
+            <div class="row">
+
+                <div class="col-lg-7 col-md-12 col-sm-12 col-12">
+                    <div class="form-group">
+                        <label class="mylabel" for="emailAddress1">Support Email Address *</label>
+                        @*<input type="email" class="form-control" id="emailAddress1" placeholder="Enter your email address" required>*@
+                        @Html.TextBoxFor(m => m.manageSystemConfiguration.SupportEmail, new { @class = "form-control", @id = "emailAddress1", @placeholder = "Enter your email address", @type = "email" })
+                        <p class="field-validation-error">@ViewBag.supporterr</p>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Support Phone Number -->
+            <div class="row">
+
+                <div class="col-lg-7 col-md-12 col-sm-12 col-12">
+                    <div class="form-group">
+                        <label class="mylabel" for="phoneNo">Support Phone Number *</label>
+                        @*<input type="email" class="form-control" id="phoneno" placeholder="Enter your phone number" required>*@
+                        @Html.TextBoxFor(m => m.manageSystemConfiguration.SupportPhoneNo, new { @class = "form-control", @id = "phoneno", @placeholder = "Enter your phone number" })
+                        <p class="field-validation-error">@ViewBag.supporphoneterr</p>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Emailes -->
+            <div class="row">
+
+                <div class="col-lg-7 col-md-12 col-sm-12 col-12">
+                    <div class="form-group">
+                        <label class="mylabel" for="emailAddress1">Email Address(es)(for veries events system will send will send notification to these users) *</label>
+                        @*<input type="email" class="form-control" id="emailAddress1" placeholder="Enter your email address" required>*@
+                        @Html.TextBoxFor(m => m.manageSystemConfiguration.OtherEmail, new { @type = "email", @class = "form-control", @id = "emailAddress1", @placeholder = "Enter your email address" })
+                        <p class="field-validation-error">@ViewBag.supporotherterr</p>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Facebook URL -->
+            <div class="row">
+
+                <div class="col-lg-7 col-md-12 col-sm-12 col-12">
+                    <div class="form-group">
+                        <label class="mylabel" for="lastname">Facebook URL *</label>
+                        @*<input type="text" class="form-control" id="lastname" placeholder="Enter your facebook url" required>*@
+                        @Html.TextBoxFor(m => m.manageSystemConfiguration.FacebookURL, new { @class = "form-control", @id = "lastname", @placeholder = "Enter your facebook url" })
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Twitter URL -->
+            <div class="row">
+
+                <div class="col-lg-7 col-md-12 col-sm-12 col-12">
+                    <div class="form-group">
+                        <label class="mylabel" for="firstname">Twitter URL *</label>
+                        @*<input type="text" class="form-control" id="firstname" placeholder="Enter your twitter url" required>*@
+                        @Html.TextBoxFor(m => m.manageSystemConfiguration.TwitterURL, new { @class = "form-control", @id = "lastname", @placeholder = "Enter your twitter url" })
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- LinkedIn URL -->
+            <div class="row">
+
+                <div class="col-lg-7 col-md-12 col-sm-12 col-12">
+                    <div class="form-group">
+                        <label class="mylabel" for="firstname">Linkedin URL *</label>
+                        @*<input type="text" class="form-control" id="firstname" placeholder="Enter your linkedin url" required>*@
+                        @Html.TextBoxFor(m => m.manageSystemConfiguration.LinkedinURL, new { @class = "form-control", @id = "firstname", @placeholder = "Enter your linkedin url" })
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Note picture -->
+            <div class="row">
+
+                <div class="col-lg-7 col-md-12 col-sm-12 col-12 profile-picture">
+                    <div class="form-group">
+                        <label class="mylabel" for="photo">Default image for note(if seller not upload)</label>
+                        <div class="file-wrapper">
+
+                            <img src="~/Content/AdminCSS/images/Admin_images/images/upload-file.png" alt="upload">
+                            <input type="file" class="form-control" id="profilephoto" placeholder="Upload a picture" name="BookImage" accept="image/*">
+                            <!--<label class="mylabel" for="photo">Upload a picture</label>-->
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Profile picture -->
+            <div class="row">
+
+                <div class="col-lg-7 col-md-12 col-sm-12 col-12 profile-picture">
+                    <div class="form-group">
+                        <label class="mylabel" for="photo">Default image for profile picture(if seller not upload)</label>
+                        <div class="file-wrapper">
+
+                            <img src="~/Content/AdminCSS/images/Admin_images/images/upload-file.png" alt="upload">
+                            <input type="file" class="form-control" id="profilephoto" placeholder="Upload a picture" name="UserImage" accept="image/*">
+                            <!--<label class="mylabel" for="photo">Upload a picture</label>-->
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Profile Button -->
+            <button type="submit" class="btn btn-primary profile-btn text-uppercase text-center"><b>submit</b></button>
+
+        }
+
+    </div>
+
+
+</section>
+

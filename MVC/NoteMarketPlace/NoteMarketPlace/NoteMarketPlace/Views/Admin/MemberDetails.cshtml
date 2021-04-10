@@ -1,0 +1,17 @@
+﻿@model NoteMarketPlace.Models.NoteDetailsViewModel
+@{
+    //Layout = null;
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    int i = 0;
+}
+
+
+@{
+    Html.RenderAction("_MembersInformation", "Admin");
+}
+
+
+@{
+    Html.RenderAction("_MembersNoteInformation", "Admin");
+}
+

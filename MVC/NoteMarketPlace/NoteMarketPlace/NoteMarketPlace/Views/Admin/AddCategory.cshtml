@@ -1,0 +1,67 @@
+﻿@model NoteMarketPlace.Models.NoteDetailsViewModel
+@{
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+@using NoteMarketPlace.Models;
+
+
+
+        <!-- Admin profile -->
+        <section id="admin-profile">
+
+            <div class="container add-category">
+
+                @using (Html.BeginForm("AddCategory", "Admin", FormMethod.Post))
+                {
+                    <!-- Heading -->
+                    <div class="row">
+
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-12">
+
+                            <div class="dashboar-heading">
+                                <h2>Add Category</h2>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <div class="row">
+
+                        <!-- Catagory -->
+                        <div class="col-lg-7 col-md-12 col-sm-12 col-12">
+                            <div class="form-group">
+                                <label class="mylabel" for="lastname">Category Name *</label>
+                                @*<input type="text" class="form-control" id="lastname" placeholder="Enter your category" required>*@
+                                @Html.TextBoxFor(m => m.noteCategory.CategoryName, new { @class="form-control", @id="lastname", @placeholder="Enter your category"})
+                                <p class="field-validation-error">@ViewBag.nameerr</p>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="row">
+
+                        <!-- Description -->
+                        <div class="col-lg-7 col-md-12 col-sm-12 col-12">
+                            <div class="form-group">
+                                <label class="mylabel" for="firstname">Description *</label>
+                                @*<textarea type="text" rows="5" class="form-control" id="firstname" placeholder="Enter descripation" required></textarea>*@
+                                @Html.TextAreaFor(m => m.noteCategory.CategoryDescription, new { @rows = "5", @class="form-control", @id="firstname", @placeholder="Enter descripation"})
+                                <p class="field-validation-error">@ViewBag.descriptionerr</p>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <!-- Profile Button -->
+                    <button type="submit" class="btn btn-primary profile-btn text-uppercase text-center"><b>submit</b></button>
+
+                }
+
+            </div>
+
+
+        </section>
+
+   

@@ -10,8 +10,6 @@
     }
     var i = new NoteMarketPlace.Models.NoteDetailsViewModel();
 
-    //Layout = "~/Views/Shared/_NonRegisteredUserLayout.cshtml";
-    //Layout = "~/Views/Shared/_Layout.cshtml";
 }
 @using NoteMarketPlace.Models;
 
@@ -44,7 +42,7 @@
                 <div class="search-heading">
                     <h4><b>Search and Filter Notes</b></h4>
                     @*@ViewBag.search
-                    @ViewBag.uni*@
+        @ViewBag.uni*@
                 </div>
 
             </div>
@@ -271,7 +269,7 @@
 
                                     <p class="sub-text"><img src="~/Content/images/search/Search/university.png" alt="university">@item.noteDetails.Institute,@item.countryDetails.CountryName</p>
                                     <p class="sub-text"><img src="~/Content/images/search/Search/pages.png" alt="pages">@item.noteDetails.Pages Pages</p>
-                                    <p class="sub-text"><img src="~/Content/images/search/Search/date.png" alt="date">@item.noteDetails.PublishedDate</p>
+                                    <p class="sub-text"><img src="~/Content/images/search/Search/date.png" alt="date">@item.noteDetails.PublishedDate.ToString("MMM dd yyyy")</p>
                                     <p class="inappropriate-mark"><img src="~/Content/images/search/Search/flag.png" alt="flag">@num Users marked this note inappropriate</p>
 
                                 </div>
@@ -334,14 +332,14 @@
                 @if (ViewBag.PageNumber == 1)
                 {
                     <li class="page-item disabled">
-                        @Html.ActionLink("<", "SearchNotes", new { PageNumber = ViewBag.PageNumber }, new { @class = "page-link" })
+                        @Html.ActionLink("<", "SearchNotes", new { textbox = ViewBag.textboxSearch, typeOfNote = ViewBag.typesearch, categoryOfNote = ViewBag.categorySearch, instituteOfNote = ViewBag.instituteSearch, courseOfNote = ViewBag.courseSearch, countryNote = ViewBag.countrySearch, rateOfNote = ViewBag.rateSearch, PageNumber = ViewBag.PageNumber }, new { @class = "page-link" })
                     </li>
 
                 }
                 else
                 {
                     <li class="page-item">
-                        @Html.ActionLink("<", "SearchNotes", new { PageNumber = ViewBag.PageNumber - 1 }, new { @class = "page-link" })
+                        @Html.ActionLink("<", "SearchNotes", new { textbox = ViewBag.textboxSearch, typeOfNote = ViewBag.typesearch, categoryOfNote = ViewBag.categorySearch, instituteOfNote = ViewBag.instituteSearch, courseOfNote = ViewBag.courseSearch, countryNote = ViewBag.countrySearch, rateOfNote = ViewBag.rateSearch, PageNumber = ViewBag.PageNumber - 1 }, new { @class = "page-link" })
                     </li>
                 }
 
@@ -354,13 +352,13 @@
                     {
 
                         <li class="page-item active">
-                            @Html.ActionLink(j.ToString(), "SearchNotes", new { PageNumber = j }, new { @class = "page-link" })
+                            @Html.ActionLink(j.ToString(), "SearchNotes", new { textbox = ViewBag.textboxSearch, typeOfNote = ViewBag.typesearch, categoryOfNote = ViewBag.categorySearch, instituteOfNote = ViewBag.instituteSearch, courseOfNote = ViewBag.courseSearch, countryNote = ViewBag.countrySearch, rateOfNote = ViewBag.rateSearch, PageNumber = j }, new { @class = "page-link" })
                         </li>
                     }
                     else
                     {
                         <li class="page-item">
-                            @Html.ActionLink(j.ToString(), "SearchNotes", new {  PageNumber = j }, new { @class = "page-link" })
+                            @Html.ActionLink(j.ToString(), "SearchNotes", new { textbox = ViewBag.textboxSearch, typeOfNote = ViewBag.typesearch, categoryOfNote = ViewBag.categorySearch, instituteOfNote = ViewBag.instituteSearch, courseOfNote = ViewBag.courseSearch, countryNote = ViewBag.countrySearch, rateOfNote = ViewBag.rateSearch, PageNumber = j }, new { @class = "page-link" })
                         </li>
                     }
 
@@ -369,14 +367,14 @@
                 @if (ViewBag.PageNumber == totalPage)
                 {
                     <li class="page-item">
-                        @Html.ActionLink(">", "SearchNotes", new { PageNumber = ViewBag.PageNumber }, new { @class = "page-link" })
+                        @Html.ActionLink(">", "SearchNotes", new { textbox = ViewBag.textboxSearch, typeOfNote = ViewBag.typesearch, categoryOfNote = ViewBag.categorySearch, instituteOfNote = ViewBag.instituteSearch, courseOfNote = ViewBag.courseSearch, countryNote = ViewBag.countrySearch, rateOfNote = ViewBag.rateSearch, PageNumber = ViewBag.PageNumber }, new { @class = "page-link" })
 
                     </li>
                 }
                 else
                 {
                     <li class="page-item">
-                        @Html.ActionLink(">", "SearchNotes", new { PageNumber = ViewBag.PageNumber + 1 }, new { @class = "page-link" })
+                        @Html.ActionLink(">", "SearchNotes", new { textbox = ViewBag.textboxSearch, typeOfNote = ViewBag.typesearch, categoryOfNote = ViewBag.categorySearch, instituteOfNote = ViewBag.instituteSearch, courseOfNote = ViewBag.courseSearch, countryNote = ViewBag.countrySearch, rateOfNote = ViewBag.rateSearch, PageNumber = ViewBag.PageNumber + 1 }, new { @class = "page-link" })
 
                     </li>
                 }
